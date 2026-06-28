@@ -1223,7 +1223,7 @@ function renderCards() {
       (card.set ? '<div class="card-collection"><span class="collection-dot"></span>' + esc(card.set) + '</div>' : '<div style="height:4px"></div>') +
       '<div class="card-footer"><span class="rarity-badge">' + esc(card.rarity) + '</span>' +
       (card.liga ? '<a class="btn-liga" href="' + card.liga + '" target="_blank" rel="noopener"><img src="https://i.imgur.com/6Qreh4P.png"> Ver na Liga</a>'.replace('https://i.imgur.com/6Qreh4P.png', 'https://i.imgur.com/6Qreh4P.png') : '') +
-      '<div class="card-actions">' + adminBtns + '</div></div>' + (!isAdmin ? '<a class="btn-whatsapp" href="' + buildWhatsAppLink(card) + '" target="_blank" rel="noopener">&#128232; Tenho essa carta!</a>' : '') + '</div>';
+      '<div class="card-actions">' + adminBtns + '</div></div>' + (!isAdmin ? (card.espera ? '<div class="badge-espera">&#9203; Em espera</div>' : '<a class="btn-whatsapp" href="' + buildWhatsAppLink(card) + '" target="_blank" rel="noopener">&#128232; Tenho essa carta!</a>') : '') + '</div>';
   }).join('');
 }
 
