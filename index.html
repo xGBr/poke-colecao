@@ -440,6 +440,33 @@
     border-color: #25D366;
   }
 
+  .badge-espera {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #C8963E;
+    background: rgba(200,150,62,0.12);
+    border: 1px solid rgba(200,150,62,0.3);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card-espera .card-img-wrap {
+    opacity: 0.55;
+    filter: grayscale(30%);
+  }
+
+  .card-espera {
+    opacity: 0.85;
+  }
+
   /* ── EMPTY STATE ── */
   .empty {
     grid-column: 1 / -1;
@@ -786,6 +813,12 @@
       <label>Coleção / expansão</label>
       <input type="text" id="cardSet" placeholder="ex: Scarlet & Violet — Stellar Crown">
     </div>
+    <div class="field" style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
+      <input type="checkbox" id="cardEspera" style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer;flex-shrink:0">
+      <label for="cardEspera" style="font-size:13px;color:var(--text-dim);cursor:pointer;text-transform:none;letter-spacing:0;margin:0">
+        Em espera <span style="color:var(--text-faint);font-size:11px">— não exibe botão de contato</span>
+      </label>
+    </div>
     <button class="btn-primary" onclick="saveCard()">Salvar carta</button>
   </div>
 </div>
@@ -824,6 +857,12 @@
     <div class="field">
       <label>Coleção / expansão</label>
       <input type="text" id="editSet" placeholder="ex: Scarlet & Violet — Stellar Crown">
+    </div>
+    <div class="field" style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
+      <input type="checkbox" id="editEspera" style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer;flex-shrink:0">
+      <label for="editEspera" style="font-size:13px;color:var(--text-dim);cursor:pointer;text-transform:none;letter-spacing:0;margin:0">
+        Em espera <span style="color:var(--text-faint);font-size:11px">— não exibe botão de contato</span>
+      </label>
     </div>
     <button class="btn-primary" onclick="saveEdit()">Salvar alterações</button>
   </div>
@@ -947,6 +986,7 @@ function openAddCard() {
   document.getElementById('cardRarity').value  = 'Comum';
   document.getElementById('cardSet').value     = '';
   document.getElementById('cardImgUrl').value  = '';
+  document.getElementById('cardEspera').checked = false;
   document.getElementById('uploadPreview').style.display = 'none';
   openModal('addModal');
   setTimeout(() => document.getElementById('cardName').focus(), 100);
@@ -959,7 +999,8 @@ async function saveCard() {
   const set    = document.getElementById('cardSet').value.trim();
   const img    = normalizeImgUrl(document.getElementById('cardImgUrl').value.trim());
   if (!name) { document.getElementById('cardName').focus(); return; }
-  cards.push({ id: Date.now(), name, num, rarity, set, img: img || null });
+  const espera = document.getElementById('cardEspera').checked;
+  cards.push({ id: Date.now(), name, num, rarity, set, img: img || null, espera: espera || false });
   closeModal('addModal');
   showToast('⏳ Salvando...');
   await saveCards();
@@ -977,6 +1018,7 @@ function openEditCard(id) {
   document.getElementById('editRarity').value = card.rarity || 'Comum';
   document.getElementById('editSet').value    = card.set    || '';
   document.getElementById('editImgUrl').value = card.img    || '';
+  document.getElementById('editEspera').checked = card.espera || false;
   const prev = document.getElementById('editPreview');
   if (card.img) { prev.src = card.img; prev.style.display = 'block'; prev.onerror = () => { prev.style.display = 'none'; }; }
   else { prev.style.display = 'none'; }
@@ -1004,6 +1046,7 @@ async function saveEdit() {
     rarity: document.getElementById('editRarity').value,
     set:    document.getElementById('editSet').value.trim(),
     img:    normalizeImgUrl(document.getElementById('editImgUrl').value.trim()) || null,
+    espera: document.getElementById('editEspera').checked,
   };
   closeModal('editModal');
   showToast('⏳ Salvando...');
@@ -1118,6 +1161,7 @@ function renderCards() {
 
   grid.innerHTML = filtered.map(card => {
     const rarClass = card.rarity.replace(/\s/g, '-');
+    const esperaClass = card.espera ? ' card-espera' : '';
     const imgBlock = card.img
       ? '<div class="card-img-wrap" onclick="openLightbox(' + card.id + ')" style="cursor:zoom-in"><img src="' + card.img + '" alt="' + esc(card.name) + '" loading="lazy"></div>'
       : '<div class="card-img-wrap"><div class="card-img-placeholder"><span>\uD83C\uDFB4</span><p>Sem foto</p></div></div>';
@@ -1126,7 +1170,7 @@ function renderCards() {
         '<button class="btn-edit"  onclick="openEditCard(' + card.id + ')" title="Editar carta">\u270E</button>' +
         '<button class="btn-delete" onclick="deleteCard(' + card.id + ')" title="Remover">\u2715</button>'
       : '';
-    return '<div class="poke-card rarity-' + rarClass + '">' +
+    return '<div class="poke-card rarity-' + rarClass + esperaClass + '">' +
       '<div class="card-rarity-bar"></div>' +
       imgBlock +
       '<div class="card-top"><span class="card-name">' + esc(card.name) + '</span>' +
