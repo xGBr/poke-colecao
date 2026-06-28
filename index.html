@@ -1054,8 +1054,7 @@ function buildWhatsAppLink(card) {
   if (card.rarity) parts.push('⭐ Raridade: ' + card.rarity);
   parts.push('');
   parts.push('Vi no site ColeçãoGBr!');
-  const msg = encodeURIComponent(parts.join('
-'));
+  const msg = parts.join('%0A');
   return 'https://wa.me/5519981061966?text=' + msg;
 }
 
@@ -1138,7 +1137,12 @@ function renderCards() {
 }
 
 function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  s = String(s);
+  s = s.replace(/&/g, '&amp;');
+  s = s.replace(/</g, '&lt;');
+  s = s.replace(/>/g, '&gt;');
+  s = s.split(String.fromCharCode(34)).join('&quot;');
+  return s;
 }
 
 // ── LIGHTBOX ──────────────────────────────────────────────────────
