@@ -682,7 +682,7 @@
 <section class="hero">
   <p class="hero-eyebrow">✦ Tipo Lutador — TCG</p>
   <h1 class="hero-title">Cartas que estou<br><em>procurando</em></h1>
-  <p class="hero-sub" id="heroSub">Se você encontrar alguma dessas cartas, entre em contato!</p>
+  <p class="hero-sub" id="heroSub">Carregando cartas…</p>
 </section>
 
 <!-- FILTERS -->
@@ -834,14 +834,45 @@ async function hashPassword(pw) {
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-// ── STATE ────────────────────────────────────────────────────────
+// ── CONFIG ───────────────────────────────────────────────────────
+const JB_BIN   = '6a414f09da38895dfe0c42b6';
+const JB_READ  = '$2a$10$yjqg/nPTdhMI1FizXnqi/OqTx/xpNA7mX60oDQ2rHIWqbipBEFtga';
+const JB_WRITE = '$2a$10$5SWZFlZBqSFHIejwQlSN1uqLQCL37sRwA3xFk3T782dWXgaZhrqUu';
+const JB_URL   = 'https://api.jsonbin.io/v3/b/' + JB_BIN;
+
+// ── STATE ─────────────────────────────────────────────────────────
 let isAdmin = false;
-let cards = JSON.parse(localStorage.getItem('pokeCards') || '[]');
+let cards = [];
 let currentFilter = 'all';
 let pendingFoundId = null;
 
-function saveCards() {
-  localStorage.setItem('pokeCards', JSON.stringify(cards));
+async function loadCards() {
+  try {
+    const res = await fetch(JB_URL + '/latest', {
+      headers: { 'X-Access-Key': JB_READ }
+    });
+    const data = await res.json();
+    const raw = data.record;
+    cards = Array.isArray(raw) ? raw.filter(c => !c.init) : [];
+  } catch(e) {
+    cards = [];
+  }
+  renderCards();
+}
+
+async function saveCards() {
+  try {
+    await fetch(JB_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': JB_WRITE
+      },
+      body: JSON.stringify(cards)
+    });
+  } catch(e) {
+    showToast('Erro ao salvar');
+  }
 }
 
 // ── AUTH FLOW ────────────────────────────────────────────────────
@@ -941,7 +972,7 @@ function previewDriveUrl(raw) {
   }
 }
 
-function saveCard() {
+async async function saveCard() {
   const name = document.getElementById('cardName').value.trim();
   const num  = document.getElementById('cardNum').value.trim();
   const rarity = document.getElementById('cardRarity').value;
@@ -950,8 +981,9 @@ function saveCard() {
   const img = normalizeImgUrl(rawUrl);
   if (!name) { document.getElementById('cardName').focus(); return; }
   cards.push({ id: Date.now(), name, num, rarity, set, img: img || null });
-  saveCards();
   closeModal('addModal');
+  showToast('⏳ Salvando...');
+  await saveCards();
   renderCards();
   showToast('✓ Carta adicionada');
 }
@@ -965,9 +997,10 @@ function askFound(id) {
   openModal('foundModal');
 }
 
-function confirmFound() {
+async function confirmFound() {
   cards = cards.filter(c => c.id !== pendingFoundId);
-  saveCards();
+  showToast('Salvando…');
+  await saveCards();
   closeModal('foundModal');
   renderCards();
   showToast('🎉 Carta removida da lista!');
@@ -1009,7 +1042,7 @@ function previewEditUrl(raw) {
   }
 }
 
-function saveEdit() {
+async async function saveEdit() {
   if (!editingId) return;
   const idx = cards.findIndex(c => c.id === editingId);
   if (idx === -1) return;
@@ -1024,18 +1057,20 @@ function saveEdit() {
     set:    document.getElementById('editSet').value.trim(),
     img:    normalizeImgUrl(rawUrl) || null,
   };
-  saveCards();
+  showToast('Salvando…');
+  await saveCards();
   closeModal('editModal');
   renderCards();
   showToast('✓ Carta atualizada');
   editingId = null;
 }
 
-function deleteCard(id) {
+async function deleteCard(id) {
   if (!isAdmin) return;
   if (!confirm('Remover essa carta da lista?')) return;
   cards = cards.filter(c => c.id !== id);
-  saveCards();
+  showToast('Salvando…');
+  await saveCards();
   renderCards();
   showToast('Carta removida');
 }
@@ -1059,6 +1094,7 @@ function renderCards() {
   );
 
   document.getElementById('countDisplay').textContent = cards.length;
+  if (!isAdmin) document.getElementById('heroSub').textContent = 'Se você encontrar alguma dessas cartas, entre em contato!';
   document.getElementById('gridLabel').textContent =
     filtered.length === cards.length
       ? `${cards.length} carta${cards.length !== 1 ? 's' : ''} procurada${cards.length !== 1 ? 's' : ''}`
@@ -1157,7 +1193,7 @@ function showToast(msg) {
 }
 
 // ── INIT ─────────────────────────────────────────────────────────
-renderCards();
+loadCards();
 </script>
 </body>
 </html>
