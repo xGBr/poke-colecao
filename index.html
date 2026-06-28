@@ -380,6 +380,23 @@
 
   .btn-found:hover { background: rgba(76,175,80,0.12); }
 
+  .btn-edit {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-faint);
+    font-size: 15px;
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+
+  .btn-edit:hover { border-color: var(--gold-dim); color: var(--gold); }
+
   .btn-delete {
     background: transparent;
     border: 1px solid var(--border);
@@ -750,6 +767,45 @@
   </div>
 </div>
 
+<!-- MODAL: EDIT CARD -->
+<div class="overlay" id="editModal">
+  <div class="modal" style="max-width:460px">
+    <button class="modal-close" onclick="closeModal('editModal')">×</button>
+    <h2 class="modal-title">Editar carta</h2>
+    <div class="field">
+      <label>Link da imagem</label>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="text" id="editImgUrl" placeholder="Cole o link do Imgur, Drive ou outra fonte..." style="flex:1" oninput="previewEditUrl(this.value)">
+        <img id="editPreview" alt="preview" style="display:none;width:44px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--border);flex-shrink:0">
+      </div>
+    </div>
+    <div class="field">
+      <label>Nome da carta</label>
+      <input type="text" id="editName" placeholder="ex: Machamp">
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Número / código</label>
+        <input type="text" id="editNum" placeholder="ex: 064/091">
+      </div>
+      <div class="field">
+        <label>Raridade</label>
+        <select id="editRarity">
+          <option value="Comum">Comum</option>
+          <option value="Holo">Holo</option>
+          <option value="Reverse Foil">Reverse Foil</option>
+          <option value="Ultra Rara">Ultra Rara</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Coleção / expansão</label>
+      <input type="text" id="editSet" placeholder="ex: Scarlet & Violet — Stellar Crown">
+    </div>
+    <button class="btn-primary" onclick="saveEdit()">Salvar alterações</button>
+  </div>
+</div>
+
 <!-- MODAL: CONFIRM FOUND -->
 <div class="overlay" id="foundModal">
   <div class="modal">
@@ -847,18 +903,22 @@ function normalizeImgUrl(url) {
   if (!url) return null;
   url = url.trim();
 
-  // Imgur: convert page URL to direct image
-  // https://imgur.com/abc123  →  https://i.imgur.com/abc123.jpg
-  const imgurPage = url.match(/^https?:\/\/(?:www\.)?imgur\.com\/([a-zA-Z0-9]+)$/);
-  if (imgurPage) return 'https://i.imgur.com/' + imgurPage[1] + '.jpg';
-
   // Already a direct i.imgur.com link — keep as-is
   if (url.includes('i.imgur.com/')) return url;
 
-  // Google Drive lh3 link (direct, works cross-origin)
+  // Imgur album /a/ID or /gallery/ID → use embed thumbnail
+  // https://imgur.com/a/GHrHZ8Z → https://i.imgur.com/GHrHZ8Zh.jpg  (h = large thumb)
+  const imgurAlbum = url.match(/imgur\.com\/(?:a|gallery)\/([a-zA-Z0-9]+)/);
+  if (imgurAlbum) return 'https://i.imgur.com/' + imgurAlbum[1] + 'h.jpg';
+
+  // Imgur direct page: https://imgur.com/abc123
+  const imgurPage = url.match(/imgur\.com\/([a-zA-Z0-9]{5,7})$/);
+  if (imgurPage) return 'https://i.imgur.com/' + imgurPage[1] + '.jpg';
+
+  // Google Drive lh3 link
   if (url.includes('lh3.googleusercontent.com')) return url;
 
-  // Google Drive share link → lh3 format (best option for Drive)
+  // Google Drive share link → lh3 format
   const driveId = url.match(/\/d\/([a-zA-Z0-9_-]{10,})/);
   if (driveId) return 'https://lh3.googleusercontent.com/d/' + driveId[1];
 
@@ -912,6 +972,63 @@ function confirmFound() {
   renderCards();
   showToast('🎉 Carta removida da lista!');
   pendingFoundId = null;
+}
+
+let editingId = null;
+
+function openEditCard(id) {
+  const card = cards.find(c => c.id === id);
+  if (!card) return;
+  editingId = id;
+  document.getElementById('editName').value = card.name || '';
+  document.getElementById('editNum').value = card.num || '';
+  document.getElementById('editRarity').value = card.rarity || 'Comum';
+  document.getElementById('editSet').value = card.set || '';
+  document.getElementById('editImgUrl').value = card.img || '';
+  const prev = document.getElementById('editPreview');
+  if (card.img) {
+    prev.src = card.img;
+    prev.style.display = 'block';
+    prev.onerror = () => { prev.style.display = 'none'; };
+  } else {
+    prev.style.display = 'none';
+  }
+  openModal('editModal');
+  setTimeout(() => document.getElementById('editName').focus(), 100);
+}
+
+function previewEditUrl(raw) {
+  const url = normalizeImgUrl(raw);
+  const prev = document.getElementById('editPreview');
+  if (url) {
+    prev.onerror = () => { prev.style.display = 'none'; };
+    prev.onload  = () => { prev.style.display = 'block'; };
+    prev.src = url;
+  } else {
+    prev.style.display = 'none';
+  }
+}
+
+function saveEdit() {
+  if (!editingId) return;
+  const idx = cards.findIndex(c => c.id === editingId);
+  if (idx === -1) return;
+  const name = document.getElementById('editName').value.trim();
+  if (!name) { document.getElementById('editName').focus(); return; }
+  const rawUrl = document.getElementById('editImgUrl').value.trim();
+  cards[idx] = {
+    ...cards[idx],
+    name,
+    num:    document.getElementById('editNum').value.trim(),
+    rarity: document.getElementById('editRarity').value,
+    set:    document.getElementById('editSet').value.trim(),
+    img:    normalizeImgUrl(rawUrl) || null,
+  };
+  saveCards();
+  closeModal('editModal');
+  renderCards();
+  showToast('✓ Carta atualizada');
+  editingId = null;
 }
 
 function deleteCard(id) {
@@ -986,6 +1103,7 @@ function renderCards() {
         <div class="card-actions">
           ${isAdmin ? `
             <button class="btn-found" onclick="askFound(${card.id})" title="Marcar como encontrada">Achei!</button>
+            <button class="btn-edit" onclick="openEditCard(${card.id})" title="Editar carta">✎</button>
             <button class="btn-delete" onclick="deleteCard(${card.id})" title="Remover">✕</button>
           ` : ''}
         </div>
