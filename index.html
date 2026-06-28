@@ -440,6 +440,33 @@
     border-color: #25D366;
   }
 
+  .btn-liga {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dim);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 4px 9px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .btn-liga:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .btn-liga img {
+    width: 13px;
+    height: 13px;
+    object-fit: contain;
+  }
+
   .badge-espera {
     display: inline-flex;
     align-items: center;
@@ -813,6 +840,13 @@
       <label>Coleção / expansão</label>
       <input type="text" id="cardSet" placeholder="ex: Scarlet & Violet — Stellar Crown">
     </div>
+    <div class="field">
+      <label style="display:flex;align-items:center;gap:6px">
+        <img src="https://i.imgur.com/6Qreh4P.png" style="width:14px;height:14px;object-fit:contain">
+        Link Liga Pokémon
+      </label>
+      <input type="text" id="cardLiga" placeholder="https://www.ligapokemon.com.br/?view=cards/card&...">
+    </div>
     <div class="field" style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
       <input type="checkbox" id="cardEspera" style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer;flex-shrink:0">
       <label for="cardEspera" style="font-size:13px;color:var(--text-dim);cursor:pointer;text-transform:none;letter-spacing:0;margin:0">
@@ -857,6 +891,13 @@
     <div class="field">
       <label>Coleção / expansão</label>
       <input type="text" id="editSet" placeholder="ex: Scarlet & Violet — Stellar Crown">
+    </div>
+    <div class="field">
+      <label style="display:flex;align-items:center;gap:6px">
+        <img src="https://i.imgur.com/6Qreh4P.png" style="width:14px;height:14px;object-fit:contain">
+        Link Liga Pokémon
+      </label>
+      <input type="text" id="editLiga" placeholder="https://www.ligapokemon.com.br/?view=cards/card&...">
     </div>
     <div class="field" style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
       <input type="checkbox" id="editEspera" style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer;flex-shrink:0">
@@ -986,6 +1027,7 @@ function openAddCard() {
   document.getElementById('cardRarity').value  = 'Comum';
   document.getElementById('cardSet').value     = '';
   document.getElementById('cardImgUrl').value  = '';
+  document.getElementById('cardLiga').value = '';
   document.getElementById('cardEspera').checked = false;
   document.getElementById('uploadPreview').style.display = 'none';
   openModal('addModal');
@@ -1000,7 +1042,8 @@ async function saveCard() {
   const img    = normalizeImgUrl(document.getElementById('cardImgUrl').value.trim());
   if (!name) { document.getElementById('cardName').focus(); return; }
   const espera = document.getElementById('cardEspera').checked;
-  cards.push({ id: Date.now(), name, num, rarity, set, img: img || null, espera: espera || false });
+  const liga  = document.getElementById('cardLiga').value.trim();
+  cards.push({ id: Date.now(), name, num, rarity, set, img: img || null, espera: espera || false, liga: liga || null });
   closeModal('addModal');
   showToast('⏳ Salvando...');
   await saveCards();
@@ -1018,6 +1061,7 @@ function openEditCard(id) {
   document.getElementById('editRarity').value = card.rarity || 'Comum';
   document.getElementById('editSet').value    = card.set    || '';
   document.getElementById('editImgUrl').value = card.img    || '';
+  document.getElementById('editLiga').value = card.liga || '';
   document.getElementById('editEspera').checked = card.espera || false;
   const prev = document.getElementById('editPreview');
   if (card.img) { prev.src = card.img; prev.style.display = 'block'; prev.onerror = () => { prev.style.display = 'none'; }; }
@@ -1046,6 +1090,7 @@ async function saveEdit() {
     rarity: document.getElementById('editRarity').value,
     set:    document.getElementById('editSet').value.trim(),
     img:    normalizeImgUrl(document.getElementById('editImgUrl').value.trim()) || null,
+    liga:   document.getElementById('editLiga').value.trim() || null,
     espera: document.getElementById('editEspera').checked,
   };
   closeModal('editModal');
@@ -1176,7 +1221,9 @@ function renderCards() {
       '<div class="card-top"><span class="card-name">' + esc(card.name) + '</span>' +
       (card.num ? '<span class="card-number">' + esc(card.num) + '</span>' : '') + '</div>' +
       (card.set ? '<div class="card-collection"><span class="collection-dot"></span>' + esc(card.set) + '</div>' : '<div style="height:4px"></div>') +
-      '<div class="card-footer"><span class="rarity-badge">' + esc(card.rarity) + '</span><div class="card-actions">' + adminBtns + '</div></div>' + (!isAdmin ? '<a class="btn-whatsapp" href="' + buildWhatsAppLink(card) + '" target="_blank" rel="noopener">&#128232; Tenho essa carta!</a>' : '') + '</div>';
+      '<div class="card-footer"><span class="rarity-badge">' + esc(card.rarity) + '</span>' +
+      (card.liga ? '<a class="btn-liga" href="' + card.liga + '" target="_blank" rel="noopener"><img src="https://i.imgur.com/6Qreh4P.png"> Ver na Liga</a>'.replace('https://i.imgur.com/6Qreh4P.png', 'https://i.imgur.com/6Qreh4P.png') : '') +
+      '<div class="card-actions">' + adminBtns + '</div></div>' + (!isAdmin ? '<a class="btn-whatsapp" href="' + buildWhatsAppLink(card) + '" target="_blank" rel="noopener">&#128232; Tenho essa carta!</a>' : '') + '</div>';
   }).join('');
 }
 
