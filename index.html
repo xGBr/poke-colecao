@@ -713,12 +713,15 @@
     <button class="modal-close" onclick="closeModal('addModal')">×</button>
     <h2 class="modal-title">Cadastrar carta</h2>
     <div class="field">
-      <label>Link do Google Drive</label>
+      <label>Link da imagem</label>
       <div style="display:flex;gap:8px;align-items:center">
-        <input type="text" id="cardImgUrl" placeholder="https://drive.google.com/file/d/..." style="flex:1" oninput="previewDriveUrl(this.value)">
+        <input type="text" id="cardImgUrl" placeholder="Cole o link do Imgur, Drive ou outra fonte..." style="flex:1" oninput="previewDriveUrl(this.value)">
         <img id="uploadPreview" alt="preview" style="display:none;width:44px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--border);flex-shrink:0">
       </div>
-      <p style="font-size:11px;color:var(--text-faint);margin-top:5px">Cole o link de compartilhamento do Drive — a conversão é automática</p>
+      <div style="font-size:11px;color:var(--text-faint);margin-top:6px;line-height:1.6">
+        <strong style="color:var(--text-dim)">Recomendado:</strong> <a href="https://imgur.com/upload" target="_blank" style="color:var(--accent);text-decoration:none">imgur.com/upload</a> — gratuito, sem bloqueio.<br>
+        Google Drive: funciona com o link <code style="background:var(--panel);padding:1px 4px;border-radius:3px;font-size:10px">lh3.googleusercontent.com</code> (veja instruções abaixo).
+      </div>
     </div>
     <div class="field">
       <label>Nome da carta</label>
@@ -840,24 +843,39 @@ function openAddCard() {
   setTimeout(() => document.getElementById('cardName').focus(), 100);
 }
 
-function driveUrlToDirectImg(url) {
+function normalizeImgUrl(url) {
   if (!url) return null;
   url = url.trim();
-  // already a direct/uc link
-  if (url.includes('drive.google.com/uc') || url.includes('drive.usercontent')) return url;
-  // standard share link: /file/d/ID or /file/d/ID/view
-  const m = url.match(/\/d\/([a-zA-Z0-9_-]{10,})/);
-  if (m) return 'https://drive.google.com/uc?export=view&id=' + m[1];
+
+  // Imgur: convert page URL to direct image
+  // https://imgur.com/abc123  →  https://i.imgur.com/abc123.jpg
+  const imgurPage = url.match(/^https?:\/\/(?:www\.)?imgur\.com\/([a-zA-Z0-9]+)$/);
+  if (imgurPage) return 'https://i.imgur.com/' + imgurPage[1] + '.jpg';
+
+  // Already a direct i.imgur.com link — keep as-is
+  if (url.includes('i.imgur.com/')) return url;
+
+  // Google Drive lh3 link (direct, works cross-origin)
+  if (url.includes('lh3.googleusercontent.com')) return url;
+
+  // Google Drive share link → lh3 format (best option for Drive)
+  const driveId = url.match(/\/d\/([a-zA-Z0-9_-]{10,})/);
+  if (driveId) return 'https://lh3.googleusercontent.com/d/' + driveId[1];
+
+  // drive.google.com/uc or usercontent links
+  if (url.includes('drive.google.com') || url.includes('drive.usercontent')) return url;
+
+  // Anything else: use as-is
   return url;
 }
 
 function previewDriveUrl(raw) {
-  const url = driveUrlToDirectImg(raw);
+  const url = normalizeImgUrl(raw);
   const prev = document.getElementById('uploadPreview');
   if (url) {
-    prev.src = url;
-    prev.style.display = 'block';
     prev.onerror = () => { prev.style.display = 'none'; };
+    prev.onload  = () => { prev.style.display = 'block'; };
+    prev.src = url;
   } else {
     prev.style.display = 'none';
   }
@@ -869,7 +887,7 @@ function saveCard() {
   const rarity = document.getElementById('cardRarity').value;
   const set  = document.getElementById('cardSet').value.trim();
   const rawUrl = document.getElementById('cardImgUrl').value.trim();
-  const img = driveUrlToDirectImg(rawUrl);
+  const img = normalizeImgUrl(rawUrl);
   if (!name) { document.getElementById('cardName').focus(); return; }
   cards.push({ id: Date.now(), name, num, rarity, set, img: img || null });
   saveCards();
