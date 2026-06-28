@@ -695,25 +695,12 @@
 
 <script>
 // ── AUTH (password: pokecoletor2024) ──────────────────────────────
-const AUTH_SALT = 'bc397bc44da942f5bfccd1757caa3e10';
-const AUTH_HASH = '2acc31c9023b8c8f4e764bae8a3c3281360c305808eb701639a282e393cb2d7506cc6a29b280f2273d8a715959b41630fbfe3030d768d5a310ef346c04e1e6eb';
+const AUTH_HASH = '854b096c627894209925b1d08f93413808b490deea4cf817a95e8eab35601395';
 
-async function hashPassword(pw, salt) {
+async function hashPassword(pw) {
   const enc = new TextEncoder();
-  const keyMat = await crypto.subtle.importKey('raw', enc.encode(pw), { name: 'PBKDF2' }, false, ['deriveBits']);
-  const buf = await crypto.subtle.deriveBits({
-    name: 'PBKDF2',
-    salt: hexToBytes(salt),
-    iterations: 100000,
-    hash: 'SHA-512'
-  }, keyMat, 512);
+  const buf = await crypto.subtle.digest('SHA-256', enc.encode(pw + 'poke_salt_2024'));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-function hexToBytes(hex) {
-  const arr = new Uint8Array(hex.length / 2);
-  for (let i = 0; i < hex.length; i += 2) arr[i / 2] = parseInt(hex.substr(i, 2), 16);
-  return arr;
 }
 
 // ── STATE ────────────────────────────────────────────────────────
@@ -737,7 +724,14 @@ function openLogin() {
 async function doLogin() {
   const pw = document.getElementById('pwInput').value;
   if (!pw) return;
-  const hash = await hashPassword(pw, AUTH_SALT);
+  let hash;
+  try {
+    hash = await hashPassword(pw);
+  } catch(e) {
+    document.getElementById('loginError').textContent = 'Erro ao verificar senha: ' + e.message;
+    document.getElementById('loginError').style.display = '';
+    return;
+  }
   if (hash === AUTH_HASH) {
     isAdmin = true;
     closeModal('loginModal');
@@ -748,6 +742,7 @@ async function doLogin() {
     renderCards();
     showToast('✓ Login efetuado');
   } else {
+    document.getElementById('loginError').textContent = 'Senha incorreta.';
     document.getElementById('loginError').style.display = '';
   }
 }
