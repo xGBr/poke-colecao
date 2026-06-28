@@ -416,6 +416,30 @@
 
   .btn-delete:hover { border-color: #8B2020; color: #E25050; }
 
+  .btn-whatsapp {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #1DA851;
+    color: #25D366;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.15s;
+    margin-top: 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .btn-whatsapp:hover {
+    background: rgba(37,211,102,0.1);
+    border-color: #25D366;
+  }
+
   /* ── EMPTY STATE ── */
   .empty {
     grid-column: 1 / -1;
@@ -1019,6 +1043,22 @@ async function deleteCard(id) {
   showToast('Carta removida');
 }
 
+// ── WHATSAPP ──────────────────────────────────────────────────────
+function buildWhatsAppLink(card) {
+  const parts = [];
+  parts.push('Olá! Tenho uma carta que você está procurando:');
+  parts.push('');
+  parts.push('🃏 *' + card.name + '*');
+  if (card.num)    parts.push('📋 Número: ' + card.num);
+  if (card.set)    parts.push('📦 Coleção: ' + card.set);
+  if (card.rarity) parts.push('⭐ Raridade: ' + card.rarity);
+  parts.push('');
+  parts.push('Vi no site ColeçãoGBr!');
+  const msg = encodeURIComponent(parts.join('
+'));
+  return 'https://wa.me/5519981061966?text=' + msg;
+}
+
 // ── IMAGE URL NORMALIZER ──────────────────────────────────────────
 function normalizeImgUrl(url) {
   if (!url) return null;
@@ -1093,8 +1133,7 @@ function renderCards() {
       '<div class="card-top"><span class="card-name">' + esc(card.name) + '</span>' +
       (card.num ? '<span class="card-number">' + esc(card.num) + '</span>' : '') + '</div>' +
       (card.set ? '<div class="card-collection"><span class="collection-dot"></span>' + esc(card.set) + '</div>' : '<div style="height:4px"></div>') +
-      '<div class="card-footer"><span class="rarity-badge">' + esc(card.rarity) + '</span>' +
-      '<div class="card-actions">' + adminBtns + '</div></div></div>';
+      '<div class="card-footer"><span class="rarity-badge">' + esc(card.rarity) + '</span><div class="card-actions">' + adminBtns + '</div></div>' + (!isAdmin ? '<a class="btn-whatsapp" href="' + buildWhatsAppLink(card) + '" target="_blank" rel="noopener">&#128232; Tenho essa carta!</a>' : '') + '</div>';
   }).join('');
 }
 
