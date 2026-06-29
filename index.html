@@ -345,8 +345,16 @@
 
   .card-footer {
     display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .card-footer-row {
+    display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 6px;
+    flex-wrap: wrap;
   }
 
   .rarity-badge {
@@ -441,19 +449,21 @@
   }
 
   .btn-liga {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: 5px;
     font-size: 11px;
     font-weight: 600;
     color: var(--text-dim);
     background: transparent;
     border: 1px solid var(--border);
-    padding: 4px 9px;
+    padding: 5px 9px;
     border-radius: 5px;
     text-decoration: none;
     transition: all 0.15s;
-    white-space: nowrap;
+    width: 100%;
+    margin-bottom: 6px;
   }
 
   .btn-liga:hover {
@@ -1221,9 +1231,12 @@ function renderCards() {
       '<div class="card-top"><span class="card-name">' + esc(card.name) + '</span>' +
       (card.num ? '<span class="card-number">' + esc(card.num) + '</span>' : '') + '</div>' +
       (card.set ? '<div class="card-collection"><span class="collection-dot"></span>' + esc(card.set) + '</div>' : '<div style="height:4px"></div>') +
-      '<div class="card-footer"><span class="rarity-badge">' + esc(card.rarity) + '</span>' +
-      (card.liga ? '<a class="btn-liga" href="' + card.liga + '" target="_blank" rel="noopener"><img src="https://i.imgur.com/6Qreh4P.png"> Ver na Liga</a>'.replace('https://i.imgur.com/6Qreh4P.png', 'https://i.imgur.com/6Qreh4P.png') : '') +
-      '<div class="card-actions">' + adminBtns + '</div></div>' + (!isAdmin ? (card.espera ? '<div class="badge-espera">&#9203; Em espera</div>' : '<a class="btn-whatsapp" href="' + buildWhatsAppLink(card) + '" target="_blank" rel="noopener"><img src=\"https://i.imgur.com/ZbmGBZx.png\" style=\"width:15px;height:15px;object-fit:contain;vertical-align:middle;margin-right:4px\"> Tenho essa carta!</a>') : '') + '</div>';
+      '<div class="card-footer">' +
+      '<div class="card-footer-row"><span class="rarity-badge">' + esc(card.rarity) + '</span>' +
+      (card.liga ? '<a class="btn-liga" href="' + card.liga + '" target="_blank" rel="noopener"><img src="https://i.imgur.com/6Qreh4P.png" style="width:13px;height:13px;object-fit:contain"> Ver na Liga</a>' : '') +
+      '</div>' +
+      (isAdmin ? '<div class="card-footer-row" style="justify-content:flex-end"><div class="card-actions">' + adminBtns + '</div></div>' : '<div class="card-footer-row">' + (card.espera ? '<div class="badge-espera">&#9203; Em espera</div>' : '<a class="btn-whatsapp" href="' + buildWhatsAppLink(card) + '" target="_blank" rel="noopener"><img src=\"https://i.imgur.com/ZbmGBZx.png\" style=\"width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:5px\"> Tenho essa carta!</a>') + '</div>') +
+      '</div>';
   }).join('');
 }
 
