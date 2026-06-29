@@ -1268,8 +1268,87 @@ function setFilter(rarity, el) {
 
 // ── PRICE FETCH ──────────────────────────────────────────────────
 const PRECO_LIMIT = 150;
-const TCG_KEY = 'tcg_live_' + '21128e4668a198e3' + 'dfa70603f4a30cf3920b554d';
-const TCG_BASE = 'https://api.tcgapi.dev/v1';
+async function fetchPreco(prefix) {
+  const nome = document.getElementById(prefix === 'card' ? 'cardName' : 'editName').value.trim();
+  const btn  = document.getElementById(prefix + 'FetchBtn');
+  const hint = document.getElementById(prefix + 'PrecoHint');
+  const inp  = document.getElementById(prefix + 'Preco');
+  if (!nome) { hint.textContent = 'Digite o nome da carta primeiro'; hint.className = 'price-hint err'; return; }
+
+  btn.disabled = true;
+  btn.textContent = '⏳';
+  hint.textContent = 'Buscando na API Pokémon TCG...';
+  hint.className = 'price-hint';
+
+  try {
+    // Passo 1: Busca a carta na API oficial (pokemontcg.io)
+    // O encodeURIComponent junto com aspas realiza a busca pelo nome exato.
+    const searchUrl = 'https://api.pokemontcg.io/v2/cards?q=name:"' + encodeURIComponent(nome) + '"';
+    
+    const sRes = await fetch(searchUrl);
+    const sData = await sRes.json();
+
+    if (!sData.data || sData.data.length === 0) {
+      hint.textContent = 'Carta não encontrada — tente o nome em inglês ou digite manualmente';
+      hint.className = 'price-hint err';
+      btn.textContent = '🔄 Buscar'; btn.disabled = false;
+      return;
+    }
+
+    const card = sData.data[0];
+
+    // Passo 2: Extrai o preço da estrutura da resposta
+    const tcgData = card.tcgplayer;
+    if (!tcgData || !tcgData.prices) {
+      hint.textContent = 'Preço não disponível na API — digite manualmente';
+      hint.className = 'price-hint err';
+      btn.textContent = '🔄 Buscar'; btn.disabled = false;
+      return;
+    }
+
+    // Pega o primeiro tipo de preço disponível (normal, holofoil, reverseHolofoil, etc.)
+    const priceTypes = Object.values(tcgData.prices);
+    let usdPrice = null;
+    if (priceTypes.length > 0) {
+       usdPrice = priceTypes[0].market || priceTypes[0].low || null;
+    }
+
+    if (!usdPrice) {
+      hint.textContent = 'Preço de mercado indisponível na API — digite manualmente';
+      hint.className = 'price-hint err';
+      btn.textContent = '🔄 Buscar'; btn.disabled = false;
+      return;
+    }
+
+    // Passo 3: Conversão USD → BRL através de uma API de finanças
+    let brl = usdPrice;
+    try {
+      const fxRes = await fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL');
+      const fxData = await fxRes.json();
+      const rate = parseFloat(fxData.USDBRL.bid);
+      if (!isNaN(rate)) brl = usdPrice * rate;
+    } catch(e) { 
+      console.warn("Falha na conversão cambial, mantendo valor original", e);
+    }
+
+    const precoStr = formatBRL(brl);
+    inp.value = precoStr;
+    
+    // Exibe a confirmação visual com o nome da coleção oficial
+    hint.textContent = 'Encontrado: ' + card.name + ' — ' + (card.set ? card.set.name : '') + ' (USD ' + usdPrice.toFixed(2) + ')';
+    hint.className = 'price-hint ok';
+    
+    applyPrecoLogic(prefix, brl, { textContent: '', className: '' }, true);
+    applyPrecoLogic(prefix, brl, hint, false);
+
+  } catch(e) {
+    hint.textContent = 'Erro ao buscar: ' + e.message;
+    hint.className = 'price-hint err';
+  }
+
+  btn.textContent = '🔄 Buscar';
+  btn.disabled = false;
+}
 
 function onLigaInput(prefix) {
   const nameId = prefix === 'card' ? 'cardName' : 'editName';
