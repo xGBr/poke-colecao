@@ -1292,3 +1292,1297 @@ loadCards();
 </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokédex TCG — Cartas Procuradas</title>
+<style>
+  :root {
+    --bg:       #1A0E07;
+    --surface:  #2C1810;
+    --panel:    #3D2314;
+    --border:   #5C3420;
+    --accent:   #D4722A;
+    --gold:     #C8963E;
+    --gold-dim: #8A6228;
+    --text:     #F5E6D3;
+    --text-dim: #A8856A;
+    --text-faint:#6B4D38;
+    --common:   #8A9BAE;
+    --holo:     #7B8FD4;
+    --reverse:  #9B7DD4;
+    --ultra:    #D4A83E;
+    --font: 'Segoe UI', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(212,114,42,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(200,150,62,0.03) 0%, transparent 50%);
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    image-rendering: auto;
+  }
+
+  .logo-text {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--text);
+  }
+
+  .logo-text span {
+    color: var(--accent);
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .badge-count {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+
+  .badge-count strong {
+    color: var(--accent);
+  }
+
+  .btn-login {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .btn-login:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .btn-logout {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-faint);
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-logout:hover { color: var(--text-dim); border-color: var(--text-faint); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 3rem 1.5rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 10 L62 38 L92 38 L68 56 L78 84 L50 66 L22 84 L32 56 L8 38 L38 38 Z' fill='none' stroke='%23D4722A' stroke-width='2' opacity='0.06'/%3E%3C/svg%3E") center/contain no-repeat;
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .hero-title {
+    font-size: clamp(24px, 5vw, 40px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .hero-title em {
+    font-style: normal;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--text-dim);
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── FILTERS ── */
+  .filters {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filter-label {
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+
+  .chip {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+  .chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .chip[data-rarity="Comum"].active { background: var(--common); border-color: var(--common); color: #1A1A2E; }
+  .chip[data-rarity="Holo"].active { background: var(--holo); border-color: var(--holo); color: #fff; }
+  .chip[data-rarity="Reverse Foil"].active { background: var(--reverse); border-color: var(--reverse); color: #fff; }
+  .chip[data-rarity="Ultra Rara"].active { background: var(--ultra); border-color: var(--ultra); color: #1A1A00; }
+
+  .search-wrap {
+    margin-left: auto;
+    position: relative;
+  }
+
+  .search-wrap input {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 13px;
+    padding: 6px 12px 6px 32px;
+    border-radius: 6px;
+    width: 200px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .search-wrap input::placeholder { color: var(--text-faint); }
+  .search-wrap input:focus { border-color: var(--accent); }
+
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-faint);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  /* ── GRID ── */
+  main {
+    padding: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  /* ── CARD ── */
+  .poke-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    position: relative;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+
+  .poke-card:hover {
+    border-color: var(--gold-dim);
+    transform: translateY(-2px);
+  }
+
+  .card-rarity-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .rarity-Comum .card-rarity-bar { background: var(--common); }
+  .rarity-Holo .card-rarity-bar { background: var(--holo); }
+  .rarity-Reverse-Foil .card-rarity-bar { background: var(--reverse); }
+  .rarity-Ultra-Rara .card-rarity-bar { background: var(--ultra); }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    margin-top: 4px;
+  }
+
+  .card-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  .card-number {
+    font-size: 11px;
+    color: var(--text-faint);
+    font-family: monospace;
+    background: var(--panel);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    white-space: nowrap;
+  }
+
+  .card-collection {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .collection-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .card-footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .rarity-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .rarity-Comum .rarity-badge { background: rgba(138,155,174,0.15); color: var(--common); }
+  .rarity-Holo .rarity-badge { background: rgba(123,143,212,0.15); color: var(--holo); }
+  .rarity-Reverse-Foil .rarity-badge { background: rgba(155,125,212,0.15); color: var(--reverse); }
+  .rarity-Ultra-Rara .rarity-badge { background: rgba(212,168,62,0.15); color: var(--ultra); }
+
+  .card-actions {
+    display: flex;
+    gap: 6px;
+  }
+
+  .btn-found {
+    background: transparent;
+    border: 1px solid #2D6E35;
+    color: #4CAF50;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+
+  .btn-found:hover { background: rgba(76,175,80,0.12); }
+
+  .btn-edit {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-faint);
+    font-size: 15px;
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+
+  .btn-edit:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+  .btn-delete {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-faint);
+    font-size: 14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+
+  .btn-delete:hover { border-color: #8B2020; color: #E25050; }
+
+  .btn-whatsapp {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #1DA851;
+    color: #25D366;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 7px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.15s;
+    margin-top: 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .btn-whatsapp:hover {
+    background: rgba(37,211,102,0.1);
+    border-color: #25D366;
+  }
+
+  .btn-liga {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dim);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 5px 9px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.15s;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
+  .btn-liga:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .btn-liga img {
+    width: 13px;
+    height: 13px;
+    object-fit: contain;
+  }
+
+  .badge-espera {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #C8963E;
+    background: rgba(200,150,62,0.12);
+    border: 1px solid rgba(200,150,62,0.3);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card-espera .card-img-wrap {
+    opacity: 0.55;
+    filter: grayscale(30%);
+  }
+
+  .card-espera {
+    opacity: 0.85;
+  }
+
+  /* ── EMPTY STATE ── */
+  .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--text-faint);
+  }
+
+  .empty-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    opacity: 0.3;
+  }
+
+  .empty p {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* ── ADD BUTTON (admin) ── */
+  .fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(212,114,42,0.4);
+    transition: transform 0.15s, background 0.15s;
+    z-index: 200;
+  }
+
+  .fab:hover { transform: scale(1.08); background: #E07B30; }
+
+  /* ── MODAL OVERLAY ── */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .overlay.open { display: flex; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+  }
+
+  .modal-title {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    color: var(--text);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: var(--text-faint);
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color 0.15s;
+  }
+
+  .modal-close:hover { color: var(--text); }
+
+  .field {
+    margin-bottom: 1rem;
+  }
+
+  .field label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .field input, .field select {
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 14px;
+    padding: 9px 12px;
+    border-radius: 7px;
+    outline: none;
+    font-family: var(--font);
+    transition: border-color 0.15s;
+    appearance: none;
+  }
+
+  .field input::placeholder { color: var(--text-faint); }
+  .field input:focus, .field select:focus { border-color: var(--accent); }
+
+  .field select option { background: var(--panel); color: var(--text); }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .btn-primary {
+    width: 100%;
+    background: var(--accent);
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 11px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background 0.15s;
+    letter-spacing: 0.3px;
+    margin-top: 4px;
+  }
+
+  .btn-primary:hover { background: #E07B30; }
+
+  .error-msg {
+    background: rgba(226,80,80,0.12);
+    border: 1px solid rgba(226,80,80,0.3);
+    color: #E25050;
+    font-size: 13px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    display: none;
+  }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 400;
+    transition: transform 0.25s;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .search-wrap { margin-left: 0; width: 100%; }
+    .search-wrap input { width: 100%; }
+    .filters { gap: 6px; }
+    .hero { padding: 2rem 1rem 1.5rem; }
+    main { padding: 1rem; }
+  }
+
+  /* ── CARD IMAGE ── */
+  .card-img-wrap {
+    width: 100%;
+    aspect-ratio: 2/3;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--panel);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.2s;
+  }
+
+  .poke-card:hover .card-img-wrap img { transform: scale(1.03); }
+
+  .card-img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-faint);
+  }
+
+  .card-img-placeholder span { font-size: 28px; opacity: 0.4; }
+  .card-img-placeholder p { font-size: 11px; letter-spacing: 0.5px; }
+
+
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 10px;
+    object-fit: contain;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <img class="logo-icon" src="https://i.imgur.com/E5eIStM.png" alt="ColeçãoGBr logo">
+    <span class="logo-text">Coleção<span>GBr</span></span>
+  </div>
+  <div class="header-right">
+    <div class="badge-count"><strong id="countDisplay">0</strong> cartas</div>
+    <button class="btn-login" id="loginBtn" onclick="openLogin()">Entrar</button>
+    <button class="btn-logout" id="logoutBtn" style="display:none" onclick="doLogout()">Sair</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">✦ Tipo Lutador — TCG</p>
+  <h1 class="hero-title">Cartas que estou<br><em>procurando</em></h1>
+  <p class="hero-sub" id="heroSub">Carregando cartas…</p>
+</section>
+
+<!-- FILTERS -->
+<div class="filters">
+  <span class="filter-label">Filtrar</span>
+  <button class="chip active" data-rarity="all" onclick="setFilter('all', this)">Todas</button>
+  <button class="chip" data-rarity="Comum" onclick="setFilter('Comum', this)">Comum</button>
+  <button class="chip" data-rarity="Holo" onclick="setFilter('Holo', this)">Holo</button>
+  <button class="chip" data-rarity="Reverse Foil" onclick="setFilter('Reverse Foil', this)">Reverse Foil</button>
+  <button class="chip" data-rarity="Ultra Rara" onclick="setFilter('Ultra Rara', this)">Ultra Rara</button>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Buscar carta..." oninput="renderCards()">
+  </div>
+</div>
+
+<!-- CARDS GRID -->
+<main>
+  <div class="section-head">
+    <span class="section-title" id="gridLabel">Cartas procuradas</span>
+  </div>
+  <div class="cards-grid" id="cardsGrid"></div>
+</main>
+
+<!-- FAB (admin only) -->
+<button class="fab" id="fabBtn" style="display:none" onclick="openAddCard()" title="Adicionar carta">+</button>
+
+<!-- MODAL: LOGIN -->
+<div class="overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('loginModal')">×</button>
+    <h2 class="modal-title">Acesso administrativo</h2>
+    <div class="error-msg" id="loginError">Senha incorreta.</div>
+    <div class="field">
+      <label>Senha</label>
+      <input type="password" id="pwInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="btn-primary" onclick="doLogin()">Entrar</button>
+  </div>
+</div>
+
+<!-- MODAL: ADD CARD -->
+<div class="overlay" id="addModal">
+  <div class="modal" style="max-width:460px">
+    <button class="modal-close" onclick="closeModal('addModal')">×</button>
+    <h2 class="modal-title">Cadastrar carta</h2>
+    <div class="field">
+      <label>Link da imagem</label>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="text" id="cardImgUrl" placeholder="Cole o link do Imgur, Drive ou outra fonte..." style="flex:1" oninput="previewDriveUrl(this.value)">
+        <img id="uploadPreview" alt="preview" style="display:none;width:44px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--border);flex-shrink:0">
+      </div>
+      <div style="font-size:11px;color:var(--text-faint);margin-top:6px;line-height:1.6">
+        <strong style="color:var(--text-dim)">Recomendado:</strong> <a href="https://imgur.com/upload" target="_blank" style="color:var(--accent);text-decoration:none">imgur.com/upload</a> — gratuito, sem bloqueio.<br>
+        Google Drive: funciona com o link <code style="background:var(--panel);padding:1px 4px;border-radius:3px;font-size:10px">lh3.googleusercontent.com</code> (veja instruções abaixo).
+      </div>
+    </div>
+    <div class="field">
+      <label>Nome da carta</label>
+      <input type="text" id="cardName" placeholder="ex: Machamp">
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Número / código</label>
+        <input type="text" id="cardNum" placeholder="ex: 064/091">
+      </div>
+      <div class="field">
+        <label>Raridade</label>
+        <select id="cardRarity">
+          <option value="Comum">Comum</option>
+          <option value="Holo">Holo</option>
+          <option value="Reverse Foil">Reverse Foil</option>
+          <option value="Ultra Rara">Ultra Rara</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Coleção / expansão</label>
+      <input type="text" id="cardSet" placeholder="ex: Scarlet & Violet — Stellar Crown">
+    </div>
+    <div class="field">
+      <label style="display:flex;align-items:center;gap:6px">
+        <img src="https://i.imgur.com/6Qreh4P.png" style="width:14px;height:14px;object-fit:contain">
+        Link Liga Pokémon
+      </label>
+      <input type="text" id="cardLiga" placeholder="https://www.ligapokemon.com.br/?view=cards/card&...">
+    </div>
+    <div class="field" style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
+      <input type="checkbox" id="cardEspera" style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer;flex-shrink:0">
+      <label for="cardEspera" style="font-size:13px;color:var(--text-dim);cursor:pointer;text-transform:none;letter-spacing:0;margin:0">
+        Em espera <span style="color:var(--text-faint);font-size:11px">— não exibe botão de contato</span>
+      </label>
+    </div>
+    <button class="btn-primary" onclick="saveCard()">Salvar carta</button>
+  </div>
+</div>
+
+<!-- MODAL: EDIT CARD -->
+<div class="overlay" id="editModal">
+  <div class="modal" style="max-width:460px">
+    <button class="modal-close" onclick="closeModal('editModal')">×</button>
+    <h2 class="modal-title">Editar carta</h2>
+    <div class="field">
+      <label>Link da imagem</label>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="text" id="editImgUrl" placeholder="Cole o link do Imgur, Drive ou outra fonte..." style="flex:1" oninput="previewEditUrl(this.value)">
+        <img id="editPreview" alt="preview" style="display:none;width:44px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--border);flex-shrink:0">
+      </div>
+    </div>
+    <div class="field">
+      <label>Nome da carta</label>
+      <input type="text" id="editName" placeholder="ex: Machamp">
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Número / código</label>
+        <input type="text" id="editNum" placeholder="ex: 064/091">
+      </div>
+      <div class="field">
+        <label>Raridade</label>
+        <select id="editRarity">
+          <option value="Comum">Comum</option>
+          <option value="Holo">Holo</option>
+          <option value="Reverse Foil">Reverse Foil</option>
+          <option value="Ultra Rara">Ultra Rara</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Coleção / expansão</label>
+      <input type="text" id="editSet" placeholder="ex: Scarlet & Violet — Stellar Crown">
+    </div>
+    <div class="field">
+      <label style="display:flex;align-items:center;gap:6px">
+        <img src="https://i.imgur.com/6Qreh4P.png" style="width:14px;height:14px;object-fit:contain">
+        Link Liga Pokémon
+      </label>
+      <input type="text" id="editLiga" placeholder="https://www.ligapokemon.com.br/?view=cards/card&...">
+    </div>
+    <div class="field" style="display:flex;align-items:center;gap:10px;margin-bottom:0.5rem">
+      <input type="checkbox" id="editEspera" style="width:16px;height:16px;accent-color:var(--gold);cursor:pointer;flex-shrink:0">
+      <label for="editEspera" style="font-size:13px;color:var(--text-dim);cursor:pointer;text-transform:none;letter-spacing:0;margin:0">
+        Em espera <span style="color:var(--text-faint);font-size:11px">— não exibe botão de contato</span>
+      </label>
+    </div>
+    <button class="btn-primary" onclick="saveEdit()">Salvar alterações</button>
+  </div>
+</div>
+
+<!-- MODAL: CONFIRM FOUND -->
+<div class="overlay" id="foundModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('foundModal')">×</button>
+    <h2 class="modal-title">Marcar como encontrada?</h2>
+    <p style="color:var(--text-dim);font-size:14px;margin-bottom:1.25rem;line-height:1.6;">Isso vai remover a carta "<strong id="foundCardName" style="color:var(--text)"></strong>" da lista de procuradas.</p>
+    <button class="btn-primary" onclick="confirmFound()">Confirmar — carta encontrada!</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" alt="">
+</div>
+
+<script>
+// ── CONFIG ───────────────────────────────────────────────────────
+const JB_BIN   = '6a414f09da38895dfe0c42b6';
+const JB_READ  = ['$2a','$10','$yjqg/nPTdhMI1FizXnqi/OqTx/xpNA7mX60oDQ2rHIWqbipBEFtga'].join('');
+const JB_WRITE = ['$2a','$10','$5SWZFlZBqSFHIejwQlSN1uqLQCL37sRwA3xFk3T782dWXgaZhrqUu'].join('');
+const JB_URL   = 'https://api.jsonbin.io/v3/b/' + JB_BIN;
+
+// ── AUTH ─────────────────────────────────────────────────────────
+const AUTH_HASH = '854b096c627894209925b1d08f93413808b490deea4cf817a95e8eab35601395';
+
+async function hashPassword(pw) {
+  const enc = new TextEncoder();
+  const buf = await crypto.subtle.digest('SHA-256', enc.encode(pw + 'poke_salt_2024'));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+// ── STATE ─────────────────────────────────────────────────────────
+let isAdmin = false;
+let cards   = [];
+let currentFilter  = 'all';
+let pendingFoundId = null;
+let editingId      = null;
+
+// ── JSONBIN ───────────────────────────────────────────────────────
+async function loadCards() {
+  try {
+    const res  = await fetch(JB_URL + '/latest', { headers: { 'X-Access-Key': JB_READ } });
+    const data = await res.json();
+    const raw  = data.record;
+    cards = Array.isArray(raw) ? raw.filter(c => c && c.id) : [];
+  } catch(e) {
+    cards = [];
+    showToast('Erro ao carregar cartas');
+  }
+  renderCards();
+}
+
+async function saveCards() {
+  try {
+    const res = await fetch(JB_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JB_WRITE },
+      body: JSON.stringify(cards)
+    });
+    if (!res.ok) throw new Error('status ' + res.status);
+  } catch(e) {
+    showToast('Erro ao salvar: ' + e.message);
+  }
+}
+
+// ── AUTH FLOW ─────────────────────────────────────────────────────
+function openLogin() {
+  document.getElementById('pwInput').value = '';
+  document.getElementById('loginError').style.display = 'none';
+  openModal('loginModal');
+  setTimeout(() => document.getElementById('pwInput').focus(), 100);
+}
+
+async function doLogin() {
+  const pw = document.getElementById('pwInput').value;
+  if (!pw) return;
+  let hash;
+  try {
+    hash = await hashPassword(pw);
+  } catch(e) {
+    document.getElementById('loginError').textContent = 'Erro ao verificar senha: ' + e.message;
+    document.getElementById('loginError').style.display = '';
+    return;
+  }
+  if (hash === AUTH_HASH) {
+    isAdmin = true;
+    closeModal('loginModal');
+    document.getElementById('loginBtn').style.display  = 'none';
+    document.getElementById('logoutBtn').style.display = '';
+    document.getElementById('fabBtn').style.display    = '';
+    document.getElementById('heroSub').textContent     = 'Modo admin ativo — cadastre e gerencie as cartas.';
+    renderCards();
+    showToast('✓ Login efetuado');
+  } else {
+    document.getElementById('loginError').textContent  = 'Senha incorreta.';
+    document.getElementById('loginError').style.display = '';
+  }
+}
+
+function doLogout() {
+  isAdmin = false;
+  document.getElementById('loginBtn').style.display  = '';
+  document.getElementById('logoutBtn').style.display = 'none';
+  document.getElementById('fabBtn').style.display    = 'none';
+  document.getElementById('heroSub').textContent     = 'Se você encontrar alguma dessas cartas, entre em contato!';
+  renderCards();
+}
+
+// ── ADD CARD ──────────────────────────────────────────────────────
+function openAddCard() {
+  document.getElementById('cardName').value    = '';
+  document.getElementById('cardNum').value     = '';
+  document.getElementById('cardRarity').value  = 'Comum';
+  document.getElementById('cardSet').value     = '';
+  document.getElementById('cardImgUrl').value  = '';
+  document.getElementById('cardLiga').value = '';
+  document.getElementById('cardEspera').checked = false;
+  document.getElementById('uploadPreview').style.display = 'none';
+  openModal('addModal');
+  setTimeout(() => document.getElementById('cardName').focus(), 100);
+}
+
+async function saveCard() {
+  const name   = document.getElementById('cardName').value.trim();
+  const num    = document.getElementById('cardNum').value.trim();
+  const rarity = document.getElementById('cardRarity').value;
+  const set    = document.getElementById('cardSet').value.trim();
+  const img    = normalizeImgUrl(document.getElementById('cardImgUrl').value.trim());
+  if (!name) { document.getElementById('cardName').focus(); return; }
+  const espera = document.getElementById('cardEspera').checked;
+  const liga  = document.getElementById('cardLiga').value.trim();
+  cards.push({ id: Date.now(), name, num, rarity, set, img: img || null, espera: espera || false, liga: liga || null });
+  closeModal('addModal');
+  showToast('⏳ Salvando...');
+  await saveCards();
+  renderCards();
+  showToast('✓ Carta adicionada');
+}
+
+// ── EDIT CARD ─────────────────────────────────────────────────────
+function openEditCard(id) {
+  const card = cards.find(c => c.id === id);
+  if (!card) return;
+  editingId = id;
+  document.getElementById('editName').value   = card.name   || '';
+  document.getElementById('editNum').value    = card.num    || '';
+  document.getElementById('editRarity').value = card.rarity || 'Comum';
+  document.getElementById('editSet').value    = card.set    || '';
+  document.getElementById('editImgUrl').value = card.img    || '';
+  document.getElementById('editLiga').value = card.liga || '';
+  document.getElementById('editEspera').checked = card.espera || false;
+  const prev = document.getElementById('editPreview');
+  if (card.img) { prev.src = card.img; prev.style.display = 'block'; prev.onerror = () => { prev.style.display = 'none'; }; }
+  else { prev.style.display = 'none'; }
+  openModal('editModal');
+  setTimeout(() => document.getElementById('editName').focus(), 100);
+}
+
+function previewEditUrl(raw) {
+  const url  = normalizeImgUrl(raw);
+  const prev = document.getElementById('editPreview');
+  if (url) { prev.onerror = () => { prev.style.display = 'none'; }; prev.onload = () => { prev.style.display = 'block'; }; prev.src = url; }
+  else { prev.style.display = 'none'; }
+}
+
+async function saveEdit() {
+  if (!editingId) return;
+  const idx = cards.findIndex(c => c.id === editingId);
+  if (idx === -1) return;
+  const name = document.getElementById('editName').value.trim();
+  if (!name) { document.getElementById('editName').focus(); return; }
+  cards[idx] = {
+    ...cards[idx],
+    name,
+    num:    document.getElementById('editNum').value.trim(),
+    rarity: document.getElementById('editRarity').value,
+    set:    document.getElementById('editSet').value.trim(),
+    img:    normalizeImgUrl(document.getElementById('editImgUrl').value.trim()) || null,
+    liga:   document.getElementById('editLiga').value.trim() || null,
+    espera: document.getElementById('editEspera').checked,
+  };
+  closeModal('editModal');
+  showToast('⏳ Salvando...');
+  await saveCards();
+  renderCards();
+  showToast('✓ Carta atualizada');
+  editingId = null;
+}
+
+// ── FOUND / DELETE ────────────────────────────────────────────────
+function askFound(id) {
+  if (!isAdmin) return;
+  const card = cards.find(c => c.id === id);
+  if (!card) return;
+  pendingFoundId = id;
+  document.getElementById('foundCardName').textContent = card.name;
+  openModal('foundModal');
+}
+
+async function confirmFound() {
+  cards = cards.filter(c => c.id !== pendingFoundId);
+  closeModal('foundModal');
+  showToast('⏳ Salvando...');
+  await saveCards();
+  renderCards();
+  showToast('🎉 Carta removida da lista!');
+  pendingFoundId = null;
+}
+
+async function deleteCard(id) {
+  if (!isAdmin) return;
+  if (!confirm('Remover essa carta da lista?')) return;
+  cards = cards.filter(c => c.id !== id);
+  showToast('⏳ Salvando...');
+  await saveCards();
+  renderCards();
+  showToast('Carta removida');
+}
+
+// ── WHATSAPP ──────────────────────────────────────────────────────
+function buildWhatsAppLink(card) {
+  const parts = [];
+  parts.push('Olá! Tenho uma carta que você está procurando:');
+  parts.push('');
+  parts.push('🃏 *' + card.name + '*');
+  if (card.num)    parts.push('📋 Número: ' + card.num);
+  if (card.set)    parts.push('📦 Coleção: ' + card.set);
+  if (card.rarity) parts.push('⭐ Raridade: ' + card.rarity);
+  parts.push('');
+  parts.push('Vi no site ColeçãoGBr!');
+  const msg = parts.join('%0A');
+  return 'https://wa.me/5519981061966?text=' + msg;
+}
+
+// ── IMAGE URL NORMALIZER ──────────────────────────────────────────
+function normalizeImgUrl(url) {
+  if (!url) return null;
+  url = url.trim();
+  if (url.includes('i.imgur.com/')) return url;
+  const imgurAlbum = url.match(/imgur\.com\/(?:a|gallery)\/([a-zA-Z0-9]+)/);
+  if (imgurAlbum) return 'https://i.imgur.com/' + imgurAlbum[1] + 'h.jpg';
+  const imgurPage = url.match(/imgur\.com\/([a-zA-Z0-9]{5,7})$/);
+  if (imgurPage) return 'https://i.imgur.com/' + imgurPage[1] + '.jpg';
+  if (url.includes('lh3.googleusercontent.com')) return url;
+  const driveId = url.match(/\/d\/([a-zA-Z0-9_-]{10,})/);
+  if (driveId) return 'https://lh3.googleusercontent.com/d/' + driveId[1];
+  if (url.includes('drive.google.com') || url.includes('drive.usercontent')) return url;
+  return url;
+}
+
+function previewDriveUrl(raw) {
+  const url  = normalizeImgUrl(raw);
+  const prev = document.getElementById('uploadPreview');
+  if (url) { prev.onerror = () => { prev.style.display = 'none'; }; prev.onload = () => { prev.style.display = 'block'; }; prev.src = url; }
+  else { prev.style.display = 'none'; }
+}
+
+// ── FILTERS & SEARCH ─────────────────────────────────────────────
+function setFilter(rarity, el) {
+  currentFilter = rarity;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderCards();
+}
+
+// ── RENDER ────────────────────────────────────────────────────────
+function renderCards() {
+  const query    = document.getElementById('searchInput').value.toLowerCase();
+  let filtered   = cards;
+  if (currentFilter !== 'all') filtered = filtered.filter(c => c.rarity === currentFilter);
+  if (query) filtered = filtered.filter(c =>
+    c.name.toLowerCase().includes(query) ||
+    (c.set && c.set.toLowerCase().includes(query)) ||
+    (c.num && c.num.toLowerCase().includes(query))
+  );
+
+  document.getElementById('countDisplay').textContent = cards.length;
+  document.getElementById('gridLabel').textContent =
+    filtered.length === cards.length
+      ? filtered.length + ' carta' + (filtered.length !== 1 ? 's' : '') + ' procurada' + (filtered.length !== 1 ? 's' : '')
+      : filtered.length + ' de ' + cards.length + ' cartas';
+
+  const grid = document.getElementById('cardsGrid');
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty"><div class="empty-icon">\uD83C\uDFB4</div><p>' +
+      (cards.length === 0
+        ? 'Nenhuma carta cadastrada ainda.' + (isAdmin ? '<br>Use o bot\u00e3o + para come\u00e7ar.' : '')
+        : 'Nenhuma carta encontrada com esse filtro.') +
+      '</p></div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(card => {
+    const rarClass = card.rarity.replace(/\s/g, '-');
+    const esperaClass = card.espera ? ' card-espera' : '';
+    const imgBlock = card.img
+      ? '<div class="card-img-wrap" onclick="openLightbox(' + card.id + ')" style="cursor:zoom-in"><img src="' + card.img + '" alt="' + esc(card.name) + '" loading="lazy"></div>'
+      : '<div class="card-img-wrap"><div class="card-img-placeholder"><span>\uD83C\uDFB4</span><p>Sem foto</p></div></div>';
+    const adminBtns = isAdmin
+      ? '<button class="btn-found" onclick="askFound(' + card.id + ')" title="Marcar como encontrada">Achei!</button>' +
+        '<button class="btn-edit"  onclick="openEditCard(' + card.id + ')" title="Editar carta">\u270E</button>' +
+        '<button class="btn-delete" onclick="deleteCard(' + card.id + ')" title="Remover">\u2715</button>'
+      : '';
+    return '<div class="poke-card rarity-' + rarClass + esperaClass + '">' +
+      '<div class="card-rarity-bar"></div>' +
+      imgBlock +
+      '<div class="card-top"><span class="card-name">' + esc(card.name) + '</span>' +
+      (card.num ? '<span class="card-number">' + esc(card.num) + '</span>' : '') + '</div>' +
+      (card.set ? '<div class="card-collection"><span class="collection-dot"></span>' + esc(card.set) + '</div>' : '<div style="height:4px"></div>') +
+      '<div class="card-footer">' +
+      '<div class="card-footer-row"><span class="rarity-badge">' + esc(card.rarity) + '</span>' +
+      (card.liga ? '<a class="btn-liga" href="' + card.liga + '" target="_blank" rel="noopener"><img src="https://i.imgur.com/6Qreh4P.png" style="width:13px;height:13px;object-fit:contain"> Ver na Liga</a>' : '') +
+      '</div>' +
+      (isAdmin ? '<div class="card-footer-row" style="justify-content:flex-end"><div class="card-actions">' + adminBtns + '</div></div>' : '<div class="card-footer-row">' + (card.espera ? '<div class="badge-espera">&#9203; Em espera</div>' : '<a class="btn-whatsapp" href="' + buildWhatsAppLink(card) + '" target="_blank" rel="noopener"><img src=\"https://i.imgur.com/ZbmGBZx.png\" style=\"width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:5px\"> Tenho essa carta!</a>') + '</div>') +
+      '</div>';
+  }).join('');
+}
+
+function esc(s) {
+  s = String(s);
+  s = s.replace(/&/g, '&amp;');
+  s = s.replace(/</g, '&lt;');
+  s = s.replace(/>/g, '&gt;');
+  s = s.split(String.fromCharCode(34)).join('&quot;');
+  return s;
+}
+
+// ── LIGHTBOX ──────────────────────────────────────────────────────
+function openLightbox(cardId) {
+  const card = cards.find(c => c.id == cardId);
+  if (!card || !card.img) return;
+  document.getElementById('lightboxImg').src = card.img;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+// ── MODAL HELPERS ─────────────────────────────────────────────────
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+document.querySelectorAll('.overlay').forEach(o => {
+  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('lightbox').classList.remove('open');
+    document.querySelectorAll('.overlay.open').forEach(o => o.classList.remove('open'));
+  }
+});
+
+// ── TOAST ─────────────────────────────────────────────────────────
+let toastTimer;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────
+document.getElementById('cardsGrid').innerHTML = '<div class="empty"><div class="empty-icon">⏳</div><p>Carregando cartas...</p></div>';
+loadCards();
+</script>
+</body>
+</html>
