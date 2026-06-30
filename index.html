@@ -16,11 +16,25 @@
     --text:     #F5E6D3;
     --text-dim: #A8856A;
     --text-faint:#6B4D38;
-    --common:   #8A9BAE;
-    --holo:     #7B8FD4;
-    --reverse:  #9B7DD4;
-    --ultra:    #D4A83E;
+    --r-normal:  #8A9BAE;
+    --r-foil:    #7B8FD4;
+    --r-reverse: #9B7DD4;
+    --r-pokeball:#5FB87A;
+    --r-masterball:#D4A83E;
     --font: 'Segoe UI', system-ui, sans-serif;
+  }
+
+  [data-theme="light"] {
+    --bg:       #F5F1EB;
+    --surface:  #FFFFFF;
+    --panel:    #F0EAE0;
+    --border:   #D8CDBC;
+    --accent:   #C9621F;
+    --gold:     #A87A2C;
+    --gold-dim: #C9A968;
+    --text:     #2B1D12;
+    --text-dim: #6B5640;
+    --text-faint:#9C8870;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +47,25 @@
     background-image:
       radial-gradient(ellipse at 20% 50%, rgba(212,114,42,0.04) 0%, transparent 60%),
       radial-gradient(ellipse at 80% 20%, rgba(200,150,62,0.03) 0%, transparent 50%);
+    transition: background-color 0.2s, color 0.2s;
   }
+
+  .btn-theme {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    transition: all 0.15s;
+  }
+
+  .btn-theme:hover { border-color: var(--accent); color: var(--accent); }
 
   /* ── HEADER ── */
   header {
@@ -206,10 +238,6 @@
 
   .chip:hover { border-color: var(--accent); color: var(--accent); }
   .chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .chip[data-rarity="Comum"].active { background: var(--common); border-color: var(--common); color: #1A1A2E; }
-  .chip[data-rarity="Holo"].active { background: var(--holo); border-color: var(--holo); color: #fff; }
-  .chip[data-rarity="Reverse Foil"].active { background: var(--reverse); border-color: var(--reverse); color: #fff; }
-  .chip[data-rarity="Ultra Rara"].active { background: var(--ultra); border-color: var(--ultra); color: #1A1A00; }
 
   .search-wrap {
     margin-left: auto;
@@ -293,10 +321,7 @@
     border-radius: 10px 10px 0 0;
   }
 
-  .rarity-Comum .card-rarity-bar { background: var(--common); }
-  .rarity-Holo .card-rarity-bar { background: var(--holo); }
-  .rarity-Reverse-Foil .card-rarity-bar { background: var(--reverse); }
-  .rarity-Ultra-Rara .card-rarity-bar { background: var(--ultra); }
+  .card-rarity-bar { background: var(--accent); }
 
   .card-top {
     display: flex;
@@ -357,19 +382,39 @@
     flex-wrap: wrap;
   }
 
-  .rarity-badge {
+  .rarity-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .rarity-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .rarity-tag.r-Normal       { background: rgba(138,155,174,0.15); color: var(--r-normal); }
+  .rarity-tag.r-Foil         { background: rgba(123,143,212,0.15); color: var(--r-foil); }
+  .rarity-tag.r-Reverse-Foil { background: rgba(155,125,212,0.15); color: var(--r-reverse); }
+  .rarity-tag.r-Pokeball-Foil{ background: rgba(95,184,122,0.15); color: var(--r-pokeball); }
+  .rarity-tag.r-Master-Ball  { background: rgba(212,168,62,0.15); color: var(--r-masterball); }
+
+  .category-badge {
     font-size: 10px;
     font-weight: 700;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     padding: 3px 8px;
     border-radius: 4px;
+    background: rgba(212,114,42,0.12);
+    color: var(--accent);
+    white-space: nowrap;
   }
-
-  .rarity-Comum .rarity-badge { background: rgba(138,155,174,0.15); color: var(--common); }
-  .rarity-Holo .rarity-badge { background: rgba(123,143,212,0.15); color: var(--holo); }
-  .rarity-Reverse-Foil .rarity-badge { background: rgba(155,125,212,0.15); color: var(--reverse); }
-  .rarity-Ultra-Rara .rarity-badge { background: rgba(212,168,62,0.15); color: var(--ultra); }
 
   .card-actions {
     display: flex;
@@ -686,6 +731,44 @@
     gap: 10px;
   }
 
+  .rarity-checks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .rarity-check-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 7px 9px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .rarity-check-item:hover { border-color: var(--gold-dim); }
+
+  .rarity-check-item input {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--accent);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .rarity-check-item label {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: 0;
+    margin: 0;
+    font-weight: 500;
+  }
+
   .btn-primary {
     width: 100%;
     background: var(--accent);
@@ -813,6 +896,7 @@
   </div>
   <div class="header-right">
     <div class="badge-count"><strong id="countDisplay">0</strong> cartas</div>
+    <button class="btn-theme" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">🌙</button>
     <button class="btn-login" id="loginBtn" onclick="openLogin()">Entrar</button>
     <button class="btn-logout" id="logoutBtn" style="display:none" onclick="doLogout()">Sair</button>
   </div>
@@ -828,11 +912,11 @@
 <!-- FILTERS -->
 <div class="filters">
   <span class="filter-label">Filtrar</span>
-  <button class="chip active" data-rarity="all" onclick="setFilter('all', this)">Todas</button>
-  <button class="chip" data-rarity="Comum" onclick="setFilter('Comum', this)">Comum</button>
-  <button class="chip" data-rarity="Holo" onclick="setFilter('Holo', this)">Holo</button>
-  <button class="chip" data-rarity="Reverse Foil" onclick="setFilter('Reverse Foil', this)">Reverse Foil</button>
-  <button class="chip" data-rarity="Ultra Rara" onclick="setFilter('Ultra Rara', this)">Ultra Rara</button>
+  <button class="chip active" data-cat="all" onclick="setFilter('all', this)">Todas</button>
+  <button class="chip" data-cat="Principal" onclick="setFilter('Principal', this)">Principal</button>
+  <button class="chip" data-cat="Treinadores" onclick="setFilter('Treinadores', this)">Treinadores</button>
+  <button class="chip" data-cat="Delta Species" onclick="setFilter('Delta Species', this)">Delta Species</button>
+  <button class="chip" data-cat="Cartas da Cintia" onclick="setFilter('Cartas da Cintia', this)">Cartas da Cintia</button>
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
     <input type="text" id="searchInput" placeholder="Buscar carta..." oninput="renderCards()">
@@ -890,13 +974,23 @@
         <input type="text" id="cardNum" placeholder="ex: 064/091">
       </div>
       <div class="field">
-        <label>Raridade</label>
-        <select id="cardRarity">
-          <option value="Comum">Comum</option>
-          <option value="Holo">Holo</option>
-          <option value="Reverse Foil">Reverse Foil</option>
-          <option value="Ultra Rara">Ultra Rara</option>
+        <label>Categoria</label>
+        <select id="cardCategory">
+          <option value="Principal">Principal</option>
+          <option value="Treinadores">Treinadores</option>
+          <option value="Delta Species">Delta Species</option>
+          <option value="Cartas da Cintia">Cartas da Cintia</option>
         </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Raridades que faltam</label>
+      <div class="rarity-checks">
+        <div class="rarity-check-item"><input type="checkbox" id="cardR-Normal" value="Normal"><label for="cardR-Normal">Normal</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="cardR-Foil" value="Foil"><label for="cardR-Foil">Foil</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="cardR-Reverse-Foil" value="Reverse Foil"><label for="cardR-Reverse-Foil">Reverse Foil</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="cardR-Pokeball-Foil" value="Pokeball Foil"><label for="cardR-Pokeball-Foil">Pokeball Foil</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="cardR-Master-Ball" value="Master Ball"><label for="cardR-Master-Ball">Master Ball</label></div>
       </div>
     </div>
     <div class="field">
@@ -950,13 +1044,23 @@
         <input type="text" id="editNum" placeholder="ex: 064/091">
       </div>
       <div class="field">
-        <label>Raridade</label>
-        <select id="editRarity">
-          <option value="Comum">Comum</option>
-          <option value="Holo">Holo</option>
-          <option value="Reverse Foil">Reverse Foil</option>
-          <option value="Ultra Rara">Ultra Rara</option>
+        <label>Categoria</label>
+        <select id="editCategory">
+          <option value="Principal">Principal</option>
+          <option value="Treinadores">Treinadores</option>
+          <option value="Delta Species">Delta Species</option>
+          <option value="Cartas da Cintia">Cartas da Cintia</option>
         </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Raridades que faltam</label>
+      <div class="rarity-checks">
+        <div class="rarity-check-item"><input type="checkbox" id="editR-Normal" value="Normal"><label for="editR-Normal">Normal</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="editR-Foil" value="Foil"><label for="editR-Foil">Foil</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="editR-Reverse-Foil" value="Reverse Foil"><label for="editR-Reverse-Foil">Reverse Foil</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="editR-Pokeball-Foil" value="Pokeball Foil"><label for="editR-Pokeball-Foil">Pokeball Foil</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="editR-Master-Ball" value="Master Ball"><label for="editR-Master-Ball">Master Ball</label></div>
       </div>
     </div>
     <div class="field">
@@ -1014,12 +1118,61 @@ const JB_WRITE = ['$2a','$10','$5SWZFlZBqSFHIejwQlSN1uqLQCL37sRwA3xFk3T782dWXgaZ
 const JB_URL   = 'https://api.jsonbin.io/v3/b/' + JB_BIN;
 
 // ── AUTH ─────────────────────────────────────────────────────────
-const AUTH_HASH = '854b096c627894209925b1d08f93413808b490deea4cf817a95e8eab35601395';
+const AUTH_HASH = '30b4a98a462f0743e1adb73c5cc034d047d52955d9114ab13fde1640df13beab';
 
 async function hashPassword(pw) {
   const enc = new TextEncoder();
   const buf = await crypto.subtle.digest('SHA-256', enc.encode(pw + 'poke_salt_2024'));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+// ── THEME ────────────────────────────────────────────────────────
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  applyTheme(next);
+}
+
+function applyTheme(theme) {
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.getElementById('themeBtn').textContent = '☀️';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    document.getElementById('themeBtn').textContent = '🌙';
+  }
+  try { window.themePref = theme; } catch(e) {}
+}
+
+// ── PT → EN SET DICTIONARY (para busca de preço) ───────────────────
+const SET_DICT_PT_EN = {
+  'máscaras do crepúsculo': 'Twilight Masquerade',
+  'mascaras do crepusculo': 'Twilight Masquerade',
+  'crystal guardians': 'Crystal Guardians',
+  'guardiões de cristal': 'Crystal Guardians',
+  'guardioes de cristal': 'Crystal Guardians',
+  'dragon frontiers': 'Dragon Frontiers',
+  'fronteira dos dragões': 'Dragon Frontiers',
+  'fronteira dos dragoes': 'Dragon Frontiers',
+  'fronteiras dragão': 'Dragon Frontiers',
+  'evoluções prismáticas': 'Prismatic Evolutions',
+  'evolucoes prismaticas': 'Prismatic Evolutions',
+  'forças temporais': 'Temporal Forces',
+  'forcas temporais': 'Temporal Forces',
+  'eletrizante': 'Paldea Evolved',
+  'paldea evolved': 'Paldea Evolved',
+  'escarlate e violeta': 'Scarlet & Violet',
+  'destinos paldeanos': 'Paldean Fates',
+  'guerreiros paradoxo': 'Paradox Rift',
+  'névoa branca': 'White Flare',
+  'nevoa branca': 'White Flare',
+  'chama negra': 'Black Bolt',
+};
+
+function translateSetName(ptName) {
+  if (!ptName) return ptName;
+  const key = ptName.trim().toLowerCase();
+  return SET_DICT_PT_EN[key] || ptName;
 }
 
 // ── STATE ─────────────────────────────────────────────────────────
@@ -1103,7 +1256,8 @@ function doLogout() {
 function openAddCard() {
   document.getElementById('cardName').value    = '';
   document.getElementById('cardNum').value     = '';
-  document.getElementById('cardRarity').value  = 'Comum';
+  document.getElementById('cardCategory').value = 'Principal';
+  document.querySelectorAll('#addModal .rarity-check-item input').forEach(cb => cb.checked = false);
   document.getElementById('cardSet').value     = '';
   document.getElementById('cardImgUrl').value  = '';
   document.getElementById('cardLiga').value = '';
@@ -1120,14 +1274,15 @@ function openAddCard() {
 async function saveCard() {
   const name   = document.getElementById('cardName').value.trim();
   const num    = document.getElementById('cardNum').value.trim();
-  const rarity = document.getElementById('cardRarity').value;
+  const category = document.getElementById('cardCategory').value;
+  const rarities = Array.from(document.querySelectorAll('#addModal .rarity-check-item input:checked')).map(cb => cb.value);
   const set    = document.getElementById('cardSet').value.trim();
   const img    = normalizeImgUrl(document.getElementById('cardImgUrl').value.trim());
   if (!name) { document.getElementById('cardName').focus(); return; }
   const espera = document.getElementById('cardEspera').checked;
   const liga   = document.getElementById('cardLiga').value.trim();
   const preco  = document.getElementById('cardPreco').value.trim();
-  cards.push({ id: Date.now(), name, num, rarity, set, img: img || null, espera: espera || false, liga: liga || null, preco: preco || null });
+  cards.push({ id: Date.now(), name, num, category, rarities, set, img: img || null, espera: espera || false, liga: liga || null, preco: preco || null });
   closeModal('addModal');
   showToast('⏳ Salvando...');
   await saveCards();
@@ -1142,7 +1297,10 @@ function openEditCard(id) {
   editingId = id;
   document.getElementById('editName').value   = card.name   || '';
   document.getElementById('editNum').value    = card.num    || '';
-  document.getElementById('editRarity').value = card.rarity || 'Comum';
+  document.getElementById('editCategory').value = card.category || 'Principal';
+  document.querySelectorAll('#editModal .rarity-check-item input').forEach(cb => {
+    cb.checked = Array.isArray(card.rarities) && card.rarities.includes(cb.value);
+  });
   document.getElementById('editSet').value    = card.set    || '';
   document.getElementById('editImgUrl').value = card.img    || '';
   document.getElementById('editLiga').value = card.liga || '';
@@ -1171,16 +1329,18 @@ async function saveEdit() {
   if (idx === -1) return;
   const name = document.getElementById('editName').value.trim();
   if (!name) { document.getElementById('editName').focus(); return; }
+  const rarities = Array.from(document.querySelectorAll('#editModal .rarity-check-item input:checked')).map(cb => cb.value);
   cards[idx] = {
     ...cards[idx],
     name,
-    num:    document.getElementById('editNum').value.trim(),
-    rarity: document.getElementById('editRarity').value,
-    set:    document.getElementById('editSet').value.trim(),
-    img:    normalizeImgUrl(document.getElementById('editImgUrl').value.trim()) || null,
-    liga:   document.getElementById('editLiga').value.trim() || null,
-    preco:  document.getElementById('editPreco').value.trim() || null,
-    espera: document.getElementById('editEspera').checked,
+    num:      document.getElementById('editNum').value.trim(),
+    category: document.getElementById('editCategory').value,
+    rarities: rarities,
+    set:      document.getElementById('editSet').value.trim(),
+    img:      normalizeImgUrl(document.getElementById('editImgUrl').value.trim()) || null,
+    liga:     document.getElementById('editLiga').value.trim() || null,
+    preco:    document.getElementById('editPreco').value.trim() || null,
+    espera:   document.getElementById('editEspera').checked,
   };
   closeModal('editModal');
   showToast('⏳ Salvando...');
@@ -1228,7 +1388,7 @@ function buildWhatsAppLink(card) {
   parts.push('🃏 *' + card.name + '*');
   if (card.num)    parts.push('📋 Número: ' + card.num);
   if (card.set)    parts.push('📦 Coleção: ' + card.set);
-  if (card.rarity) parts.push('⭐ Raridade: ' + card.rarity);
+  if (Array.isArray(card.rarities) && card.rarities.length) parts.push('⭐ Raridade(s): ' + card.rarities.join(', '));
   parts.push('');
   parts.push('Vi no site ColeçãoGBr!');
   const msg = parts.join('%0A');
@@ -1293,6 +1453,8 @@ function onPrecoInput(prefix) {
 const PRECO_LIMIT = 150;
 async function fetchPreco(prefix) {
   const nome = document.getElementById(prefix === 'card' ? 'cardName' : 'editName').value.trim();
+  const setRaw = document.getElementById(prefix === 'card' ? 'cardSet' : 'editSet').value.trim();
+  const setEn = translateSetName(setRaw);
   const btn  = document.getElementById(prefix + 'FetchBtn');
   const hint = document.getElementById(prefix + 'PrecoHint');
   const inp  = document.getElementById(prefix + 'Preco');
@@ -1309,10 +1471,19 @@ async function fetchPreco(prefix) {
   hint.className = 'price-hint';
 
   try {
-    const searchUrl = 'https://api.pokemontcg.io/v2/cards?q=name:"' + encodeURIComponent(nome) + '"';
+    let query = 'name:"' + nome + '"';
+    if (setEn) query += ' set.name:"' + setEn + '"';
+    let searchUrl = 'https://api.pokemontcg.io/v2/cards?q=' + encodeURIComponent(query);
     
-    const sRes = await fetch(searchUrl);
-    const sData = await sRes.json();
+    let sRes = await fetch(searchUrl);
+    let sData = await sRes.json();
+
+    // fallback: if set-filtered search returns nothing, retry by name only
+    if ((!sData.data || sData.data.length === 0) && setEn) {
+      searchUrl = 'https://api.pokemontcg.io/v2/cards?q=' + encodeURIComponent('name:"' + nome + '"');
+      sRes = await fetch(searchUrl);
+      sData = await sRes.json();
+    }
 
     if (!sData.data || sData.data.length === 0) {
       hint.textContent = 'Carta não encontrada — tente o nome em inglês ou digite manualmente';
@@ -1370,8 +1541,10 @@ async function fetchPreco(prefix) {
 
 // ── RENDER ────────────────────────────────────────────────────────
 function buildCardHTML(card) {
-  const rarClass    = card.rarity.replace(/\s/g, '-');
   const esperaClass = card.espera ? ' card-espera' : '';
+  let rarities = Array.isArray(card.rarities) ? card.rarities : [];
+  if (rarities.length === 0 && card.rarity) rarities = [card.rarity];
+  const category = card.category || 'Principal';
 
   const imgBlock = card.img
     ? '<div class="card-img-wrap" onclick="openLightbox(' + card.id + ')" style="cursor:zoom-in"><img src="' + card.img + '" alt="' + esc(card.name) + '" loading="lazy"></div>'
@@ -1384,6 +1557,10 @@ function buildCardHTML(card) {
   const waBtn = '<a class="btn-whatsapp" href="' + buildWhatsAppLink(card) + '" target="_blank" rel="noopener"><img src="https://i.imgur.com/ZbmGBZx.png" style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:5px"> Tenho essa carta!</a>';
 
   const esperaBadge = '<div class="badge-espera">&#9203; Em espera</div>';
+
+  const rarityTagsHTML = rarities.length
+    ? '<div class="rarity-tags">' + rarities.map(r => '<span class="rarity-tag r-' + String(r).replace(/\s/g, '-') + '">' + esc(r) + '</span>').join('') + '</div>'
+    : '';
 
   let footerBottom = '';
   if (isAdmin) {
@@ -1398,7 +1575,7 @@ function buildCardHTML(card) {
       + '</div>';
   }
 
-  return '<div class="poke-card rarity-' + rarClass + esperaClass + '">'
+  return '<div class="poke-card' + esperaClass + '">'
     + '<div class="card-rarity-bar"></div>'
     + imgBlock
     + '<div class="card-top"><span class="card-name">' + esc(card.name) + '</span>'
@@ -1406,8 +1583,9 @@ function buildCardHTML(card) {
     + '</div>'
     + (card.set ? '<div class="card-collection"><span class="collection-dot"></span>' + esc(card.set) + '</div>' : '<div style="height:4px"></div>')
     + (card.preco ? '<div style="margin-bottom:6px"><span class="card-price' + (parsePreco(card.preco) > PRECO_LIMIT ? ' alto' : '') + '">' + esc(card.preco) + '</span></div>' : '')
+    + (rarityTagsHTML ? '<div style="margin-bottom:8px">' + rarityTagsHTML + '</div>' : '')
     + '<div class="card-footer">'
-    + '<div class="card-footer-row"><span class="rarity-badge">' + esc(card.rarity) + '</span>' + ligatBtn + '</div>'
+    + '<div class="card-footer-row"><span class="category-badge">' + esc(category) + '</span>' + ligatBtn + '</div>'
     + footerBottom
     + '</div>'
     + '</div>';
@@ -1416,7 +1594,7 @@ function buildCardHTML(card) {
 function renderCards() {
   const query   = document.getElementById('searchInput').value.toLowerCase();
   let filtered  = cards;
-  if (currentFilter !== 'all') filtered = filtered.filter(c => c.rarity === currentFilter);
+  if (currentFilter !== 'all') filtered = filtered.filter(c => (c.category || 'Principal') === currentFilter);
   if (query) filtered = filtered.filter(c =>
     c.name.toLowerCase().includes(query) ||
     (c.set && c.set.toLowerCase().includes(query)) ||
@@ -1489,6 +1667,7 @@ function showToast(msg) {
 }
 
 // ── INIT ──────────────────────────────────────────────────────────
+applyTheme('dark');
 document.getElementById('cardsGrid').innerHTML = '<div class="empty"><div class="empty-icon">⏳</div><p>Carregando cartas...</p></div>';
 loadCards();
 </script>
