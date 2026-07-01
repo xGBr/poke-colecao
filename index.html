@@ -6,21 +6,22 @@
 <title>Pokédex TCG — Cartas Procuradas</title>
 <style>
   :root {
-    --bg:       #1A0E07;
-    --surface:  #2C1810;
-    --panel:    #3D2314;
-    --border:   #5C3420;
-    --accent:   #D4722A;
-    --gold:     #C8963E;
-    --gold-dim: #8A6228;
-    --text:     #F5E6D3;
-    --text-dim: #A8856A;
-    --text-faint:#6B4D38;
-    --r-normal:  #8A9BAE;
-    --r-foil:    #7B8FD4;
-    --r-reverse: #9B7DD4;
-    --r-pokeball:#5FB87A;
+    --bg:        #0D0D0F;
+    --surface:   #17181C;
+    --panel:     #1F2026;
+    --border:    #2E3038;
+    --accent:    #D4722A;
+    --gold:      #C8963E;
+    --gold-dim:  #8A6228;
+    --text:      #EEEEF0;
+    --text-dim:  #9A9BA8;
+    --text-faint:#55566A;
+    --r-normal:    #8A9BAE;
+    --r-foil:      #7B8FD4;
+    --r-reverse:   #9B7DD4;
+    --r-pokeball:  #5FB87A;
     --r-masterball:#D4A83E;
+    --r-cosmoholo: #E07CA0;
     --font: 'Segoe UI', system-ui, sans-serif;
   }
 
@@ -398,11 +399,12 @@
     white-space: nowrap;
   }
 
-  .rarity-tag.r-Normal       { background: rgba(138,155,174,0.15); color: var(--r-normal); }
-  .rarity-tag.r-Foil         { background: rgba(123,143,212,0.15); color: var(--r-foil); }
-  .rarity-tag.r-Reverse-Foil { background: rgba(155,125,212,0.15); color: var(--r-reverse); }
-  .rarity-tag.r-Pokeball-Foil{ background: rgba(95,184,122,0.15); color: var(--r-pokeball); }
-  .rarity-tag.r-Master-Ball  { background: rgba(212,168,62,0.15); color: var(--r-masterball); }
+  .rarity-tag.r-Normal        { background: rgba(138,155,174,0.15); color: var(--r-normal); }
+  .rarity-tag.r-Foil          { background: rgba(123,143,212,0.15); color: var(--r-foil); }
+  .rarity-tag.r-Reverse-Foil  { background: rgba(155,125,212,0.15); color: var(--r-reverse); }
+  .rarity-tag.r-Pokeball-Foil { background: rgba(95,184,122,0.15);  color: var(--r-pokeball); }
+  .rarity-tag.r-Master-Ball   { background: rgba(212,168,62,0.15);  color: var(--r-masterball); }
+  .rarity-tag.r-Cosmo-Holo    { background: rgba(224,124,160,0.15); color: var(--r-cosmoholo); }
 
   .category-badge {
     font-size: 10px;
@@ -734,29 +736,64 @@
   .rarity-checks {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 6px;
+  }
+
+  /* Hide the native checkbox completely */
+  .rarity-check-item input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
   }
 
   .rarity-check-item {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 9px;
     background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 7px 9px;
+    border: 1.5px solid var(--border);
+    border-radius: 7px;
+    padding: 8px 10px;
     cursor: pointer;
-    transition: border-color 0.15s;
+    transition: border-color 0.15s, background 0.15s;
+    position: relative;
+    user-select: none;
   }
 
-  .rarity-check-item:hover { border-color: var(--gold-dim); }
+  .rarity-check-item:hover {
+    border-color: var(--gold-dim);
+    background: rgba(200,150,62,0.06);
+  }
 
-  .rarity-check-item input {
-    width: 15px;
-    height: 15px;
-    accent-color: var(--accent);
-    cursor: pointer;
+  /* Custom checkbox visual box */
+  .rarity-check-item .r-box {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid var(--border);
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+    transition: all 0.15s;
+    font-size: 11px;
+    color: transparent;
+  }
+
+  /* When checked — full color fill + checkmark */
+  .rarity-check-item input:checked ~ .r-box {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  /* Border highlight when checked */
+  .rarity-check-item:has(input:checked) {
+    border-color: var(--accent);
+    background: rgba(212,114,42,0.08);
   }
 
   .rarity-check-item label {
@@ -767,6 +804,13 @@
     letter-spacing: 0;
     margin: 0;
     font-weight: 500;
+    transition: color 0.15s;
+    flex: 1;
+  }
+
+  .rarity-check-item:has(input:checked) label {
+    color: var(--text);
+    font-weight: 600;
   }
 
   .btn-primary {
@@ -986,17 +1030,14 @@
     <div class="field">
       <label>Raridades que faltam</label>
       <div class="rarity-checks">
-        <div class="rarity-check-item"><input type="checkbox" id="editR-Normal" value="Normal"><label for="editR-Normal">Normal</label></div>
-        <div class="rarity-check-item"><input type="checkbox" id="editR-Foil" value="Foil"><label for="editR-Foil">Foil</label></div>
-        <div class="rarity-check-item"><input type="checkbox" id="editR-Reverse-Foil" value="Reverse Foil"><label for="editR-Reverse-Foil">Reverse Foil</label></div>
-		<div class="rarity-check-item"><input type="checkbox" id="editR-Master-Ball" value="Master Ball"><label for="editR-Master-Ball">Cosmo Holo</label></div>
-        <div class="rarity-check-item"><input type="checkbox" id="editR-Pokeball-Foil" value="Pokeball Foil"><label for="editR-Pokeball-Foil">Pokeball Foil</label></div>
-        <div class="rarity-check-item"><input type="checkbox" id="editR-Master-Ball" value="Master Ball"><label for="editR-Master-Ball">Master Ball</label></div>
-		<div class="rarity-check-item"><input type="checkbox" id="editR-Play-Pokemon" value="Play Pokemon"><label for="editR-Master-Ball">Play! Pokémon</label></div>
-		<div class="rarity-check-item"><input type="checkbox" id="editR-Play-Pokemon-Cosmo" value="Play Pokemon Cosmo"><label for="editR-Master-Ball">Play! Pokémon (Cosmo Holo)</label></div>
-		<div class="rarity-check-item"><input type="checkbox" id="editR-World Championships" value="World Championships"><label for="editR-Master-Ball">World Championships</label></div>
-		<div class="rarity-check-item"><input type="checkbox" id="editR-Staff" value="Staff"><label for="editR-Master-Ball">Staff</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="cardR-Normal" value="Normal"><span class="r-box">&#10003;</span><label for="cardR-Normal">Normal</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="cardR-Foil" value="Foil"><span class="r-box">&#10003;</span><label for="cardR-Foil">Foil</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="cardR-Reverse-Foil" value="Reverse Foil"><span class="r-box">&#10003;</span><label for="cardR-Reverse-Foil">Reverse Foil</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="cardR-Cosmo-Holo" value="Cosmo Holo"><span class="r-box">&#10003;</span><label for="cardR-Cosmo-Holo">Cosmo Holo</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="cardR-Pokeball-Foil" value="Pokeball Foil"><span class="r-box">&#10003;</span><label for="cardR-Pokeball-Foil">Pokeball Foil</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="cardR-Master-Ball" value="Master Ball"><span class="r-box">&#10003;</span><label for="cardR-Master-Ball">Master Ball</label></div>
       </div>
+    </div>
     </div>
     <div class="field">
       <label>Coleção / expansão</label>
@@ -1061,17 +1102,14 @@
     <div class="field">
       <label>Raridades que faltam</label>
       <div class="rarity-checks">
-        <div class="rarity-check-item"><input type="checkbox" id="editR-Normal" value="Normal"><label for="editR-Normal">Normal</label></div>
-        <div class="rarity-check-item"><input type="checkbox" id="editR-Foil" value="Foil"><label for="editR-Foil">Foil</label></div>
-        <div class="rarity-check-item"><input type="checkbox" id="editR-Reverse-Foil" value="Reverse Foil"><label for="editR-Reverse-Foil">Reverse Foil</label></div>
-		<div class="rarity-check-item"><input type="checkbox" id="editR-Master-Ball" value="Master Ball"><label for="editR-Master-Ball">Cosmo Holo</label></div>
-        <div class="rarity-check-item"><input type="checkbox" id="editR-Pokeball-Foil" value="Pokeball Foil"><label for="editR-Pokeball-Foil">Pokeball Foil</label></div>
-        <div class="rarity-check-item"><input type="checkbox" id="editR-Master-Ball" value="Master Ball"><label for="editR-Master-Ball">Master Ball</label></div>
-		<div class="rarity-check-item"><input type="checkbox" id="editR-Play-Pokemon" value="Play Pokemon"><label for="editR-Master-Ball">Play! Pokémon</label></div>
-		<div class="rarity-check-item"><input type="checkbox" id="editR-Play-Pokemon-Cosmo" value="Play Pokemon Cosmo"><label for="editR-Master-Ball">Play! Pokémon (Cosmo Holo)</label></div>
-		<div class="rarity-check-item"><input type="checkbox" id="editR-World Championships" value="World Championships"><label for="editR-Master-Ball">World Championships</label></div>
-		<div class="rarity-check-item"><input type="checkbox" id="editR-Staff" value="Staff"><label for="editR-Master-Ball">Staff</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="editR-Normal" value="Normal"><span class="r-box">&#10003;</span><label for="editR-Normal">Normal</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="editR-Foil" value="Foil"><span class="r-box">&#10003;</span><label for="editR-Foil">Foil</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="editR-Reverse-Foil" value="Reverse Foil"><span class="r-box">&#10003;</span><label for="editR-Reverse-Foil">Reverse Foil</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="editR-Cosmo-Holo" value="Cosmo Holo"><span class="r-box">&#10003;</span><label for="editR-Cosmo-Holo">Cosmo Holo</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="editR-Pokeball-Foil" value="Pokeball Foil"><span class="r-box">&#10003;</span><label for="editR-Pokeball-Foil">Pokeball Foil</label></div>
+        <div class="rarity-check-item"><input type="checkbox" id="editR-Master-Ball" value="Master Ball"><span class="r-box">&#10003;</span><label for="editR-Master-Ball">Master Ball</label></div>
       </div>
+    </div>
     </div>
     <div class="field">
       <label>Coleção / expansão</label>
