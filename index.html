@@ -6,34 +6,35 @@
 <title>Pokédex TCG — Cartas Procuradas</title>
 <style>
   :root {
-    --bg:       #1A0E07;
-    --surface:  #2C1810;
-    --panel:    #3D2314;
-    --border:   #5C3420;
-    --accent:   #D4722A;
-    --gold:     #C8963E;
-    --gold-dim: #8A6228;
-    --text:     #F5E6D3;
-    --text-dim: #A8856A;
-    --text-faint:#6B4D38;
-    --r-normal:  #8A9BAE;
-    --r-foil:    #7B8FD4;
-    --r-reverse: #9B7DD4;
-    --r-pokeball:#5FB87A;
+    --bg:          #0D0D0F;
+    --surface:     #17181C;
+    --panel:       #1F2026;
+    --border:      #2E3038;
+    --accent:      #D4722A;
+    --gold:        #C8963E;
+    --gold-dim:    #8A6228;
+    --text:        #EEEEF0;
+    --text-dim:    #9A9BA8;
+    --text-faint:  #55566A;
+    --r-normal:    #8A9BAE;
+    --r-foil:      #7B8FD4;
+    --r-reverse:   #9B7DD4;
+    --r-pokeball:  #5FB87A;
     --r-masterball:#D4A83E;
+    --r-cosmoholo: #E07CA0;
     --font: 'Segoe UI', system-ui, sans-serif;
   }
 
   [data-theme="light"] {
-    --bg:       #F5F1EB;
-    --surface:  #FFFFFF;
-    --panel:    #F0EAE0;
-    --border:   #D8CDBC;
-    --accent:   #C9621F;
-    --gold:     #A87A2C;
-    --gold-dim: #C9A968;
-    --text:     #2B1D12;
-    --text-dim: #6B5640;
+    --bg:        #F5F1EB;
+    --surface:   #FFFFFF;
+    --panel:     #F0EAE0;
+    --border:    #D8CDBC;
+    --accent:    #C9621F;
+    --gold:      #A87A2C;
+    --gold-dim:  #C9A968;
+    --text:      #2B1D12;
+    --text-dim:  #6B5640;
     --text-faint:#9C8870;
   }
 
@@ -656,9 +657,10 @@
     inset: 0;
     background: rgba(0,0,0,0.75);
     z-index: 300;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     padding: 1rem;
+    overflow-y: auto;
   }
 
   .overlay.open { display: flex; }
@@ -669,8 +671,11 @@
     border-radius: 12px;
     padding: 1.75rem;
     width: 100%;
-    max-width: 420px;
+    max-width: 460px;
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
     position: relative;
+    margin: auto;
   }
 
   .modal-title {
@@ -997,7 +1002,7 @@
 
 <!-- MODAL: ADD CARD -->
 <div class="overlay" id="addModal">
-  <div class="modal" style="max-width:460px">
+  <div class="modal">
     <button class="modal-close" onclick="closeModal('addModal')">×</button>
     <h2 class="modal-title">Cadastrar carta</h2>
     <div class="field">
@@ -1077,7 +1082,7 @@
 
 <!-- MODAL: EDIT CARD -->
 <div class="overlay" id="editModal">
-  <div class="modal" style="max-width:460px">
+  <div class="modal">
     <button class="modal-close" onclick="closeModal('editModal')">×</button>
     <h2 class="modal-title">Editar carta</h2>
     <div class="field">
