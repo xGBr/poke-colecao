@@ -73,5 +73,20 @@
       "Normal"
     ],
     "id": 1788052594903
+  },
+  {
+    "name": "Horsea",
+    "num": "50/101",
+    "category": "Delta Species",
+    "year": 2006,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Horsea%20(50/101)&ed=DF&num=50",
+    "preco": "R$ 18,05",
+    "img": "https://i.imgur.com/HqLagNe.png",
+    "espera": false,
+    "rarities": [
+      "Normal"
+    ],
+    "id": 1788052760045
   }
 ]
