@@ -1762,6 +1762,56 @@ applyTheme('dark');
 document.getElementById('cardsGrid').innerHTML = '<div class="empty"><div class="empty-icon">⏳</div><p>Carregando cartas...</p></div>';
 loadCards();
 </script>
+// ── EXPORTAÇÃO ────────────────────────────────────────────────────
+function exportCards() {
+  if (!cards || cards.length === 0) {
+    showToast('Nenhuma carta para exportar!');
+    return;
+  }
+
+  // Formata os dados para o padrão exato que você solicitou
+  const colecaoFormatada = cards.map(carta => ({
+    name: carta.name || "Nome Desconhecido",
+    num: carta.num || "0/0",
+    category: carta.category || "Principal",
+    year: carta.year || 0,
+    set: carta.set || "Set Desconhecido",
+    liga: carta.liga || `https://www.ligapokemon.com.br/?view=cards/card&card=${encodeURIComponent(carta.name)}`,
+    preco: carta.preco || "R$ 0,00",
+    img: carta.img || "",
+    espera: carta.espera || false,
+    rarities: carta.rarities || ["Normal"],
+    id: carta.id || Date.now()
+  }));
+
+  // Converte para JSON
+  const jsonString = JSON.stringify(colecaoFormatada, null, 2);
+  const blob = new Blob([jsonString], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  
+  // Força o download
+  const linkDownload = document.createElement('a');
+  linkDownload.href = url;
+  linkDownload.download = "minha_colecao.json";
+  
+  document.body.appendChild(linkDownload);
+  linkDownload.click();
+  
+  document.body.removeChild(linkDownload);
+  URL.revokeObjectURL(url);
+  
+  showToast('✓ Coleção exportada!');
+}
+
+// ── LIGHTBOX ──────────────────────────────────────────────────────
+function openLightbox(cardId) {
+<!-- ... existing code ... -->
+applyTheme('dark');
+document.getElementById('cardsGrid').innerHTML = '<div class="empty"><div class="empty-icon">⏳</div><p>Carregando cartas...</p></div>';
+loadCards();
+</script>
+</body>
+</html>
 <script src="js/export.js"></script>
 </body>
 </html>
