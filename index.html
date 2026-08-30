@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -319,9 +320,8 @@
     right: 0;
     height: 3px;
     border-radius: 10px 10px 0 0;
+    background: var(--accent);
   }
-
-  .card-rarity-bar { background: var(--accent); }
 
   .card-top {
     display: flex;
@@ -559,9 +559,9 @@
     min-height: 16px;
   }
 
-  .price-hint.ok  { color: #4CAF50; }
+  .price-hint.ok   { color: #4CAF50; }
   .price-hint.warn { color: var(--gold); }
-  .price-hint.err { color: #E25050; }
+  .price-hint.err  { color: #E25050; }
 
   .card-price {
     font-size: 12px;
@@ -740,13 +740,12 @@
     gap: 10px;
   }
 
-    .rarity-checks {
+  .rarity-checks {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 6px;
   }
 
-  /* Hide native checkbox */
   .rarity-check-item input[type="checkbox"] {
     position: absolute;
     opacity: 0;
@@ -774,7 +773,6 @@
     background: rgba(200,150,62,0.06);
   }
 
-  /* Custom visual box */
   .rarity-check-item .r-box {
     width: 18px;
     height: 18px;
@@ -791,7 +789,6 @@
     transition: all 0.15s;
   }
 
-  /* Checked state — JS adds class .checked to the item */
   .rarity-check-item.checked .r-box {
     background: var(--accent);
     border-color: var(--accent);
@@ -913,8 +910,6 @@
   .card-img-placeholder span { font-size: 28px; opacity: 0.4; }
   .card-img-placeholder p { font-size: 11px; letter-spacing: 0.5px; }
 
-
-
   /* ── LIGHTBOX ── */
   .lightbox {
     display: none;
@@ -946,6 +941,7 @@
   </div>
   <div class="header-right">
     <div class="badge-count"><strong id="countDisplay">0</strong> cartas</div>
+    <button class="btn-theme" onclick="exportCards()" title="Exportar Coleção (JSON)">📥</button>
     <button class="btn-theme" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">🌙</button>
     <button class="btn-login" id="loginBtn" onclick="openLogin()">Entrar</button>
     <button class="btn-logout" id="logoutBtn" style="display:none" onclick="doLogout()">Sair</button>
@@ -1004,8 +1000,7 @@
         <img id="uploadPreview" alt="preview" style="display:none;width:44px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--border);flex-shrink:0">
       </div>
       <div style="font-size:11px;color:var(--text-faint);margin-top:6px;line-height:1.6">
-        <strong style="color:var(--text-dim)">Recomendado:</strong> <a href="https://imgur.com/upload" target="_blank" style="color:var(--accent);text-decoration:none">imgur.com/upload</a> — gratuito, sem bloqueio.<br>
-        Google Drive: funciona com o link <code style="background:var(--panel);padding:1px 4px;border-radius:3px;font-size:10px">lh3.googleusercontent.com</code> (veja instruções abaixo).
+        <strong style="color:var(--text-dim)">Recomendado:</strong> <a href="https://imgur.com/upload" target="_blank" style="color:var(--accent);text-decoration:none">imgur.com/upload</a> — gratuito, sem bloqueio.
       </div>
     </div>
     <div class="field">
@@ -1303,21 +1298,17 @@ function doLogout() {
 }
 
 // ── ADD CARD ──────────────────────────────────────────────────────
-// ── RARITY CHECKBOX VISUAL ───────────────────────────────────────
 function initRarityChecks(modalId) {
   const items = document.querySelectorAll('#' + modalId + ' .rarity-check-item');
   items.forEach(item => {
-    // Remove old listeners by replacing with clone
     const clone = item.cloneNode(true);
     item.parentNode.replaceChild(clone, item);
   });
   document.querySelectorAll('#' + modalId + ' .rarity-check-item').forEach(item => {
     const cb = item.querySelector('input[type="checkbox"]');
-    // Sync visual state
     syncCheckItem(item, cb);
-    // Click on whole item toggles checkbox
     item.addEventListener('click', function(e) {
-      if (e.target === cb) return; // native click handled separately
+      if (e.target === cb) return;
       cb.checked = !cb.checked;
       syncCheckItem(item, cb);
     });
@@ -1333,13 +1324,6 @@ function syncCheckItem(item, cb) {
   } else {
     item.classList.remove('checked');
   }
-}
-
-function syncAllChecks(modalId) {
-  document.querySelectorAll('#' + modalId + ' .rarity-check-item').forEach(item => {
-    const cb = item.querySelector('input[type="checkbox"]');
-    syncCheckItem(item, cb);
-  });
 }
 
 function openAddCard() {
@@ -1398,7 +1382,7 @@ function openEditCard(id) {
   document.getElementById('editPreco').value = card.preco || '';
   document.getElementById('editPrecoHint').textContent = '';
   document.getElementById('editPrecoHint').className = 'price-hint';
-  document.getElementById('editFetchBtn').disabled = !(card.liga);
+  document.getElementById('editFetchBtn').disabled = !(card.name);
   document.getElementById('editEspera').checked = card.espera || false;
   const prev = document.getElementById('editPreview');
   if (card.img) { prev.src = card.img; prev.style.display = 'block'; prev.onerror = () => { prev.style.display = 'none'; }; }
@@ -1463,7 +1447,6 @@ async function confirmFound() {
 
 async function deleteCard(id) {
   if (!isAdmin) return;
-  if (!confirm('Remover essa carta da lista?')) return;
   cards = cards.filter(c => c.id !== id);
   showToast('⏳ Salvando...');
   await saveCards();
@@ -1536,10 +1519,9 @@ function onLigaInput(prefix) {
 }
 
 function onPrecoInput(prefix) {
-  // Apenas deixa o usuário digitar, a formatação acontece no final
+  // Mantém edição livre de valor
 }
 
-// ── PRICE FETCH ──────────────────────────────────────────────────
 // ── PRICE FETCH ──────────────────────────────────────────────────
 const PRECO_LIMIT = 150;
 async function fetchPreco(prefix) {
@@ -1569,7 +1551,6 @@ async function fetchPreco(prefix) {
     let sRes = await fetch(searchUrl);
     let sData = await sRes.json();
 
-    // fallback: if set-filtered search returns nothing, retry by name only
     if ((!sData.data || sData.data.length === 0) && setEn) {
       searchUrl = 'https://api.pokemontcg.io/v2/cards?q=' + encodeURIComponent('name:"' + nome + '"');
       sRes = await fetch(searchUrl);
@@ -1584,7 +1565,6 @@ async function fetchPreco(prefix) {
     }
 
     const card = sData.data[0];
-
     const tcgData = card.tcgplayer;
     if (!tcgData || !tcgData.prices) {
       hint.textContent = 'Preço não disponível na API — digite manualmente';
@@ -1712,12 +1692,51 @@ function renderCards() {
 }
 
 function esc(s) {
+  if (s === null || s === undefined) return '';
   s = String(s);
-  s = s.replace(/&/g, '&');
-  s = s.replace(/</g, '<');
-  s = s.replace(/>/g, '>');
-  s = s.split(String.fromCharCode(34)).join('"');
+  s = s.replace(/&/g, '&amp;');
+  s = s.replace(/</g, '&lt;');
+  s = s.replace(/>/g, '&gt;');
+  s = s.replace(/"/g, '&quot;');
   return s;
+}
+
+// ── EXPORTAÇÃO ────────────────────────────────────────────────────
+function exportCards() {
+  if (!cards || cards.length === 0) {
+    showToast('Nenhuma carta para exportar!');
+    return;
+  }
+
+  const colecaoFormatada = cards.map(carta => ({
+    name: carta.name || "Nome Desconhecido",
+    num: carta.num || "0/0",
+    category: carta.category || "Principal",
+    year: carta.year || 0,
+    set: carta.set || "Set Desconhecido",
+    liga: carta.liga || `https://www.ligapokemon.com.br/?view=cards/card&card=${encodeURIComponent(carta.name)}`,
+    preco: carta.preco || "R$ 0,00",
+    img: carta.img || "",
+    espera: carta.espera || false,
+    rarities: carta.rarities || ["Normal"],
+    id: carta.id || Date.now()
+  }));
+
+  const jsonString = JSON.stringify(colecaoFormatada, null, 2);
+  const blob = new Blob([jsonString], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  
+  const linkDownload = document.createElement('a');
+  linkDownload.href = url;
+  linkDownload.download = "minha_colecao.json";
+  
+  document.body.appendChild(linkDownload);
+  linkDownload.click();
+  
+  document.body.removeChild(linkDownload);
+  URL.revokeObjectURL(url);
+  
+  showToast('✓ Coleção exportada!');
 }
 
 // ── LIGHTBOX ──────────────────────────────────────────────────────
@@ -1762,56 +1781,5 @@ applyTheme('dark');
 document.getElementById('cardsGrid').innerHTML = '<div class="empty"><div class="empty-icon">⏳</div><p>Carregando cartas...</p></div>';
 loadCards();
 </script>
-// ── EXPORTAÇÃO ────────────────────────────────────────────────────
-function exportCards() {
-  if (!cards || cards.length === 0) {
-    showToast('Nenhuma carta para exportar!');
-    return;
-  }
-
-  // Formata os dados para o padrão exato que você solicitou
-  const colecaoFormatada = cards.map(carta => ({
-    name: carta.name || "Nome Desconhecido",
-    num: carta.num || "0/0",
-    category: carta.category || "Principal",
-    year: carta.year || 0,
-    set: carta.set || "Set Desconhecido",
-    liga: carta.liga || `https://www.ligapokemon.com.br/?view=cards/card&card=${encodeURIComponent(carta.name)}`,
-    preco: carta.preco || "R$ 0,00",
-    img: carta.img || "",
-    espera: carta.espera || false,
-    rarities: carta.rarities || ["Normal"],
-    id: carta.id || Date.now()
-  }));
-
-  // Converte para JSON
-  const jsonString = JSON.stringify(colecaoFormatada, null, 2);
-  const blob = new Blob([jsonString], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  
-  // Força o download
-  const linkDownload = document.createElement('a');
-  linkDownload.href = url;
-  linkDownload.download = "minha_colecao.json";
-  
-  document.body.appendChild(linkDownload);
-  linkDownload.click();
-  
-  document.body.removeChild(linkDownload);
-  URL.revokeObjectURL(url);
-  
-  showToast('✓ Coleção exportada!');
-}
-
-// ── LIGHTBOX ──────────────────────────────────────────────────────
-function openLightbox(cardId) {
-<!-- ... existing code ... -->
-applyTheme('dark');
-document.getElementById('cardsGrid').innerHTML = '<div class="empty"><div class="empty-icon">⏳</div><p>Carregando cartas...</p></div>';
-loadCards();
-</script>
-</body>
-</html>
-<script src="js/export.js"></script>
 </body>
 </html>
