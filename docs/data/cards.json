@@ -1,5 +1,1291 @@
 [
   {
+    "name": "Blastoise",
+    "num": "2/100",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Crystal Guardians",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Blastoise%20(2/100)&ed=CG&num=2",
+    "preco": "R$ 1.250,00",
+    "img": "https://i.imgur.com/jxelQ8E.jpg",
+    "espera": true,
+    "rarities": [],
+    "id": 1782678724817
+  },
+  {
+    "name": "Cloyster",
+    "num": "14/101",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Cloyster%20(14/101)&ed=DF&num=14",
+    "preco": "R$ 4,00",
+    "img": "https://i.imgur.com/FyX3WQI.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782679221606
+  },
+  {
+    "name": "Exeggcute",
+    "num": "65/110",
+    "category": "Delta Species",
+    "year": null,
+    "set": "EX Holon Phantoms",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Exeggcute%20(65/110)&ed=EHP&num=65",
+    "preco": "R$ 35,00",
+    "img": "https://i.imgur.com/6TeXbio.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782679332772
+  },
+  {
+    "name": "Exeggutor",
+    "num": "41/110",
+    "category": "Delta Species",
+    "year": null,
+    "set": "EX Holon Phantoms",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Exeggutor%20(41/110)&ed=EHP&num=41",
+    "preco": "R$ 23,00",
+    "img": "https://i.imgur.com/PBqQJva.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782679362684
+  },
+  {
+    "name": "Horsea",
+    "num": "50/101",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Horsea%20(50/101)&ed=DF&num=50",
+    "preco": "R$ 2,70",
+    "img": "https://i.imgur.com/HqLagNe.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782679474471
+  },
+  {
+    "name": "Horsea",
+    "num": "31/101",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Horsea%20(31/101)&ed=DF&num=31",
+    "preco": "R$ 59,50",
+    "img": "https://i.imgur.com/2RT0wQK.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782679523652
+  },
+  {
+    "name": "Seadra",
+    "num": "37/101",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Seadra%20(37/101)&ed=DF&num=37",
+    "preco": "R$ 4,25",
+    "img": "https://i.imgur.com/R1kaEPf.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782679685747
+  },
+  {
+    "name": "Seadra",
+    "num": "22/101",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Seadra+%2822%2F101%29",
+    "preco": "R$ 4,89",
+    "img": "https://i.imgur.com/OLU4JVx.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782679721989
+  },
+  {
+    "name": "Electabuzz",
+    "num": "29/101",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Electabuzz+%2829%2F101%29",
+    "preco": "R$ 4,90",
+    "img": "https://i.imgur.com/HMdfVgW.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782679820027
+  },
+  {
+    "name": "Pinsir",
+    "num": "9/101",
+    "category": "Delta Species",
+    "year": null,
+    "set": "EX Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Pinsir%20(9/101)&ed=DF&num=9",
+    "preco": "R$ 24,49",
+    "img": "https://i.imgur.com/5TYvmae.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782679881205
+  },
+  {
+    "name": "Ditto",
+    "num": "62/113",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Delta Species",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Ditto+%2862%2F113%29",
+    "preco": "R$ 64,50",
+    "img": "https://i.imgur.com/gTfGLUN.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782679935733
+  },
+  {
+    "name": "Chikorita",
+    "num": "44/101",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Chikorita%20(44/101)&ed=DF&num=44",
+    "preco": "R$ 69,90",
+    "img": "https://i.imgur.com/Y6VN2tF.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782680580861
+  },
+  {
+    "name": "Bayleef",
+    "num": "26/101",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Bayleef+%2826%2F101%29",
+    "preco": "R$ 29,90",
+    "img": "https://i.imgur.com/Dl5AEV2.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782680620599
+  },
+  {
+    "name": "Meganium",
+    "num": "4/101",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Meganium%20(4/101)&ed=DF&num=4",
+    "preco": "R$ 118,99",
+    "img": "https://i.imgur.com/szJs8wo.jpg",
+    "espera": true,
+    "rarities": [],
+    "id": 1782680666790
+  },
+  {
+    "name": "Magcargo",
+    "num": "H17/144",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Skyridge",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Magcargo+%28H17%2F144%29",
+    "preco": "R$ 250,00",
+    "img": "https://i.imgur.com/WS9Y3On.jpg",
+    "espera": true,
+    "rarities": [],
+    "id": 1782680847266
+  },
+  {
+    "name": "Magcargo",
+    "num": "18/144",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Skyridge",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=18%2F144",
+    "preco": "R$ 54,90",
+    "img": "https://i.imgur.com/sVgfNvJ.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782680937465
+  },
+  {
+    "name": "Kingdra EX",
+    "num": "94/101",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Kingdra+ex+%2894%2F101%29",
+    "preco": "R$ 219,50",
+    "img": "https://i.imgur.com/nTbtR8F.jpg",
+    "espera": true,
+    "rarities": [],
+    "id": 1782681046475
+  },
+  {
+    "name": "Elekid",
+    "num": "48/101",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Elekid+%2848%2F101%29",
+    "preco": "R$ 4,99",
+    "img": "https://i.imgur.com/VG9BWlX.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782681091581
+  },
+  {
+    "name": "Combusken",
+    "num": "16/100",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Crystal Guardians",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Combusken%20(16/100)&ed=CG&num=16",
+    "preco": "R$ 6,50",
+    "img": "https://i.imgur.com/ghcdr3O.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782681243360
+  },
+  {
+    "name": "Blaziken EX",
+    "num": "90/100",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Crystal Guardians",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Blaziken+ex%20(90/100)&ed=CG&num=90",
+    "preco": "R$ 149,50",
+    "img": "https://i.imgur.com/aP9I5wz.jpg",
+    "espera": true,
+    "rarities": [],
+    "id": 1782681300193
+  },
+  {
+    "name": "Marshtomp",
+    "num": "15/17",
+    "category": "Delta Species",
+    "year": null,
+    "set": "POP Series 3",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Marshtomp%20(15/17)&ed=P3&num=15",
+    "preco": "R$ 0,50",
+    "img": "https://i.imgur.com/TArFqEz.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782681517266
+  },
+  {
+    "name": "Marshtomp",
+    "num": "38/100",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Crystal Guardians",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Marshtomp%20(38/100)&ed=CG&num=38",
+    "preco": "R$ 1,95",
+    "img": "https://i.imgur.com/K5xgdPN.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782681597023
+  },
+  {
+    "name": "Swampert EX",
+    "num": "95/95",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Team Magma vs Team Aqua",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Swampert+ex+%2895%2F95%29",
+    "preco": "R$ 80,00",
+    "img": "https://i.imgur.com/5S9f6Io.jpg",
+    "espera": true,
+    "rarities": [],
+    "id": 1782681704729
+  },
+  {
+    "name": "Swampert",
+    "num": "27/100",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Crystal Guardians",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Swampert%20(27/100)&ed=CG&num=27",
+    "preco": "R$ 39,99",
+    "img": "https://i.imgur.com/H25GsJL.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782681787903
+  },
+  {
+    "name": "Carvanha",
+    "num": "61/110",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Holon Phantoms",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Carvanha%20(61/110)&ed=EHP&num=61",
+    "preco": "R$ 0,45",
+    "img": "https://i.imgur.com/1jVP5Zc.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782681970839
+  },
+  {
+    "name": "Sharpedo",
+    "num": "53/110",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Holon Phantoms",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Sharpedo%20(53/110)&ed=EHP&num=53",
+    "preco": "R$ 13,90",
+    "img": "https://i.imgur.com/8GHKUyk.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782682035010
+  },
+  {
+    "name": "Torkoal",
+    "num": "10/17",
+    "category": "Delta Species",
+    "year": null,
+    "set": "POP Series 1",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Torkoal%20(10/17)&ed=P1&num=10",
+    "preco": "R$ 14,99",
+    "img": "https://i.imgur.com/b4yK7Y5.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782682106765
+  },
+  {
+    "name": "Cacturne",
+    "num": "15/100",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Crystal Guardians",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Cacturne%20(15/100)&ed=CG&num=15",
+    "preco": "R$ 5,00",
+    "img": "https://i.imgur.com/2VF5TJW.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782682200036
+  },
+  {
+    "name": "Torterra",
+    "num": "11/100",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Stormfront",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Torterra%20(11/100)&ed=SF&num=11",
+    "preco": "R$ 12,90",
+    "img": "https://i.imgur.com/VMhGaZV.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782683385606
+  },
+  {
+    "name": "Infernape",
+    "num": "3/100",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Stormfront",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Infernape%20(3/100)&ed=SF&num=3",
+    "preco": "R$ 15,49",
+    "img": "https://i.imgur.com/w4H28Cn.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782683437093
+  },
+  {
+    "name": "Infernape",
+    "num": "59/131",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Luz Proibida",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=59%2F131",
+    "preco": "R$ 3,71",
+    "img": "https://i.imgur.com/A0b1MWU.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782683543795
+  },
+  {
+    "name": "Arceus",
+    "num": "AR8/99",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Arceus",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Arceus+%28AR8%2F99%29",
+    "preco": "R$ 45,00",
+    "img": "https://i.imgur.com/fBcr1GO.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782683717125
+  },
+  {
+    "name": "Greninja ex",
+    "num": "214/167",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Máscaras do Crepúsculo",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=214%2F167",
+    "preco": "R$ 1.097,88",
+    "img": "https://i.imgur.com/x71tbqV.jpg",
+    "espera": true,
+    "rarities": [],
+    "id": 1782684942765
+  },
+  {
+    "name": "Greninja ex",
+    "num": "198/167",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Máscaras do Crepúsculo",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=198%2F167",
+    "preco": "R$ 164,89",
+    "img": "https://i.imgur.com/36oZA2z.jpg",
+    "espera": true,
+    "rarities": [],
+    "id": 1782684992402
+  },
+  {
+    "name": "Toxtricity ex",
+    "num": "227/182",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Fenda Paradoxal",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Toxtricity+ex%20(227/182)&ed=PAR&num=227",
+    "preco": "R$ 19,50",
+    "img": "https://i.imgur.com/QpnkRL9.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782689788313
+  },
+  {
+    "name": "Toxtricity ex",
+    "num": "100/182",
+    "category": "Delta Species",
+    "year": null,
+    "set": "Fenda Paradoxal",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Toxtricity+ex+%28100%2F182%29",
+    "preco": "R$ 3,99",
+    "img": "https://i.imgur.com/NAaW3h6.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782689843054
+  },
+  {
+    "name": "Bia",
+    "num": "193/185",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Voltagem Vívida",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Bea+%28193%2F185%29",
+    "preco": "R$ 47,00",
+    "img": "https://i.imgur.com/9e4p7CH.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782848621854
+  },
+  {
+    "name": "Bia",
+    "num": "180/185",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Voltagem Vívida",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Bea+%28180%2F185%29",
+    "preco": "R$ 74,99",
+    "img": "https://i.imgur.com/ErrG98i.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil",
+      "Foil"
+    ],
+    "id": 1782848744455
+  },
+  {
+    "name": "Brawly",
+    "num": "212/198",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Reinado Arrepiante",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Brawly+%28212%2F198%29",
+    "preco": "R$ 20,00",
+    "img": "https://i.imgur.com/uQxHd7c.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782849062327
+  },
+  {
+    "name": "Brawly",
+    "num": "188/198",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Reinado Arrepiante",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Brawly+%28188%2F198%29",
+    "preco": "R$ 21,25",
+    "img": "https://i.imgur.com/8SLakIr.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782849234357
+  },
+  {
+    "name": "Bruno",
+    "num": "172/163",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Estilos de Batalha",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=172%2F163",
+    "preco": "R$ 39,90",
+    "img": "https://i.imgur.com/hfgf89S.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782849333831
+  },
+  {
+    "name": "Bruno",
+    "num": "158/163",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Estilos de Batalha",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Bruno%20(158/163)&ed=BST&num=158",
+    "preco": "R$ 254,92",
+    "img": "https://i.imgur.com/q8xiYSP.jpg",
+    "espera": true,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782850109136
+  },
+  {
+    "name": "Ambição da Cíntia",
+    "num": "178/172",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Astros Cintilantes",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Cynthia%27s+Ambition+%28178%2F172%29",
+    "preco": "R$ 69,30",
+    "img": "https://i.imgur.com/tHgMQm0.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782850248938
+  },
+  {
+    "name": "Cíntia e Caitlin",
+    "num": "228/236",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Eclipse Cósmico",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Cynthia+%26+Caitlin+%28228%2F236%29",
+    "preco": "R$ 759,99",
+    "img": "https://i.imgur.com/QYtpTXH.jpg",
+    "espera": true,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782850585000
+  },
+  {
+    "name": "Cíntia",
+    "num": "SV82/68",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Destinos Ocultos",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Cynthia+%28SV82%2F68%29",
+    "preco": "R$ 1799,00",
+    "img": "https://i.imgur.com/6ut4Fqy.jpg",
+    "espera": true,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782850968642
+  },
+  {
+    "name": "Cíntia",
+    "num": "119a/156",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Ultraprisma",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Cynthia+%28119a%2F156%29",
+    "preco": "R$ 49,90",
+    "img": "https://i.imgur.com/cdyKIWx.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782907589904
+  },
+  {
+    "name": "Cíntia",
+    "num": "148/156",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Ultraprisma",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Cynthia+%28148%2F156%29",
+    "preco": "R$ 499,90",
+    "img": "https://i.imgur.com/G4Pift8.jpg",
+    "espera": true,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782907668925
+  },
+  {
+    "name": "Cynthia's Guidance",
+    "num": "136/147",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Supreme Victors",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Cynthia%27s+Guidance+%28136%2F147%29",
+    "preco": "R$ 4,00",
+    "img": "https://i.imgur.com/0wXLWj1.jpg",
+    "espera": false,
+    "rarities": [
+      "Normal",
+      "Reverse Foil"
+    ],
+    "id": 1782907796781
+  },
+  {
+    "name": "Dendra",
+    "num": "179/193",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Evoluções em Paldea",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Dendra+%28179%2F193%29",
+    "preco": "R$ 0,15",
+    "img": "https://i.imgur.com/l0pMekL.jpg",
+    "espera": false,
+    "rarities": [
+      "Normal",
+      "Reverse Foil"
+    ],
+    "id": 1782907948237
+  },
+  {
+    "name": "Êri",
+    "num": "210/162",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Forças Temporais",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Eri+%28210%2F162%29",
+    "preco": "R$ 106,40",
+    "img": "https://i.imgur.com/Xitsh50.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782908063806
+  },
+  {
+    "name": "Êri",
+    "num": "199/162",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Forças Temporais",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=199%2F162",
+    "preco": "R$ 25,00",
+    "img": "https://i.imgur.com/qEr0yTa.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782908742561
+  },
+  {
+    "name": "Faixa Preta",
+    "num": "85/102",
+    "category": "Treinadores",
+    "year": 2010,
+    "set": "Triumphant",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Black+Belt+%2885%2F102%29",
+    "preco": "R$ 0,50",
+    "img": "https://i.imgur.com/TZ36Mcc.jpg",
+    "espera": false,
+    "rarities": [
+      "Normal",
+      "Reverse Foil"
+    ],
+    "id": 1782908818446
+  },
+  {
+    "name": "Foco da Korrina",
+    "num": "174/163",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Estilos de Batalha",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Korrina%27s+Focus+%28174%2F163%29",
+    "preco": "R$ 39,60",
+    "img": "https://i.imgur.com/VI8GvDM.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782908928356
+  },
+  {
+    "name": "Mostarda Estilo Golpe Fluido",
+    "num": "162/163",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Estilos de Batalha",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=162%2F163",
+    "preco": "R$ 18,00",
+    "img": "https://i.imgur.com/ok6vchh.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782909048036
+  },
+  {
+    "name": "Mostarda Estilo Golpe Decisivo",
+    "num": "163/163",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Estilos de Batalha",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Single+Strike+Style+Mustard%20(163/163)&ed=BST&num=163",
+    "preco": "R$ 23,00",
+    "img": "https://i.imgur.com/5y1HokO.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782909111518
+  },
+  {
+    "name": "Mostarda Estilo Golpe Fluido",
+    "num": "176/163",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Estilos de Batalha",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=176%2F163",
+    "preco": "R$ 35,00",
+    "img": "https://i.imgur.com/CWfk2nn.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782909183360
+  },
+  {
+    "name": "Mostarda Estilo Golpe Decisivo",
+    "num": "177/163",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Estilos de Batalha",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=177%2F163",
+    "preco": "R$ 29,50",
+    "img": "https://i.imgur.com/aJx6pxf.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782909291742
+  },
+  {
+    "name": "Mostarda Estilo Golpe Fluido",
+    "num": "TG27/TG30",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Astros Cintilantes - Galeria de Treinadores",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Rapid+Strike+Style+Mustard+%28TG27%2FTG30%29",
+    "preco": "R$ 19,90",
+    "img": "https://i.imgur.com/fBhnK4O.jpg",
+    "espera": false,
+    "rarities": [
+      "Foil"
+    ],
+    "id": 1782909372158
+  },
+  {
+    "name": "Treino de Faixa Preta",
+    "num": "144/159",
+    "category": "Treinadores",
+    "year": null,
+    "set": "Amigos de Jornada",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Black+Belt%27s+Training%20(144/159)&ed=JTG&num=144",
+    "preco": "R$ 0,50",
+    "img": "https://i.imgur.com/zODysvm.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782909680457
+  },
+  {
+    "name": "Roserade C",
+    "num": "40/147",
+    "category": "Cartas da Cintia",
+    "year": null,
+    "set": "Supreme Victors",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Roserade+C+%2840%2F147%29",
+    "preco": "R$ 14,50",
+    "img": "https://i.imgur.com/2pMFtPx.jpg",
+    "espera": false,
+    "rarities": [
+      "Normal",
+      "Reverse Foil"
+    ],
+    "id": 1782996277725
+  },
+  {
+    "name": "Garchomp C",
+    "num": "60/147",
+    "category": "Cartas da Cintia",
+    "year": null,
+    "set": "Supreme Victors",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Garchomp+C+%2860%2F147%29",
+    "preco": "R$ 77,90",
+    "img": "https://i.imgur.com/BW12jl9.jpg",
+    "espera": false,
+    "rarities": [
+      "Normal",
+      "Reverse Foil",
+      "World Championships",
+      "Staff"
+    ],
+    "id": 1782996419735
+  },
+  {
+    "name": "Garchomp C LV.X",
+    "num": "145/147",
+    "category": "Cartas da Cintia",
+    "year": null,
+    "set": "Supreme Victors",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Garchomp+C+LV.X+%28145%2F147%29",
+    "preco": "R$ 499,90",
+    "img": "https://i.imgur.com/ImvHds7.jpg",
+    "espera": true,
+    "rarities": [
+      "Foil",
+      "World Championships"
+    ],
+    "id": 1782996530146
+  },
+  {
+    "name": "Garchomp C LV.X",
+    "num": "DP46/56",
+    "category": "Cartas da Cintia",
+    "year": null,
+    "set": "Diamante & Pérola Promos",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Garchomp+C+LV.X+%28DP46%2F56%29",
+    "preco": "R$ 70,00",
+    "img": "https://i.imgur.com/3N7X4u4.jpg",
+    "espera": false,
+    "rarities": [
+      "Cosmo Holo"
+    ],
+    "id": 1782996703182
+  },
+  {
+    "name": "Roserade da Cíntia",
+    "num": "008/182",
+    "category": "Cartas da Cintia",
+    "year": null,
+    "set": "Rivais Predestinados",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Cynthia%27s+Roserade+%28008%2F182%29",
+    "preco": "R$ 4,00",
+    "img": "https://i.imgur.com/zeCSR1B.jpg",
+    "espera": false,
+    "rarities": [
+      "Play Pokemon Cosmo"
+    ],
+    "id": 1782996817871
+  },
+  {
+    "name": "Milotic C",
+    "num": "35/147",
+    "category": "Cartas da Cintia",
+    "year": null,
+    "set": "Supreme Victors",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Milotic+C+%2835%2F147%29",
+    "preco": "R$ 35,00",
+    "img": "https://i.imgur.com/sUwxEcR.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil",
+      "Cosmo Holo"
+    ],
+    "id": 1782996984847
+  },
+  {
+    "name": "Spiritomb C",
+    "num": "84/147",
+    "category": "Cartas da Cintia",
+    "year": null,
+    "set": "Supreme Victors",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Spiritomb+C+%2884%2F147%29",
+    "preco": "R$ ??",
+    "img": "https://i.imgur.com/I5FGXph.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782997088838
+  },
+  {
+    "name": "Togekiss C",
+    "num": "86/147",
+    "category": "Cartas da Cintia",
+    "year": null,
+    "set": "Supreme Victors",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Togekiss+C%20(86/147)&ed=SV&num=86",
+    "preco": "R$ 29,00",
+    "img": "https://i.imgur.com/ktIbfMh.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782997256548
+  },
+  {
+    "name": "Riolu",
+    "num": "76/132",
+    "category": "Principal",
+    "year": null,
+    "set": "Megaevolução",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Riolu+%28076%2F132%29",
+    "preco": "R$ 39,90",
+    "img": "https://i.imgur.com/PNOBytH.jpg",
+    "espera": false,
+    "rarities": [
+      "Cosmo Holo",
+      "Play Pokemon"
+    ],
+    "id": 1782998004377
+  },
+  {
+    "name": "Riolu",
+    "num": "81/142",
+    "category": "Principal",
+    "year": null,
+    "set": "Coroa Estelar",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Riolu+%28081%2F142%29",
+    "preco": "R$ 0,20",
+    "img": "https://i.imgur.com/ZS0qbvf.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782998126686
+  },
+  {
+    "name": "Riolu",
+    "num": "112/198",
+    "category": "Principal",
+    "year": null,
+    "set": "Escarlate e Violeta",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(112/198)&ed=SV1&num=112",
+    "preco": "R$ 0,25",
+    "img": "https://i.imgur.com/kZqQ2eI.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782998227810
+  },
+  {
+    "name": "Riolu",
+    "num": "78/172",
+    "category": "Principal",
+    "year": null,
+    "set": "Astros Cintilantes",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Riolu+%2878%2F172%29",
+    "preco": "R$ 0,90",
+    "img": "https://i.imgur.com/5psDWB1.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782998314616
+  },
+  {
+    "name": "Riolu",
+    "num": "90/185",
+    "category": "Principal",
+    "year": null,
+    "set": "Voltagem Vívida",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=90%2F185",
+    "preco": "R$ 0,95",
+    "img": "https://i.imgur.com/vud7An0.jpg",
+    "espera": false,
+    "rarities": [],
+    "id": 1782998390628
+  },
+  {
+    "name": "Riolu",
+    "num": "115/236",
+    "category": "Principal",
+    "year": null,
+    "set": "Sintonia Mental",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Riolu+%28115%2F236%29",
+    "preco": "R$ 5,00",
+    "img": "https://i.imgur.com/XGkVapd.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782998562281
+  },
+  {
+    "name": "Riolu",
+    "num": "116/236",
+    "category": "Principal",
+    "year": null,
+    "set": "Sintonia Mental",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(116/236)&ed=UNM&num=116",
+    "preco": "R$ 5,00",
+    "img": "https://i.imgur.com/wiIb5hI.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782998760819
+  },
+  {
+    "name": "Riolu",
+    "num": "102/214",
+    "category": "Principal",
+    "year": null,
+    "set": "Elos Inquebráveis",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Riolu+%28102%2F214%29",
+    "preco": "R$ 1,00",
+    "img": "https://i.imgur.com/jSOy0lv.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782998848389
+  },
+  {
+    "name": "Riolu",
+    "num": "24/40",
+    "category": "Principal",
+    "year": null,
+    "set": "Ultraprisma",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=66%2F156",
+    "preco": "R$ 6,50",
+    "img": "https://i.imgur.com/iRB3pKN.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782999036558
+  },
+  {
+    "name": "Riolu",
+    "num": "45/124",
+    "category": "Principal",
+    "year": null,
+    "set": "Fusão de Destinos",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(45/124)&ed=FCO&num=45",
+    "preco": "R$ 4,40",
+    "img": "https://i.imgur.com/VwOURHQ.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782999186159
+  },
+  {
+    "name": "Riolu",
+    "num": "46/124",
+    "category": "Principal",
+    "year": null,
+    "set": "Fusão de Destinos",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(46/124)&ed=FCO&num=46",
+    "preco": "R$ 5,00",
+    "img": "https://i.imgur.com/MiNyJzB.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782999342556
+  },
+  {
+    "name": "Riolu",
+    "num": "79/113",
+    "category": "Principal",
+    "year": null,
+    "set": "Tesouros Lendários",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Riolu+%2879%2F113%29",
+    "preco": "R$ 75,00",
+    "img": "https://i.imgur.com/jxBUUu5.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782999534781
+  },
+  {
+    "name": "Riolu",
+    "num": "75/135",
+    "category": "Principal",
+    "year": null,
+    "set": "Tempestade de Plasma",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=75%2F135",
+    "preco": "R$ 25,00",
+    "img": "https://i.imgur.com/mCAVFko.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782999626189
+  },
+  {
+    "name": "Riolu",
+    "num": "76/135",
+    "category": "Principal",
+    "year": null,
+    "set": "Tempestade de Plasma",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=76%2F135",
+    "preco": "R$ 5,00",
+    "img": "https://i.imgur.com/UIF9U5A.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782999695866
+  },
+  {
+    "name": "Riolu",
+    "num": "50/95",
+    "category": "Principal",
+    "year": null,
+    "set": "Chamado das Lendas",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(50/95)&ed=CL&num=50",
+    "preco": "R$ 13,90",
+    "img": "https://i.imgur.com/NGsATJH.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782999796692
+  },
+  {
+    "name": "Riolu",
+    "num": "BW33/99",
+    "category": "Principal",
+    "year": null,
+    "set": "Black & White Promos",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Riolu+%28BW33%2F99%29",
+    "preco": "R$ 6,00",
+    "img": "https://i.imgur.com/B1H85vS.jpg",
+    "espera": false,
+    "rarities": [
+      "Normal"
+    ],
+    "id": 1782999896575
+  },
+  {
+    "name": "Riolu",
+    "num": "60/95",
+    "category": "Principal",
+    "year": null,
+    "set": "Revelado",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(60/95)&ed=UL&num=60",
+    "preco": "R$ 5,00",
+    "img": "https://i.imgur.com/wgecAN4.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1782999974400
+  },
+  {
+    "name": "Riolu",
+    "num": "91/127",
+    "category": "Principal",
+    "year": null,
+    "set": "Platinum",
+    "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=91%2F127",
+    "preco": "R$ 29,90",
+    "img": "https://i.imgur.com/T2x2IFX.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1783000074322
+  },
+  {
+    "name": "Riolu",
+    "num": "16/17",
+    "category": "Principal",
+    "year": null,
+    "set": "POP Series 8",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(16/17)&ed=P8&num=16",
+    "preco": "R$ 100,00",
+    "img": "https://i.imgur.com/bpwt2dh.jpg",
+    "espera": false,
+    "rarities": [
+      "Cosmo Holo"
+    ],
+    "id": 1783000254496
+  },
+  {
+    "name": "Riolu",
+    "num": "117/146",
+    "category": "Principal",
+    "year": null,
+    "set": "Legends Awakened",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(117/146)&ed=LA&num=117",
+    "preco": "R$ 20,00",
+    "img": "https://i.imgur.com/ZjlowPL.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1783000391058
+  },
+  {
+    "name": "Riolu",
+    "num": "6/11",
+    "category": "Principal",
+    "year": null,
+    "set": "Diamond & Pearl Trainer Kit - Lucario",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(06/11)&ed=TK3B&num=06",
+    "preco": "R$ 3,99",
+    "img": "https://i.imgur.com/ZXh44GE.jpg",
+    "espera": false,
+    "rarities": [
+      "Normal"
+    ],
+    "id": 1783000876057
+  },
+  {
+    "name": "Riolu",
+    "num": "8/17",
+    "category": "Principal",
+    "year": null,
+    "set": "POP Series 6",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(8/17)&ed=P6&num=8",
+    "preco": "R$ 79,90",
+    "img": "https://i.imgur.com/95RnDO8.jpg",
+    "espera": false,
+    "rarities": [
+      "Cosmo Holo"
+    ],
+    "id": 1783001045156
+  },
+  {
+    "name": "Riolu",
+    "num": "61/130",
+    "category": "Principal",
+    "year": null,
+    "set": "Diamante & Pérola",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(61/130)&ed=DP&num=61",
+    "preco": "R$ 8,99",
+    "img": "https://i.imgur.com/YhlkIXD.jpg",
+    "espera": false,
+    "rarities": [
+      "Reverse Foil"
+    ],
+    "id": 1783001130661
+  }
+][
+  {
     "name": "Blastoise (2/100)",
     "num": "2/100",
     "category": "Delta Species",
