@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — ColeçãoGBr (GitHub Pages)</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <a class="logo" href="admin.html">
+    <img class="logo-icon" src="https://i.imgur.com/E5eIStM.png" alt="ColeçãoGBr">
+    <span class="logo-text">Coleção<span>GBr</span> · admin</span>
+  </a>
+  <div class="header-right">
+    <a class="btn-ghost" href="index.html">Ver site público</a>
+    <button class="btn-icon btn-logout" onclick="disconnect()" title="Desconectar">⏻</button>
+  </div>
+</header>
+
+<!-- Tela de conexão -->
+<div class="admin-gate" id="adminGate">
+  <img class="logo-icon" src="https://i.imgur.com/E5eIStM.png" alt="">
+  <h1 style="font-family:var(--font-display);font-size:20px;margin:1rem 0 .5rem">Conectar ao repositório</h1>
+  <p style="font-size:12.5px;color:var(--text-dim);margin-bottom:1.5rem;line-height:1.6">
+    Cole um <strong>Personal Access Token</strong> (fine-grained, com permissão de leitura/escrita só neste
+    repositório, seção "Contents"). Ele fica só nesta aba — não é salvo em nenhum arquivo do site.
+  </p>
+  <div class="error-msg" id="loginError"></div>
+  <div class="field" style="text-align:left"><label>Usuário ou organização no GitHub</label><input type="text" id="ghOwner" placeholder="ex: seu-usuario"></div>
+  <div class="field" style="text-align:left"><label>Repositório</label><input type="text" id="ghRepo" placeholder="ex: colecaogbr"></div>
+  <div class="field" style="text-align:left"><label>Branch</label><input type="text" id="ghBranch" placeholder="main" value="main"></div>
+  <div class="field" style="text-align:left">
+    <label>Personal Access Token</label>
+    <input type="password" id="ghToken" placeholder="github_pat_...">
+  </div>
+  <button class="btn-primary" onclick="connect()">Conectar</button>
+  <p style="font-size:11px;color:var(--text-faint);margin-top:1rem">
+    Não tem um token ainda? Crie em
+    <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" style="color:var(--accent)">github.com/settings/personal-access-tokens/new</a>
+    — escolha "Only select repositories" → este repositório → permissão "Contents: Read and write".
+  </p>
+</div>
+
+<!-- Painel -->
+<div class="admin-shell" id="adminShell" style="display:none">
+  <div class="admin-stats-row" id="statsRow"></div>
+
+  <div class="admin-toolbar">
+    <button class="btn-primary" style="width:auto;margin:0" onclick="openAddCard()">+ Nova carta</button>
+    <span class="filter-label" style="margin-left:auto">cada alteração vira um commit no repositório</span>
+  </div>
+
+  <div style="overflow-x:auto">
+    <table class="admin-table">
+      <thead><tr><th></th><th>Carta</th><th>Categoria</th><th>Ano</th><th>Raridades</th><th>Preço</th><th>Ações</th></tr></thead>
+      <tbody id="cardsTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal de carta -->
+<div class="overlay" id="cardModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('cardModal')">×</button>
+    <h2 class="modal-title" id="formTitle">Cadastrar carta</h2>
+
+    <div class="field">
+      <label>Imagem</label>
+      <input type="text" id="fImg" placeholder="Cole uma URL ou envie um arquivo abaixo">
+      <input type="file" accept="image/png,image/jpeg,image/webp" style="margin-top:8px" onchange="uploadImageFile(this)">
+    </div>
+
+    <div class="field"><label>Nome da carta</label><input type="text" id="fName" placeholder="ex: Machamp"></div>
+
+    <div class="field-row">
+      <div class="field"><label>Número / código</label><input type="text" id="fNum" placeholder="ex: 064/091"></div>
+      <div class="field">
+        <label>Categoria</label>
+        <select id="fCategory">
+          <option value="Principal">Principal</option>
+          <option value="Treinadores">Treinadores</option>
+          <option value="Delta Species">Delta Species</option>
+          <option value="Cartas da Cintia">Cartas da Cintia</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field"><label>Raridades que faltam</label><div class="rarity-checks" id="rarityChecks"></div></div>
+
+    <div class="field-row">
+      <div class="field"><label>Coleção / expansão</label><input type="text" id="fSet" placeholder="ex: Twilight Masquerade"></div>
+      <div class="field"><label>Ano de lançamento</label><input type="number" id="fYear" placeholder="ex: 2024"></div>
+    </div>
+
+    <div class="field"><label>Link Liga Pokémon</label><input type="text" id="fLiga" placeholder="https://www.ligapokemon.com.br/?view=cards/card&..."></div>
+
+    <div class="field">
+      <label>Preço sugerido</label>
+      <div style="display:flex;gap:8px">
+        <input type="text" id="fPreco" placeholder="R$ 0,00" style="flex:1">
+        <button class="btn-ghost" onclick="lookupPrice()">🔄 Buscar referência</button>
+      </div>
+      <div id="priceHint" style="font-size:11px;color:var(--text-dim);margin-top:6px"></div>
+    </div>
+
+    <div class="field" style="display:flex;align-items:center;gap:10px">
+      <input type="checkbox" id="fEspera" style="width:16px;height:16px;accent-color:var(--gold)">
+      <label for="fEspera" style="margin:0;text-transform:none;letter-spacing:0;font-size:13px">Em espera (não mostra botão de contato)</label>
+    </div>
+
+    <button class="btn-primary" onclick="saveCardForm()">Salvar carta</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/admin-github.js"></script>
+</body>
+</html>

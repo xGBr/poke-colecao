@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ColeçãoGBr — Preview do novo design</title>
+<style>
+/* ==========================================================================
+   ColeçãoGBr — Design System v2
+   Paleta "vitrine noturna": fundo quase-preto, âmbar/ouro (identidade já
+   existente, tipo Lutador) + um gradiente holográfico reservado SÓ para
+   indicar cartas foil — a cor conta uma informação real, não é decoração.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root {
+  /* Base */
+  --bg:          #0B0C10;
+  --surface:     #16171C;
+  --panel:       #1E2027;
+  --panel-2:     #24262E;
+  --border:      #2B2D36;
+
+  /* Identidade (mantida do projeto original) */
+  --accent:      #D4722A;
+  --accent-hi:   #E8863C;
+  --gold:        #C8963E;
+  --gold-dim:    #8A6228;
+
+  /* Texto */
+  --text:        #F1F1F3;
+  --text-dim:    #9CA0AE;
+  --text-faint:  #565A6B;
+
+  /* Raridades */
+  --r-normal:     #8A9BAE;
+  --r-foil:       #7B8FD4;
+  --r-reverse:    #9B7DD4;
+  --r-pokeball:   #5FB87A;
+  --r-masterball: #D4A83E;
+  --r-cosmoholo:  #E07CA0;
+
+  /* Holo — usado SOMENTE em cartas com raridade foil/especial */
+  --holo-1: #7EE8D5;
+  --holo-2: #9C8CF5;
+  --holo-3: #E68AC7;
+  --holo-4: #F5C97A;
+  --holo-gradient: linear-gradient(115deg,
+    var(--holo-1) 0%, var(--holo-2) 22%, var(--holo-3) 45%,
+    var(--holo-4) 68%, var(--holo-1) 100%);
+
+  /* Semântico */
+  --ok:    #4CAF50;
+  --warn:  #C8963E;
+  --err:   #E25050;
+  --whats: #25D366;
+
+  /* Tipografia */
+  --font-display: 'Sora', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Layout */
+  --radius-sm: 6px;
+  --radius:    10px;
+  --radius-lg: 16px;
+  --header-h:  64px;
+  --shadow-lift: 0 12px 32px rgba(0,0,0,.45);
+}
+
+[data-theme="light"] {
+  --bg:        #F6F2EA;
+  --surface:   #FFFFFF;
+  --panel:     #F1EBDF;
+  --panel-2:   #E9E1D2;
+  --border:    #DCD1BC;
+  --accent:    #C9621F;
+  --gold:      #A87A2C;
+  --gold-dim:  #C9A968;
+  --text:      #241A0F;
+  --text-dim:  #6B5640;
+  --text-faint:#9C8870;
+  --shadow-lift: 0 12px 32px rgba(60,40,10,.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 700px 400px at 15% 0%, rgba(212,114,42,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 500px at 90% 15%, rgba(200,150,62,.05) 0%, transparent 55%);
+  background-attachment: fixed;
+  transition: background-color .2s, color .2s;
+}
+
+a { color: inherit; }
+button { font-family: inherit; }
+img { max-width: 100%; display: block; }
+
+::selection { background: var(--accent); color: #fff; }
+
+/* Foco visível — obrigatório para navegação por teclado */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── HEADER ───────────────────────────────────────────────────────── */
+header {
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 clamp(1rem, 4vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-h);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { width: 34px; height: 34px; object-fit: contain; border-radius: 8px; }
+.logo-text { font-family: var(--font-display); font-size: 17px; font-weight: 800; letter-spacing: -.3px; }
+.logo-text span { color: var(--accent); }
+
+.header-right { display: flex; align-items: center; gap: 10px; }
+
+.badge-count {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+.badge-count strong { color: var(--accent); font-family: var(--font-mono); }
+
+.btn-icon, .btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all .15s;
+  font-family: inherit;
+}
+.btn-icon { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+.btn-ghost { font-size: 13px; padding: 7px 14px; }
+.btn-icon:hover, .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn-logout { font-size: 12px; color: var(--text-faint); border-color: var(--border); }
+
+/* ── HERO ─────────────────────────────────────────────────────────── */
+.hero {
+  padding: clamp(2.5rem, 6vw, 4rem) 1.5rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5.5vw, 46px);
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  line-height: 1.05;
+  margin-bottom: 12px;
+}
+
+.hero-title .holo-word {
+  background-image: var(--holo-gradient);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: holo-drift 6s ease-in-out infinite;
+}
+
+@keyframes holo-drift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+.hero-sub { font-size: 14.5px; color: var(--text-dim); max-width: 460px; margin: 0 auto; line-height: 1.65; }
+
+/* ── FILTERS ──────────────────────────────────────────────────────── */
+.filters {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 90;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  padding: .9rem clamp(1rem, 4vw, 2rem);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-faint);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-right: 2px;
+}
+
+.chip {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 6px 13px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.chip-sep { width: 1px; height: 18px; background: var(--border); margin: 0 4px; }
+
+.search-wrap { margin-left: auto; position: relative; }
+.search-wrap input {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 13px;
+  padding: 7px 12px 7px 32px;
+  border-radius: var(--radius-sm);
+  width: 220px;
+  outline: none;
+  transition: border-color .15s;
+}
+.search-wrap input:focus { border-color: var(--accent); }
+.search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-faint); font-size: 14px; pointer-events: none; }
+
+/* ── MAIN / TIMELINE POR ANO ─────────────────────────────────────── */
+main { padding: 1.75rem clamp(1rem, 4vw, 2rem) 4rem; max-width: 1180px; margin: 0 auto; }
+
+.year-group { margin-bottom: 2.25rem; }
+
+.year-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 1rem;
+}
+.year-divider .year-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--text);
+  white-space: nowrap;
+}
+.year-divider .year-count {
+  font-size: 12px;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+.year-divider .year-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+.section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.section-title { font-size: 12.5px; font-weight: 600; color: var(--text-dim); letter-spacing: .5px; text-transform: uppercase; }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  gap: 1.1rem;
+}
+
+/* ── CARD ─────────────────────────────────────────────────────────── */
+.poke-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: .9rem;
+  position: relative;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  transform-style: preserve-3d;
+}
+.poke-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+
+.poke-card.card-espera { opacity: .82; }
+.poke-card.card-espera .card-img-wrap { filter: grayscale(35%); opacity: .6; }
+
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 6px; margin-bottom: 8px; }
+.card-name { font-family: var(--font-display); font-size: 15px; font-weight: 700; line-height: 1.3; flex: 1; }
+.card-number {
+  font-size: 10.5px; color: var(--text-faint); font-family: var(--font-mono);
+  background: var(--panel); padding: 2px 7px; border-radius: 4px; white-space: nowrap;
+}
+
+.card-collection { font-size: 11.5px; color: var(--text-dim); margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
+.collection-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+/* Imagem + moldura holográfica (o elemento-assinatura do site) */
+.card-img-wrap {
+  --fx: 50%; --fy: 30%;
+  width: 100%;
+  aspect-ratio: 2/3;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--panel);
+  margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border);
+  position: relative;
+  cursor: zoom-in;
+}
+.card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+.poke-card:hover .card-img-wrap img { transform: scale(1.04); }
+
+/* Camada holo — só aparece em cartas .is-foil (rarities foil/reverse/cosmo/etc) */
+.card-img-wrap .foil-sheen {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(115deg,
+    #ff7ac1 0%, #ffd76a 12%, #7affc8 24%, #7ab8ff 36%, #c17aff 48%, #ff7ac1 60%);
+  background-size: 240% 240%;
+  background-position: var(--fx) var(--fy);
+  mix-blend-mode: color-dodge;
+  opacity: 0;
+  transition: opacity .25s, background-position .1s linear;
+  pointer-events: none;
+}
+.is-foil .card-img-wrap .foil-sheen { opacity: .38; }
+.is-foil:hover .card-img-wrap .foil-sheen { opacity: .58; }
+
+.card-img-placeholder { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--text-faint); }
+.card-img-placeholder span { font-size: 26px; opacity: .4; }
+.card-img-placeholder p { font-size: 10.5px; letter-spacing: .5px; }
+
+/* Tags de raridade */
+.rarity-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.rarity-tag {
+  font-size: 9px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase;
+  padding: 3px 7px; border-radius: 4px; white-space: nowrap;
+}
+.rarity-tag.r-Normal        { background: rgba(138,155,174,.15); color: var(--r-normal); }
+.rarity-tag.r-Foil          { background: rgba(123,143,212,.15); color: var(--r-foil); }
+.rarity-tag.r-Reverse-Foil  { background: rgba(155,125,212,.15); color: var(--r-reverse); }
+.rarity-tag.r-Pokeball-Foil { background: rgba(95,184,122,.15);  color: var(--r-pokeball); }
+.rarity-tag.r-Master-Ball   { background: rgba(212,168,62,.15);  color: var(--r-masterball); }
+.rarity-tag.r-Cosmo-Holo    { background: rgba(224,124,160,.15); color: var(--r-cosmoholo); }
+
+.category-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 4px; background: rgba(212,114,42,.14); color: var(--accent);
+  white-space: nowrap;
+}
+
+.card-price {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--gold);
+  background: rgba(200,150,62,.1); border: 1px solid rgba(200,150,62,.25);
+  padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+}
+.card-price.alto { color: var(--err); background: rgba(226,80,80,.1); border-color: rgba(226,80,80,.25); }
+.price-source { font-size: 9.5px; color: var(--text-faint); margin-left: 5px; }
+
+.badge-espera {
+  display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase; color: var(--gold);
+  background: rgba(200,150,62,.12); border: 1px solid rgba(200,150,62,.3);
+  padding: 5px 8px; border-radius: 4px; width: 100%; justify-content: center;
+}
+
+.card-footer { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.card-footer-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; flex-wrap: wrap; }
+
+.card-actions { display: flex; gap: 6px; }
+.btn-found, .btn-edit, .btn-delete {
+  border-radius: 5px; cursor: pointer; font-weight: 600; transition: all .15s; background: transparent;
+}
+.btn-found { border: 1px solid #2D6E35; color: var(--ok); font-size: 11px; padding: 4px 10px; }
+.btn-found:hover { background: rgba(76,175,80,.12); }
+.btn-edit, .btn-delete {
+  border: 1px solid var(--border); color: var(--text-faint); width: 28px; height: 28px; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.btn-edit:hover { border-color: var(--gold-dim); color: var(--gold); }
+.btn-delete:hover { border-color: #8B2020; color: var(--err); }
+
+.btn-whatsapp {
+  width: 100%; background: transparent; border: 1px solid #1DA851; color: var(--whats);
+  font-size: 12px; font-weight: 700; padding: 8px 10px; border-radius: var(--radius-sm);
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all .15s;
+}
+.btn-whatsapp:hover { background: rgba(37,211,102,.1); }
+
+.btn-liga {
+  display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 11px; font-weight: 600;
+  color: var(--text-dim); background: transparent; border: 1px solid var(--border); padding: 5px 9px;
+  border-radius: 5px; text-decoration: none; transition: all .15s; width: 100%;
+}
+.btn-liga:hover { border-color: var(--accent); color: var(--accent); }
+.btn-liga img { width: 13px; height: 13px; object-fit: contain; }
+
+/* ── EMPTY STATE ──────────────────────────────────────────────────── */
+.empty { grid-column: 1/-1; text-align: center; padding: 4rem 1rem; color: var(--text-faint); }
+.empty-icon { font-size: 46px; margin-bottom: 12px; opacity: .3; }
+.empty p { font-size: 14px; line-height: 1.7; }
+
+/* ── FAB ──────────────────────────────────────────────────────────── */
+.fab {
+  position: fixed; bottom: 2rem; right: 2rem; background: var(--accent); color: #fff; border: none;
+  width: 54px; height: 54px; border-radius: 50%; font-size: 22px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 22px rgba(212,114,42,.45);
+  transition: transform .15s, background .15s; z-index: 200;
+}
+.fab:hover { transform: scale(1.08); background: var(--accent-hi); }
+
+/* ── OVERLAY / MODAL ──────────────────────────────────────────────── */
+.overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.78); z-index: 300;
+  align-items: flex-start; justify-content: center; padding: 1rem; overflow-y: auto;
+}
+.overlay.open { display: flex; }
+.modal {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 1.75rem; width: 100%; max-width: 460px; max-height: calc(100dvh - 2rem);
+  overflow-y: auto; position: relative; margin: auto;
+}
+.modal-title { font-family: var(--font-display); font-size: 17px; font-weight: 700; margin-bottom: 1.25rem; }
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; color: var(--text-faint);
+  font-size: 20px; cursor: pointer; line-height: 1; padding: 4px; border-radius: 4px; transition: color .15s;
+}
+.modal-close:hover { color: var(--text); }
+
+.field { margin-bottom: 1rem; }
+.field label { display: block; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; font-weight: 600; }
+.field input, .field select, .field textarea {
+  width: 100%; background: var(--panel); border: 1px solid var(--border); color: var(--text); font-size: 14px;
+  padding: 9px 12px; border-radius: 7px; outline: none; font-family: var(--font-body); transition: border-color .15s; appearance: none;
+}
+.field textarea { resize: vertical; min-height: 80px; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.rarity-checks { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+.rarity-check-item input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+.rarity-check-item {
+  display: flex; align-items: center; gap: 8px; background: var(--panel); border: 1.5px solid var(--border);
+  border-radius: 7px; padding: 8px 10px; cursor: pointer; transition: border-color .15s, background .15s; user-select: none;
+}
+.rarity-check-item:hover { border-color: var(--gold-dim); }
+.rarity-check-item .r-box {
+  width: 18px; height: 18px; min-width: 18px; border-radius: 4px; border: 2px solid var(--border);
+  background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 12px;
+  font-weight: 900; color: transparent; transition: all .15s;
+}
+.rarity-check-item.checked .r-box { background: var(--accent); border-color: var(--accent); color: #fff; }
+.rarity-check-item.checked { border-color: var(--accent); background: rgba(212,114,42,.1); }
+.rarity-check-item label { font-size: 12px; color: var(--text-dim); text-transform: none; letter-spacing: 0; margin: 0; font-weight: 500; }
+.rarity-check-item.checked label { color: var(--text); font-weight: 700; }
+
+.btn-primary {
+  width: 100%; background: var(--accent); border: none; color: #fff; font-size: 14px; font-weight: 700;
+  padding: 11px; border-radius: 7px; cursor: pointer; transition: background .15s; letter-spacing: .3px; margin-top: 4px;
+}
+.btn-primary:hover { background: var(--accent-hi); }
+.btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+
+.error-msg {
+  background: rgba(226,80,80,.12); border: 1px solid rgba(226,80,80,.3); color: var(--err); font-size: 13px;
+  padding: 9px 12px; border-radius: 6px; margin-bottom: 1rem; display: none;
+}
+
+/* ── TOAST ────────────────────────────────────────────────────────── */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--panel); border: 1px solid var(--border); color: var(--text); padding: 10px 20px;
+  border-radius: 8px; font-size: 14px; z-index: 400; transition: transform .25s; pointer-events: none; white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ── LIGHTBOX (com navegação entre cartas) ───────────────────────── */
+.lightbox {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 500;
+  align-items: center; justify-content: center;
+}
+.lightbox.open { display: flex; }
+.lightbox-stage { position: relative; max-width: 92vw; max-height: 88vh; }
+.lightbox-stage img {
+  max-width: 92vw; max-height: 88vh; border-radius: 12px; object-fit: contain;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+.lightbox-close, .lightbox-nav {
+  position: absolute; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2);
+  color: #fff; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 18px;
+  display: flex; align-items: center; justify-content: center; transition: background .15s;
+}
+.lightbox-close:hover, .lightbox-nav:hover { background: rgba(255,255,255,.18); }
+.lightbox-close { top: -1.2rem; right: -1.2rem; }
+.lightbox-nav.prev { left: -1.5rem; top: 50%; transform: translateY(-50%); }
+.lightbox-nav.next { right: -1.5rem; top: 50%; transform: translateY(-50%); }
+.lightbox-caption { position: absolute; bottom: -2.2rem; left: 0; right: 0; text-align: center; color: var(--text-dim); font-size: 13px; }
+
+@media (max-width: 640px) {
+  .lightbox-nav.prev { left: .5rem; }
+  .lightbox-nav.next { right: .5rem; }
+  .lightbox-close { top: .5rem; right: .5rem; }
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .search-wrap { margin-left: 0; width: 100%; }
+  .search-wrap input { width: 100%; }
+  main { padding: 1.25rem 1rem 3rem; }
+  .field-row { grid-template-columns: 1fr; }
+}
+
+/* ── PAINEL ADMIN (compartilha o mesmo design system) ───────────── */
+.admin-shell { max-width: 900px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.admin-gate { max-width: 380px; margin: 10vh auto; text-align: center; }
+.admin-gate .logo-icon { width: 48px; height: 48px; margin: 0 auto 1rem; }
+.admin-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.admin-table th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-faint); padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.admin-table td { padding: 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.admin-table img { width: 34px; height: 46px; object-fit: cover; border-radius: 4px; }
+.admin-toolbar { display: flex; gap: 8px; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.admin-stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; }
+.admin-stat .num { font-family: var(--font-display); font-size: 26px; font-weight: 800; }
+.admin-stat .lbl { font-size: 11.5px; color: var(--text-faint); text-transform: uppercase; letter-spacing: .5px; }
+.admin-stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: .75rem; margin-bottom: 1.5rem; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">
+    <img class="logo-icon" src="https://i.imgur.com/E5eIStM.png" alt="ColeçãoGBr">
+    <span class="logo-text">Coleção<span>GBr</span></span>
+  </a>
+  <div class="header-right">
+    <div class="badge-count"><strong id="countDisplay">0</strong> cartas</div>
+    <button class="btn-icon" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">🌙</button>
+  </div>
+</header>
+
+<section class="hero">
+  <p class="hero-eyebrow">✦ Tipo Lutador — TCG · Preview v2</p>
+  <h1 class="hero-title">Cartas que estou <span class="holo-word">procurando</span></h1>
+  <p class="hero-sub" id="heroSub">Esse é um preview autocontido, com dados de exemplo — passe o mouse nas cartas com brilho para ver o efeito foil.</p>
+</section>
+
+<div class="filters">
+  <span class="filter-label">Categoria</span>
+  <div id="categoryChips" style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="chip active" data-cat="all" onclick="setFilter('all', this)">Todas</button>
+    <button class="chip" data-cat="Principal" onclick="setFilter('Principal', this)">Principal</button>
+    <button class="chip" data-cat="Treinadores" onclick="setFilter('Treinadores', this)">Treinadores</button>
+    <button class="chip" data-cat="Delta Species" onclick="setFilter('Delta Species', this)">Delta Species</button>
+    <button class="chip" data-cat="Cartas da Cintia" onclick="setFilter('Cartas da Cintia', this)">Cartas da Cintia</button>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Buscar carta, coleção ou número...">
+  </div>
+</div>
+
+<div class="filters" style="top:calc(var(--header-h) + 53px)">
+  <span class="filter-label">Ano</span>
+  <div id="yearChips" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+</div>
+
+<main id="cardsMain">
+  <div class="cards-grid"><div class="empty"><div class="empty-icon">⏳</div><p>Carregando cartas...</p></div></div>
+</main>
+
+<footer style="text-align:center;padding:2rem 1rem 3rem;color:var(--text-faint);font-size:12px">
+  ColeçãoGBr — preview estático (sem backend) · versão real separa CSS/JS e tem painel admin
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-stage">
+    <button class="lightbox-nav prev" onclick="lightboxStep(-1)" aria-label="Carta anterior">‹</button>
+    <img id="lightboxImg" alt="">
+    <button class="lightbox-nav next" onclick="lightboxStep(1)" aria-label="Próxima carta">›</button>
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fechar">×</button>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</div>
+
+<div class="overlay" id="contactModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('contactModal')">×</button>
+    <h2 class="modal-title">Falar sem WhatsApp</h2>
+    <div class="field">
+      <label>Seu contato (e-mail, Instagram, Telegram...)</label>
+      <input type="text" id="contactWay" placeholder="ex: @seuinstagram ou email@exemplo.com">
+    </div>
+    <div class="field">
+      <label>Mensagem (opcional)</label>
+      <textarea id="contactMsg" placeholder="Tenho essa carta em qual estado, preço, etc."></textarea>
+    </div>
+    <button class="btn-primary" onclick="sendContactForm()">Enviar</button>
+  </div>
+</div>
+
+<script>
+// Preview autocontido: dados de exemplo embutidos, sem chamadas de rede e
+// sem localStorage (este arquivo roda dentro do preview do chat).
+const FOIL_RARITIES = new Set(['Foil', 'Reverse Foil', 'Cosmo Holo', 'Master Ball', 'Play Pokemon Cosmo']);
+
+const SAMPLE_CARDS = [
+  { id: 1, name: 'Aerodactyl', num: '1/62', category: 'Principal', year: 1999, set: 'Fossil', rarities: ['Normal'], img: 'https://images.pokemontcg.io/base3/1.png', preco: 'R$ 45,00', liga: null, espera: false },
+  { id: 2, name: 'Alakazam', num: '1/130', category: 'Principal', year: 2000, set: 'Base Set 2', rarities: ['Foil'], img: 'https://images.pokemontcg.io/base4/1.png', preco: 'R$ 210,00', liga: null, espera: false },
+  { id: 3, name: "Blaine's Moltres", num: '1/132', category: 'Principal', year: 2000, set: 'Gym Heroes', rarities: ['Reverse Foil'], img: 'https://images.pokemontcg.io/gym1/1.png', preco: 'R$ 380,00', liga: null, espera: true },
+  { id: 4, name: 'Beedrill δ', num: '1/113', category: 'Delta Species', year: 2005, set: 'Delta Species', rarities: ['Foil','Reverse Foil'], img: 'https://images.pokemontcg.io/ex11/1.png', preco: 'R$ 95,00', liga: null, espera: false },
+  { id: 5, name: 'Aggron', num: '1/102', category: 'Principal', year: 2010, set: 'HS—Triumphant', rarities: ['Normal'], img: 'https://images.pokemontcg.io/hgss4/1.png', preco: 'R$ 38,00', liga: null, espera: false },
+  { id: 6, name: 'Celebi & Venusaur-GX', num: '1/181', category: 'Cartas da Cintia', year: 2019, set: 'Team Up', rarities: ['Master Ball'], img: 'https://images.pokemontcg.io/sm9/1.png', preco: 'R$ 260,00', liga: null, espera: false },
+  { id: 7, name: 'Venusaur V', num: '1/73', category: 'Principal', year: 2020, set: "Champion's Path", rarities: ['Cosmo Holo'], img: 'https://images.pokemontcg.io/swsh35/1.png', preco: 'R$ 55,00', liga: null, espera: false },
+  { id: 8, name: 'Machamp', num: '64/091', category: 'Treinadores', year: 2010, set: 'HS—Undaunted', rarities: ['Pokeball Foil'], img: null, preco: null, liga: null, espera: false },
+];
+
+let cards = SAMPLE_CARDS;
+let currentFilter = 'all';
+let currentYear = 'all';
+let visibleList = [];
+let lightboxIndex = -1;
+let themeState = 'dark';
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hasHover = window.matchMedia('(hover: hover)').matches;
+
+function applyTheme(theme) {
+  themeState = theme;
+  if (theme === 'light') { document.documentElement.setAttribute('data-theme', 'light'); document.getElementById('themeBtn').textContent = '☀️'; }
+  else { document.documentElement.removeAttribute('data-theme'); document.getElementById('themeBtn').textContent = '🌙'; }
+}
+function toggleTheme() { applyTheme(themeState === 'light' ? 'dark' : 'light'); }
+
+function setFilter(cat, el) {
+  currentFilter = cat;
+  document.querySelectorAll('#categoryChips .chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderCards();
+}
+function buildYearFilters() {
+  const years = [...new Set(cards.map(c => c.year).filter(Boolean))].sort((a, b) => a - b);
+  document.getElementById('yearChips').innerHTML = '<button class="chip active" data-year="all" onclick="setYear(\'all\', this)">Todos os anos</button>'
+    + years.map(y => `<button class="chip" data-year="${y}" onclick="setYear(${y}, this)">${y}</button>`).join('');
+}
+function setYear(year, el) {
+  currentYear = year;
+  document.querySelectorAll('#yearChips .chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderCards();
+}
+
+function esc(s) { return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function isFoil(card) { return Array.isArray(card.rarities) && card.rarities.some(r => FOIL_RARITIES.has(r)); }
+
+function buildWhatsAppLink(card) {
+  const parts = ['Olá! Tenho uma carta que você está procurando:', '', '🃏 *' + card.name + '*'];
+  if (card.num) parts.push('📋 Número: ' + card.num);
+  if (card.set) parts.push('📦 Coleção: ' + card.set);
+  if (Array.isArray(card.rarities) && card.rarities.length) parts.push('⭐ Raridade(s): ' + card.rarities.join(', '));
+  parts.push('', 'Vi no site ColeçãoGBr!');
+  return 'https://wa.me/5519981061966?text=' + encodeURIComponent(parts.join('\n'));
+}
+
+function onWhatsAppClick() { showToast('No projeto real, isso também grava um "lead" no painel admin.'); }
+
+function buildCardHTML(card, indexInVisible) {
+  const foilClass = isFoil(card) ? ' is-foil' : '';
+  const esperaClass = card.espera ? ' card-espera' : '';
+  const imgBlock = card.img
+    ? `<div class="card-img-wrap" onclick="openLightbox(${indexInVisible})"><img src="${card.img}" alt="${esc(card.name)}" loading="lazy"><div class="foil-sheen"></div></div>`
+    : `<div class="card-img-wrap"><div class="card-img-placeholder"><span>🎴</span><p>Sem foto</p></div></div>`;
+  const rarityTagsHTML = Array.isArray(card.rarities) && card.rarities.length
+    ? '<div class="rarity-tags">' + card.rarities.map(r => `<span class="rarity-tag r-${String(r).replace(/\s/g, '-')}">${esc(r)}</span>`).join('') + '</div>' : '';
+  const ligaBtn = card.liga ? `<a class="btn-liga" href="${card.liga}" target="_blank" rel="noopener"><img src="https://i.imgur.com/6Qreh4P.png" alt=""> Ver na Liga</a>` : '';
+  const priceBlock = card.preco ? `<div style="margin-bottom:6px"><span class="card-price">${esc(card.preco)}</span></div>` : '';
+  const bottomBlock = card.espera
+    ? `<div class="badge-espera">⏳ Em espera</div>`
+    : `<div style="display:flex;gap:6px;width:100%">
+         <a class="btn-whatsapp" style="flex:1" href="${buildWhatsAppLink(card)}" target="_blank" rel="noopener" onclick="onWhatsAppClick()"><img src="https://i.imgur.com/ZbmGBZx.png" alt="" style="width:18px;height:18px"> Tenho essa carta!</a>
+         <button class="btn-icon" title="Falar sem WhatsApp" onclick="openContactForm()">✉️</button>
+       </div>`;
+  return `<div class="poke-card${foilClass}${esperaClass}">
+    ${imgBlock}
+    <div class="card-top"><span class="card-name">${esc(card.name)}</span>${card.num ? `<span class="card-number">${esc(card.num)}</span>` : ''}</div>
+    ${card.set ? `<div class="card-collection"><span class="collection-dot"></span>${esc(card.set)}</div>` : ''}
+    ${priceBlock}
+    ${rarityTagsHTML}
+    <div class="card-footer">
+      <div class="card-footer-row"><span class="category-badge">${esc(card.category || 'Principal')}</span>${ligaBtn}</div>
+      <div class="card-footer-row">${bottomBlock}</div>
+    </div>
+  </div>`;
+}
+
+function renderCards() {
+  const query = document.getElementById('searchInput').value.trim().toLowerCase();
+  let filtered = cards;
+  if (currentFilter !== 'all') filtered = filtered.filter(c => (c.category || 'Principal') === currentFilter);
+  if (currentYear !== 'all') filtered = filtered.filter(c => c.year === currentYear);
+  if (query) filtered = filtered.filter(c => c.name.toLowerCase().includes(query) || (c.set && c.set.toLowerCase().includes(query)) || (c.num && c.num.toLowerCase().includes(query)));
+  visibleList = filtered;
+  document.getElementById('countDisplay').textContent = cards.length;
+  const main = document.getElementById('cardsMain');
+  if (filtered.length === 0) {
+    main.innerHTML = `<div class="cards-grid"><div class="empty"><div class="empty-icon">🎴</div><p>Nenhuma carta encontrada com esse filtro.</p></div></div>`;
+    return;
+  }
+  const byYear = new Map();
+  filtered.forEach(c => { const y = c.year || 'Sem ano'; if (!byYear.has(y)) byYear.set(y, []); byYear.get(y).push(c); });
+  const years = [...byYear.keys()].sort((a, b) => a === 'Sem ano' ? 1 : b === 'Sem ano' ? -1 : a - b);
+  main.innerHTML = years.map(y => {
+    const list = byYear.get(y);
+    return `<div class="year-group">
+      <div class="year-divider"><span class="year-num">${y}</span><span class="year-count">${list.length} carta${list.length !== 1 ? 's' : ''}</span><span class="year-line"></span></div>
+      <div class="cards-grid">${list.map(c => buildCardHTML(c, visibleList.indexOf(c))).join('')}</div>
+    </div>`;
+  }).join('');
+  attachFoilTracking();
+}
+
+function attachFoilTracking() {
+  if (!hasHover || prefersReducedMotion) return;
+  document.querySelectorAll('.poke-card.is-foil .card-img-wrap').forEach(wrap => {
+    wrap.addEventListener('mousemove', e => {
+      const rect = wrap.getBoundingClientRect();
+      wrap.style.setProperty('--fx', ((e.clientX - rect.left) / rect.width) * 100 + '%');
+      wrap.style.setProperty('--fy', ((e.clientY - rect.top) / rect.height) * 100 + '%');
+    });
+    wrap.addEventListener('mouseleave', () => { wrap.style.setProperty('--fx', '50%'); wrap.style.setProperty('--fy', '30%'); });
+  });
+}
+
+function openLightbox(index) {
+  const card = visibleList[index];
+  if (!card || !card.img) return;
+  lightboxIndex = index;
+  renderLightbox();
+  document.getElementById('lightbox').classList.add('open');
+}
+function renderLightbox() {
+  const card = visibleList[lightboxIndex];
+  document.getElementById('lightboxImg').src = card.img;
+  document.getElementById('lightboxCaption').textContent = `${card.name}${card.num ? ' — ' + card.num : ''}`;
+}
+function lightboxStep(dir) {
+  const withImg = visibleList.map((c, i) => ({ c, i })).filter(x => x.c.img);
+  if (!withImg.length) return;
+  const pos = withImg.findIndex(x => x.i === lightboxIndex);
+  const next = (pos + dir + withImg.length) % withImg.length;
+  lightboxIndex = withImg[next].i;
+  renderLightbox();
+}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+
+function openContactForm() { document.getElementById('contactMsg').value = ''; document.getElementById('contactWay').value = ''; openModal('contactModal'); }
+function sendContactForm() { closeModal('contactModal'); showToast('✓ No projeto real isso salva no painel admin.'); }
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+let toastTimer;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  applyTheme('dark');
+  document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); }));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeLightbox(); document.querySelectorAll('.overlay.open').forEach(o => o.classList.remove('open')); }
+    if (document.getElementById('lightbox').classList.contains('open')) {
+      if (e.key === 'ArrowRight') lightboxStep(1);
+      if (e.key === 'ArrowLeft') lightboxStep(-1);
+    }
+  });
+  document.getElementById('searchInput').addEventListener('input', renderCards);
+  buildYearFilters();
+  renderCards();
+});
+</script>
+</body>
+</html>

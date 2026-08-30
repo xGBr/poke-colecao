@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ColeçãoGBr — Cartas Procuradas</title>
+<meta name="description" content="Cartas de Pokémon TCG que estou procurando para completar a coleção.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <a class="logo" href="index.html">
+    <img class="logo-icon" src="https://i.imgur.com/E5eIStM.png" alt="ColeçãoGBr">
+    <span class="logo-text">Coleção<span>GBr</span></span>
+  </a>
+  <div class="header-right">
+    <div class="badge-count"><strong id="countDisplay">0</strong> cartas</div>
+    <button class="btn-icon" id="themeBtn" onclick="toggleTheme()" title="Alternar tema">🌙</button>
+  </div>
+</header>
+
+<section class="hero">
+  <p class="hero-eyebrow">✦ Tipo Lutador — TCG</p>
+  <h1 class="hero-title">Cartas que estou <span class="holo-word">procurando</span></h1>
+  <p class="hero-sub" id="heroSub">Carregando cartas…</p>
+</section>
+
+<div class="filters">
+  <span class="filter-label">Categoria</span>
+  <div id="categoryChips" style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="chip active" data-cat="all" onclick="setFilter('all', this)">Todas</button>
+    <button class="chip" data-cat="Principal" onclick="setFilter('Principal', this)">Principal</button>
+    <button class="chip" data-cat="Treinadores" onclick="setFilter('Treinadores', this)">Treinadores</button>
+    <button class="chip" data-cat="Delta Species" onclick="setFilter('Delta Species', this)">Delta Species</button>
+    <button class="chip" data-cat="Cartas da Cintia" onclick="setFilter('Cartas da Cintia', this)">Cartas da Cintia</button>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Buscar carta, coleção ou número...">
+  </div>
+</div>
+
+<div class="filters" style="top:calc(var(--header-h) + 53px)">
+  <span class="filter-label">Ano</span>
+  <div id="yearChips" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+</div>
+
+<main id="cardsMain">
+  <div class="cards-grid"><div class="empty"><div class="empty-icon">⏳</div><p>Carregando cartas...</p></div></div>
+</main>
+
+<footer style="text-align:center;padding:2rem 1rem 3rem;color:var(--text-faint);font-size:12px">
+  ColeçãoGBr · <a href="admin.html" style="color:var(--text-faint);text-decoration:underline">acesso administrativo</a>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-stage">
+    <button class="lightbox-nav prev" onclick="lightboxStep(-1)" aria-label="Carta anterior">‹</button>
+    <img id="lightboxImg" alt="">
+    <button class="lightbox-nav next" onclick="lightboxStep(1)" aria-label="Próxima carta">›</button>
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fechar">×</button>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</div>
+
+<div class="overlay" id="contactModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('contactModal')">×</button>
+    <h2 class="modal-title">Falar sem WhatsApp</h2>
+    <div class="field">
+      <label>Seu contato (e-mail, Instagram, Telegram...)</label>
+      <input type="text" id="contactWay" placeholder="ex: @seuinstagram ou email@exemplo.com">
+    </div>
+    <div class="field">
+      <label>Mensagem (opcional)</label>
+      <textarea id="contactMsg" placeholder="Tenho essa carta em qual estado, preço, etc."></textarea>
+    </div>
+    <button class="btn-primary" onclick="sendContactForm()">Enviar</button>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

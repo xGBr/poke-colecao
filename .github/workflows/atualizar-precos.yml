@@ -1,0 +1,50 @@
+name: Atualizar preços das cartas
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'   # toda segunda-feira, 12h UTC (9h em Brasília)
+  workflow_dispatch: {}     # também dá pra rodar manualmente pela aba "Actions"
+
+permissions:
+  contents: write
+
+jobs:
+  atualizar-precos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Buscar preços de referência atualizados
+        env:
+          POKEMONTCG_API_KEY: ${{ secrets.POKEMONTCG_API_KEY }}
+        run: node scripts/atualizar-precos.js
+
+      - name: Commitar alterações (se houver)
+        id: commit
+        run: |
+          git config user.name "colecaogbr-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- docs/data/cards.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git add docs/data/cards.json
+            git commit -m "chore: atualiza preços de referência das cartas"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Notificar no Telegram (opcional)
+        if: steps.commit.outputs.changed == 'true' && env.TELEGRAM_BOT_TOKEN != ''
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          TEXTO=$(cat _price_changes.txt 2>/dev/null | head -c 3500)
+          MSG=$(printf '📈 Preços atualizados no ColeçãoGBr:\n%s' "$TEXTO")
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d chat_id="${TELEGRAM_CHAT_ID}" \
+            --data-urlencode text="$MSG"
