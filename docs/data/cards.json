@@ -103,5 +103,20 @@
       "Normal"
     ],
     "id": 1788052833428
+  },
+  {
+    "name": "Seadra",
+    "num": "37/101",
+    "category": "Delta Species",
+    "year": 2006,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Seadra%20(37/101)&ed=DF&num=37",
+    "preco": "R$ 44,90",
+    "img": "https://i.imgur.com/R1kaEPf.png",
+    "espera": false,
+    "rarities": [
+      "Normal"
+    ],
+    "id": 1788052933000
   }
 ]
