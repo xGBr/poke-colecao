@@ -28,5 +28,20 @@
       "Normal"
     ],
     "id": 1788052163300
+  },
+  {
+    "name": "Cloyster",
+    "num": "14/101",
+    "category": "Delta Species",
+    "year": 2006,
+    "set": "Dragon Frontiers",
+    "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Cloyster%20(14/101)&ed=DF&num=14",
+    "preco": "100,00",
+    "img": "https://i.imgur.com/FyX3WQI.png",
+    "espera": false,
+    "rarities": [
+      "Normal"
+    ],
+    "id": 1788052284569
   }
 ]
