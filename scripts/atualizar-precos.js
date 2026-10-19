@@ -79,15 +79,30 @@ function nameMatches(card, apiCard) {
   return a === b || b.includes(a) || a.includes(b);
 }
 
-async function getUsdBrlRate() {
-  try {
-    const r = await fetchComPrazo('https://economia.awesomeapi.com.br/json/last/USD-BRL', {});
-    const j = await r.json();
-    return parseFloat(j.USDBRL.bid) || null;
-  } catch (e) {
-    console.warn('Falha ao buscar câmbio:', e.message);
-    return null;
+// Câmbio USD→BRL: tenta as fontes em ordem. As duas primeiras não pedem chave.
+// (A AwesomeAPI passou a oferecer chave gratuita; se você criar uma, guarde em
+// AWESOMEAPI_KEY nos secrets do repositório e ela também funciona como reserva.)
+const FX_FONTES = [
+  { nome: 'frankfurter', url: 'https://api.frankfurter.dev/v2/rate/usd/brl', taxa: j => j.rate },
+  { nome: 'open.er-api', url: 'https://open.er-api.com/v6/latest/USD', taxa: j => j.rates && j.rates.BRL },
+  { nome: 'awesomeapi', url: 'https://economia.awesomeapi.com.br/json/last/USD-BRL', taxa: j => j.USDBRL && j.USDBRL.bid,
+    headers: process.env.AWESOMEAPI_KEY ? { 'x-api-key': process.env.AWESOMEAPI_KEY } : {} },
+];
+
+async function getUsdBrlRate(fetchFn = fetch, net = NET, fontes = FX_FONTES) {
+  for (const f of fontes) {
+    try {
+      const r = await fetchComPrazo(f.url, { headers: f.headers || {} }, fetchFn, net);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const taxa = Number(f.taxa(await r.json()));
+      if (!isFinite(taxa) || taxa < 0.5 || taxa > 100) throw new Error('resposta sem taxa válida');
+      console.log(`Câmbio USD-BRL: ${taxa} (via ${f.nome})`);
+      return taxa;
+    } catch (e) {
+      console.warn(`Câmbio via ${f.nome} falhou: ${e.message}`);
+    }
   }
+  return null;
 }
 
 async function lookup(card, sets, rate, fetchFn = fetch, net = NET) {
@@ -116,11 +131,15 @@ async function main() {
   let sets = {};
   try { sets = JSON.parse(fs.readFileSync(SETS_PATH, 'utf8')).sets || {}; } catch { /* sem dicionário: usa número+total */ }
   const rate = await getUsdBrlRate();
-  if (!rate) { console.warn('Sem câmbio — nada será gravado nesta execução.'); return; }
+  if (!rate) {
+    // falha VISÍVEL: a Action fica vermelha (e o GitHub avisa por e-mail) em vez de "passar" sem fazer nada
+    console.error('Não consegui o câmbio USD-BRL em nenhuma fonte; nada foi gravado.');
+    process.exit(1);
+  }
 
   const agora = new Date().toISOString();
   const linhas = [];
-  let semMatch = 0, falhasSeguidas = 0;
+  let semMatch = 0, falhasSeguidas = 0, consultasOk = 0;
 
   for (const card of cards) {
     if (card.status === 'obtida') continue;
@@ -130,7 +149,7 @@ async function main() {
     }
     try {
       const res = await lookup(card, sets, rate);
-      falhasSeguidas = 0; // a API respondeu (mesmo que sem a carta)
+      falhasSeguidas = 0; consultasOk++; // a API respondeu (mesmo que sem a carta)
       if (res.skip) { semMatch++; console.log(`· ${card.name} ${card.num || ''}: ${res.skip}`); }
       else if (res.brl != null && res.brl !== card.precoRef) {
         linhas.push(`${card.name} ${card.num || ''}: ref ${card.precoRef != null ? 'R$ ' + card.precoRef : '(vazio)'} → R$ ${res.brl} (US$ ${res.usd}, ${res.tipo})`);
@@ -146,6 +165,12 @@ async function main() {
     await sleep(300); // gentil com a API gratuita
   }
 
+  const ativas = cards.filter(c => c.status !== 'obtida').length;
+  if (ativas && !consultasOk) {
+    console.error('A pokemontcg.io não respondeu a nenhuma consulta; nada foi gravado.');
+    process.exit(1);
+  }
+
   if (linhas.length) {
     fs.writeFileSync(CARDS_PATH, JSON.stringify(cards, null, 2) + '\n');
     fs.writeFileSync(path.join(ROOT, '_price_changes.txt'), linhas.join('\n'));
@@ -155,5 +180,5 @@ async function main() {
   }
 }
 
-module.exports = { parseNum, buildQuery, pickUsd, nameMatches, lookup, fetchComPrazo };
+module.exports = { parseNum, buildQuery, pickUsd, nameMatches, lookup, fetchComPrazo, getUsdBrlRate };
 if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });
