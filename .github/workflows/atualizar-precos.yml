@@ -1,4 +1,7 @@
-name: Atualizar preços das cartas
+name: Atualizar preços de referência
+
+# Atualiza só o campo `precoRef` (termômetro internacional em BRL).
+# O campo `preco` (valor da Liga Pokémon, conferido por você) nunca é alterado aqui.
 
 on:
   schedule:
@@ -11,6 +14,10 @@ permissions:
 jobs:
   atualizar-precos:
     runs-on: ubuntu-latest
+    env:
+      # no nível do job para poder ser usado no `if:` do passo do Telegram
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
     steps:
       - uses: actions/checkout@v4
 
@@ -32,19 +39,18 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             git add docs/data/cards.json
-            git commit -m "chore: atualiza preços de referência das cartas"
+            git commit -m "chore: atualiza preços de referência (precoRef)"
+            # se você salvou algo pelo painel enquanto o job rodava, reaplica por cima
+            git pull --rebase origin "${GITHUB_REF_NAME}"
             git push
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Notificar no Telegram (opcional)
         if: steps.commit.outputs.changed == 'true' && env.TELEGRAM_BOT_TOKEN != ''
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          TEXTO=$(cat _price_changes.txt 2>/dev/null | head -c 3500)
-          MSG=$(printf '📈 Preços atualizados no ColeçãoGBr:\n%s' "$TEXTO")
+          TEXTO=$(head -c 3500 _price_changes.txt 2>/dev/null)
+          MSG=$(printf '📈 Referências de preço atualizadas:\n%s' "$TEXTO")
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
             -d chat_id="${TELEGRAM_CHAT_ID}" \
             --data-urlencode text="$MSG"

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Gerenciar faltantes — ColeçãoGBr</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/gerenciar.css">
+</head>
+<body>
+
+<header>
+  <a class="logo" href="gerenciar.html">
+    <img class="logo-icon" src="https://i.imgur.com/E5eIStM.png" alt="ColeçãoGBr">
+    <span class="logo-text">Coleção<span>GBr</span> · faltantes</span>
+  </a>
+  <nav class="gz-tabs" id="gzTabs" aria-label="Seções" hidden>
+    <button class="gz-tab active" data-act="view" data-view="cartas">Cartas</button>
+    <button class="gz-tab" data-act="view" data-view="fila">Conferir preços <span class="gz-pill" id="tabFilaCount"></span></button>
+  </nav>
+  <div class="header-right">
+    <a class="btn-ghost gz-hide-sm" href="admin.html">Admin</a>
+    <a class="btn-ghost gz-hide-sm" href="index.html">Site público</a>
+    <button class="btn-icon" id="themeBtn" data-act="theme" title="Alternar tema">🌙</button>
+    <button class="btn-icon btn-logout" id="logoutBtn" data-act="logout" title="Desconectar" hidden>⏻</button>
+  </div>
+</header>
+
+<!-- ───────── Entrada ───────── -->
+<div class="admin-gate" id="gate">
+  <img class="logo-icon" src="https://i.imgur.com/E5eIStM.png" alt="">
+  <h1 style="font-family:var(--font-display);font-size:20px;margin:1rem 0 .5rem">Gerenciar cartas que faltam</h1>
+  <p style="font-size:12.5px;color:var(--text-dim);margin-bottom:1.25rem;line-height:1.6">
+    Usa o mesmo token do <a href="admin.html" style="color:var(--accent)">admin</a> (fine-grained, só este repositório,
+    <strong>Contents: Read and write</strong>). Ele fica só nesta aba.
+  </p>
+  <div class="error-msg" id="gateError"></div>
+  <div class="field" style="text-align:left"><label for="ghOwner">Usuário ou organização no GitHub</label><input type="text" id="ghOwner" placeholder="ex: seu-usuario" autocomplete="off"></div>
+  <div class="field" style="text-align:left"><label for="ghRepo">Repositório</label><input type="text" id="ghRepo" placeholder="ex: poke-colecao" autocomplete="off"></div>
+  <div class="field" style="text-align:left"><label for="ghBranch">Branch</label><input type="text" id="ghBranch" value="main" autocomplete="off"></div>
+  <div class="field" style="text-align:left"><label for="ghToken">Personal Access Token</label><input type="password" id="ghToken" placeholder="github_pat_..." autocomplete="off"></div>
+  <button class="btn-primary" id="btnConnect" data-act="connect">Conectar</button>
+  <button class="btn-ghost" style="width:100%;margin-top:10px" data-act="demo">Só ver (modo leitura, sem salvar)</button>
+</div>
+
+<!-- ───────── Painel ───────── -->
+<main class="gz-shell" id="shell" hidden>
+  <div class="gz-banner" id="roBanner" hidden>Modo leitura: você pode mexer à vontade, mas para <strong>salvar</strong> precisa conectar com o token. Dá para baixar um backup do que alterou.</div>
+
+  <section class="gz-stats" id="stats" aria-label="Resumo"></section>
+  <section class="gz-issues" id="issueChips" aria-label="Pendências"></section>
+
+  <!-- Vista: Cartas -->
+  <section id="viewCartas">
+    <div class="gz-toolbar">
+      <input type="search" id="fSearch" class="gz-search" placeholder="Buscar por nome, coleção ou número…" aria-label="Buscar">
+      <select id="fStatus" aria-label="Situação">
+        <option value="ativas">Ativas</option>
+        <option value="procurando">Procurando</option>
+        <option value="espera">Em espera</option>
+        <option value="obtidas">Obtidas</option>
+        <option value="todas">Todas</option>
+      </select>
+      <select id="fCat" aria-label="Categoria"></select>
+      <select id="fYear" aria-label="Ano"></select>
+      <select id="fSet" aria-label="Coleção"></select>
+      <select id="fSort" aria-label="Ordenar">
+        <option value="ano">Ordem: ano</option>
+        <option value="nome">Ordem: nome</option>
+        <option value="preco-desc">Ordem: mais caras</option>
+        <option value="preco-asc">Ordem: mais baratas</option>
+        <option value="prioridade">Ordem: prioridade</option>
+        <option value="conferido">Ordem: conferida há mais tempo</option>
+        <option value="recentes">Ordem: cadastradas por último</option>
+      </select>
+      <select id="fGroup" aria-label="Agrupar">
+        <option value="ano">Agrupar: ano</option>
+        <option value="colecao">Agrupar: coleção</option>
+        <option value="categoria">Agrupar: categoria</option>
+        <option value="nenhum">Sem grupos</option>
+      </select>
+      <button class="btn-ghost" data-act="density" id="densityBtn" title="Alternar lista compacta">▤ Compacta</button>
+      <button class="btn-primary gz-add" data-act="new">+ Nova carta</button>
+    </div>
+
+    <div class="gz-bulk" id="bulkBar" hidden></div>
+    <div id="cardsOut"></div>
+
+    <details class="gz-tools">
+      <summary>Ferramentas em lote</summary>
+      <div class="gz-tools-body" id="toolsBody"></div>
+    </details>
+  </section>
+
+  <!-- Vista: Conferir preços -->
+  <section id="viewFila" hidden>
+    <div class="gz-toolbar">
+      <label class="gz-inline">Quais conferir
+        <select id="qMode">
+          <option value="velhos">Desatualizadas e nunca conferidas</option>
+          <option value="sempreco">Só as sem preço</option>
+          <option value="diverge">Só as que divergem da referência</option>
+          <option value="todas">Todas as ativas</option>
+        </select>
+      </label>
+      <label class="gz-inline">Começar por
+        <select id="qOrder">
+          <option value="preco-desc">mais caras</option>
+          <option value="prioridade">prioridade</option>
+          <option value="conferido">conferida há mais tempo</option>
+          <option value="ano">ano</option>
+        </select>
+      </label>
+      <button class="btn-ghost" data-act="queue-restart">↻ Remontar fila</button>
+    </div>
+    <div id="queueOut"></div>
+  </section>
+</main>
+
+<!-- Barra de salvar -->
+<div class="gz-savebar" id="saveBar" hidden>
+  <span class="gz-save-info" id="saveInfo"></span>
+  <button class="btn-ghost" data-act="discard">Descartar</button>
+  <button class="btn-ghost" data-act="export" title="Baixa o cards.json com as alterações">⬇ Backup</button>
+  <button class="btn-primary" id="btnSave" data-act="save">Salvar no GitHub</button>
+</div>
+
+<!-- Modal de carta -->
+<div class="overlay" id="editModal" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+  <div class="modal gz-modal">
+    <button class="modal-close" data-act="close-modal" aria-label="Fechar">×</button>
+    <h2 class="modal-title" id="editTitle">Carta</h2>
+
+    <div class="gz-edit-grid">
+      <div class="gz-edit-photo">
+        <div class="card-img-wrap" id="ePreview"></div>
+        <button class="btn-ghost" data-act="e-official">Usar foto oficial</button>
+        <button class="btn-ghost" data-act="e-noimg">Remover foto</button>
+      </div>
+      <div>
+        <div class="field"><label for="eName">Nome</label><input id="eName" type="text" autocomplete="off"></div>
+        <div class="field-row">
+          <div class="field"><label for="eNum">Número (ex.: 78/172)</label><input id="eNum" type="text" autocomplete="off"></div>
+          <div class="field"><label for="eYear">Ano</label><input id="eYear" type="number" min="1996" max="2100"></div>
+        </div>
+        <div class="field"><label for="eSet">Coleção</label><input id="eSet" type="text" list="setList" autocomplete="off"><datalist id="setList"></datalist><div class="gz-hint" id="eSetHint"></div></div>
+        <div class="field-row">
+          <div class="field"><label for="eCat">Categoria</label><input id="eCat" type="text" list="catList" autocomplete="off"><datalist id="catList"></datalist></div>
+          <div class="field"><label for="ePrio">Prioridade</label>
+            <select id="ePrio"><option value="0">—</option><option value="1">★ baixa</option><option value="2">★★ média</option><option value="3">★★★ urgente</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field"><label>Raridades que faltam</label><div class="rarity-checks" id="eRarities"></div></div>
+    <div class="field"><label for="eImg">Foto (URL)</label><input id="eImg" type="url" placeholder="https://…" autocomplete="off"></div>
+    <div class="field"><label for="eLiga">Link da Liga Pokémon</label>
+      <div class="gz-row"><input id="eLiga" type="url" placeholder="https://www.ligapokemon.com.br/…" autocomplete="off">
+        <button class="btn-ghost" data-act="e-genlink" title="Gera o link com o código da edição, quando conhecido">Gerar</button>
+        <button class="btn-ghost" data-act="e-openliga">Abrir ↗</button></div>
+      <div class="gz-hint" id="eLigaHint"></div>
+    </div>
+    <div class="field"><label for="ePreco">Preço na Liga</label><input id="ePreco" type="text" inputmode="decimal" placeholder="R$ 0,00" autocomplete="off">
+      <div class="gz-hint" id="ePrecoHint"></div></div>
+    <div class="field"><label for="eNotas">Notas</label><textarea id="eNotas" rows="2" placeholder="ex.: aceito NM ou LP; ver com o João na feira"></textarea></div>
+    <div class="gz-checks">
+      <label><input type="checkbox" id="eEspera"> Em espera (some o botão “Tenho essa carta!” no site)</label>
+      <label><input type="checkbox" id="eObtida"> Já consegui esta carta (sai do site público)</label>
+    </div>
+    <div class="error-msg" id="editError"></div>
+    <div class="gz-row" style="margin-top:1rem">
+      <button class="btn-primary" data-act="e-save" style="flex:1">Aplicar</button>
+      <button class="btn-ghost gz-danger" data-act="e-delete" id="eDeleteBtn">Excluir</button>
+    </div>
+    <div class="gz-hint" style="margin-top:8px">“Aplicar” altera só a tela. Nada vai para o GitHub até você clicar em <strong>Salvar</strong>.</div>
+  </div>
+</div>
+
+<!-- Tela cheia -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-stage">
+    <button class="lightbox-nav prev" data-act="lb-prev" aria-label="Carta anterior">‹</button>
+    <img id="lbImg" alt="">
+    <button class="lightbox-nav next" data-act="lb-next" aria-label="Próxima carta">›</button>
+    <button class="lightbox-close" data-act="lb-close" aria-label="Fechar">×</button>
+    <div class="lightbox-caption" id="lbCaption"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/colecao-utils.js"></script>
+<script src="js/gh-client.js"></script>
+<script src="js/gerenciar.js"></script>
+</body>
+</html>

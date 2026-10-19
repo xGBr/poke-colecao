@@ -50,7 +50,8 @@ async function loadCards() {
     // logo depois de você salvar uma alteração no painel admin.
     const res = await fetch(`${DATA_URL}?t=${Date.now()}`);
     if (!res.ok) throw new Error('status ' + res.status);
-    cards = await res.json();
+    // cartas marcadas como "já consegui" (status: 'obtida') não aparecem para os visitantes
+    cards = (await res.json()).filter(c => c.status !== 'obtida');
     usingSampleData = false;
   } catch (e) {
     console.warn('Não consegui ler data/cards.json, usando exemplo:', e.message);
