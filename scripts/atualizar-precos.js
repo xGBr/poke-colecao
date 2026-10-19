@@ -19,6 +19,26 @@ const API_KEY = process.env.POKEMONTCG_API_KEY || null;
 const API = 'https://api.pokemontcg.io/v2/cards';
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+// A pokemontcg.io às vezes demora ou devolve 5xx. Sem limite de tempo, um pedido
+// travado seguraria o job por horas; aqui cada pedido tem prazo e 1 nova tentativa.
+const NET = { timeoutMs: 20000, retries: 1, backoffMs: 2000 };
+const MAX_FALHAS_SEGUIDAS = 5; // API fora do ar: para e tenta de novo na próxima semana
+
+async function fetchComPrazo(url, opts, fetchFn = fetch, net = NET) {
+  let ultimo;
+  for (let i = 0; i <= net.retries; i++) {
+    try {
+      const r = await fetchFn(url, Object.assign({}, opts, { signal: AbortSignal.timeout(net.timeoutMs) }));
+      if (r.status === 429 || r.status >= 500) throw new Error('HTTP ' + r.status);
+      return r;
+    } catch (e) {
+      ultimo = e;
+      if (i < net.retries) await sleep(net.backoffMs);
+    }
+  }
+  throw ultimo;
+}
 const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 
 // "24/40" -> { numero: '24', total: '40' } ; "SWSH123" -> { numero: 'SWSH123', total: null }
@@ -61,7 +81,7 @@ function nameMatches(card, apiCard) {
 
 async function getUsdBrlRate() {
   try {
-    const r = await fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL');
+    const r = await fetchComPrazo('https://economia.awesomeapi.com.br/json/last/USD-BRL', {});
     const j = await r.json();
     return parseFloat(j.USDBRL.bid) || null;
   } catch (e) {
@@ -70,12 +90,12 @@ async function getUsdBrlRate() {
   }
 }
 
-async function lookup(card, sets, rate, fetchFn = fetch) {
+async function lookup(card, sets, rate, fetchFn = fetch, net = NET) {
   const query = buildQuery(card, sets);
   if (!query) return { skip: 'sem coleção/número confiável' };
   const headers = API_KEY ? { 'X-Api-Key': API_KEY } : {};
   const url = `${API}?q=${encodeURIComponent(query.q)}&pageSize=5&select=id,name,number,set,images,tcgplayer`;
-  const r = await fetchFn(url, { headers });
+  const r = await fetchComPrazo(url, { headers }, fetchFn, net);
   if (!r.ok) throw new Error('HTTP ' + r.status);
   const j = await r.json();
   const hit = (j.data || []).find(c => nameMatches(card, c));
@@ -100,12 +120,17 @@ async function main() {
 
   const agora = new Date().toISOString();
   const linhas = [];
-  let semMatch = 0;
+  let semMatch = 0, falhasSeguidas = 0;
 
   for (const card of cards) {
     if (card.status === 'obtida') continue;
+    if (falhasSeguidas >= MAX_FALHAS_SEGUIDAS) {
+      console.warn(`API sem resposta ${MAX_FALHAS_SEGUIDAS} vezes seguidas: parei por aqui; o resto fica para a próxima execução.`);
+      break;
+    }
     try {
       const res = await lookup(card, sets, rate);
+      falhasSeguidas = 0; // a API respondeu (mesmo que sem a carta)
       if (res.skip) { semMatch++; console.log(`· ${card.name} ${card.num || ''}: ${res.skip}`); }
       else if (res.brl != null && res.brl !== card.precoRef) {
         linhas.push(`${card.name} ${card.num || ''}: ref ${card.precoRef != null ? 'R$ ' + card.precoRef : '(vazio)'} → R$ ${res.brl} (US$ ${res.usd}, ${res.tipo})`);
@@ -115,6 +140,7 @@ async function main() {
         if (res.apiId) card.apiId = res.apiId; // ajuda a página a achar a foto/ref depois
       }
     } catch (e) {
+      falhasSeguidas++;
       console.warn(`Falha em ${card.name}:`, e.message);
     }
     await sleep(300); // gentil com a API gratuita
@@ -129,5 +155,5 @@ async function main() {
   }
 }
 
-module.exports = { parseNum, buildQuery, pickUsd, nameMatches, lookup };
+module.exports = { parseNum, buildQuery, pickUsd, nameMatches, lookup, fetchComPrazo };
 if (require.main === module) main().catch(e => { console.error(e); process.exit(1); });
