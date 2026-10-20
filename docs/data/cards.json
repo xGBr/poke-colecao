@@ -41,7 +41,11 @@
         "2026-10-20T01:18:50.590Z",
         4
       ]
-    ]
+    ],
+    "precoRef": 159.4,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-14",
+    "precoRefAtualizadoEm": "2026-10-20T01:30:08.144Z",
+    "apiId": "ex15-14"
   },
   {
     "name": "Exeggcute",
@@ -110,7 +114,11 @@
     "rarities": [
       "Normal"
     ],
-    "id": 1788052833428
+    "id": 1788052833428,
+    "precoRef": 219.51,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-31",
+    "precoRefAtualizadoEm": "2026-10-20T01:30:08.144Z",
+    "apiId": "ex15-31"
   },
   {
     "name": "Seadra",
@@ -125,7 +133,11 @@
     "rarities": [
       "Normal"
     ],
-    "id": 1788052933000
+    "id": 1788052933000,
+    "precoRef": 113.18,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-37",
+    "precoRefAtualizadoEm": "2026-10-20T01:30:08.144Z",
+    "apiId": "ex15-37"
   },
   {
     "name": "Seadra",
