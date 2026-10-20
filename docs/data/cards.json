@@ -771,7 +771,9 @@
       "Normal",
       "Reverse Foil"
     ],
-    "id": 1782907948237
+    "id": 1782907948237,
+    "status": "obtida",
+    "obtidaEm": "2026-10-20T01:24:04.673Z"
   },
   {
     "name": "Êri",
@@ -786,7 +788,9 @@
     "rarities": [
       "Foil"
     ],
-    "id": 1782908063806
+    "id": 1782908063806,
+    "status": "obtida",
+    "obtidaEm": "2026-10-20T01:24:06.654Z"
   },
   {
     "name": "Êri",
@@ -801,7 +805,9 @@
     "rarities": [
       "Foil"
     ],
-    "id": 1782908742561
+    "id": 1782908742561,
+    "status": "obtida",
+    "obtidaEm": "2026-10-20T01:24:07.485Z"
   },
   {
     "name": "Faixa Preta",
@@ -922,7 +928,9 @@
     "rarities": [
       "Reverse Foil"
     ],
-    "id": 1782909680457
+    "id": 1782909680457,
+    "status": "obtida",
+    "obtidaEm": "2026-10-20T01:24:11.434Z"
   },
   {
     "name": "Roserade C",
@@ -1014,7 +1022,9 @@
     "rarities": [
       "Play Pokemon Cosmo"
     ],
-    "id": 1782996817871
+    "id": 1782996817871,
+    "status": "obtida",
+    "obtidaEm": "2026-10-20T01:24:17.952Z"
   },
   {
     "name": "Milotic C",
