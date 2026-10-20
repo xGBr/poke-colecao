@@ -94,7 +94,12 @@ pokedex-tcg-v2/
 
 ## Migrando os dados do site antigo
 
-Seu site atual guarda tudo num JSONBin público. Para trazer as cartas:
+> **Já feito:** as cartas do site antigo foram importadas para `docs/data/cards.json`
+> e o `index.html` antigo foi removido do repositório. Os passos abaixo ficam só como
+> histórico — não precisa repetir. A chave do JSONBin continua no histórico do git:
+> revogue/gire a chave no painel do JSONBin.
+
+Seu site antigo guardava tudo num JSONBin público. Para trazer as cartas:
 
 1. Abra a URL do seu bin (`https://api.jsonbin.io/v3/b/<ID>/latest`) com o
    header `X-Access-Key` que já está no `index.html` atual, e copie o array.
