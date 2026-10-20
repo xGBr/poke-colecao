@@ -884,7 +884,7 @@
     "name": "Garchomp C LV.X",
     "num": "DP46/56",
     "category": "Cartas da Cintia",
-    "year": null,
+    "year": 2007,
     "set": "Diamante & Pérola Promos",
     "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Garchomp+C+LV.X+%28DP46%2F56%29",
     "preco": "R$ 70,00",
@@ -933,13 +933,20 @@
     "year": 2009,
     "set": "Supreme Victors",
     "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Spiritomb+C+%2884%2F147%29",
-    "preco": "R$ ??",
+    "preco": "R$ 49,99",
     "img": "https://i.imgur.com/I5FGXph.jpg",
     "espera": false,
     "rarities": [
       "Reverse Foil"
     ],
-    "id": 1782997088838
+    "id": 1782997088838,
+    "precoEm": "2026-10-20T01:10:32.403Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:10:32.403Z",
+        49.99
+      ]
+    ]
   },
   {
     "name": "Togekiss C",
@@ -1077,7 +1084,7 @@
   },
   {
     "name": "Riolu",
-    "num": "24/40",
+    "num": "66/156",
     "category": "Principal",
     "year": 2018,
     "set": "Ultraprisma",
@@ -1184,7 +1191,7 @@
     "name": "Riolu",
     "num": "BW33/99",
     "category": "Principal",
-    "year": null,
+    "year": 2011,
     "set": "Black & White Promos",
     "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Riolu+%28BW33%2F99%29",
     "preco": "R$ 6,00",
@@ -1259,7 +1266,7 @@
     "name": "Riolu",
     "num": "6/11",
     "category": "Principal",
-    "year": null,
+    "year": 2007,
     "set": "Diamond & Pearl Trainer Kit - Lucario",
     "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(06/11)&ed=TK3B&num=06",
     "preco": "R$ 3,99",
