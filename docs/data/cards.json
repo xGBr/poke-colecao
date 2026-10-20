@@ -6,13 +6,20 @@
     "year": 2006,
     "set": "Crystal Guardians",
     "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Blastoise%20(2/100)&ed=CG&num=2",
-    "preco": "R$ 799,99",
+    "preco": "R$ 1.250,00",
     "img": "https://i.imgur.com/jxelQ8E.png",
     "espera": false,
     "rarities": [
       "Foil"
     ],
-    "id": 1788051675016
+    "id": 1788051675016,
+    "precoEm": "2026-10-20T01:16:06.131Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:16:06.131Z",
+        1250
+      ]
+    ]
   },
   {
     "name": "Cloyster",
@@ -21,13 +28,20 @@
     "year": 2006,
     "set": "Dragon Frontiers",
     "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Cloyster%20(14/101)&ed=DF&num=14",
-    "preco": "R$ 100,00",
+    "preco": "R$ 4,00",
     "img": "https://i.imgur.com/FyX3WQI.png",
     "espera": false,
     "rarities": [
       "Normal"
     ],
-    "id": 1788052284569
+    "id": 1788052284569,
+    "precoEm": "2026-10-20T01:18:50.590Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:18:50.590Z",
+        4
+      ]
+    ]
   },
   {
     "name": "Exeggcute",
@@ -36,13 +50,20 @@
     "year": 2006,
     "set": "EX Holon Phantoms",
     "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Exeggcute%20(65/110)&ed=EHP&num=65",
-    "preco": "R$ 110,00",
+    "preco": "R$ 64,99",
     "img": "https://i.imgur.com/6TeXbio.png",
     "espera": false,
     "rarities": [
       "Normal"
     ],
-    "id": 1788052502901
+    "id": 1788052502901,
+    "precoEm": "2026-10-20T01:18:33.897Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:18:33.897Z",
+        64.99
+      ]
+    ]
   },
   {
     "name": "Exeggutor",
@@ -191,11 +212,18 @@
     "year": 2006,
     "set": "Dragon Frontiers",
     "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Meganium%20(4/101)&ed=DF&num=4",
-    "preco": "R$ 118,99",
+    "preco": "R$ 351,90",
     "img": "https://i.imgur.com/szJs8wo.jpg",
     "espera": true,
     "rarities": [],
-    "id": 1782680666790
+    "id": 1782680666790,
+    "precoEm": "2026-10-20T01:18:07.433Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:18:07.433Z",
+        351.9
+      ]
+    ]
   },
   {
     "name": "Magcargo",
@@ -204,11 +232,18 @@
     "year": 2003,
     "set": "Skyridge",
     "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Magcargo+%28H17%2F144%29",
-    "preco": "R$ 250,00",
+    "preco": "R$ 499,50",
     "img": "https://i.imgur.com/WS9Y3On.jpg",
     "espera": true,
     "rarities": [],
-    "id": 1782680847266
+    "id": 1782680847266,
+    "precoEm": "2026-10-20T01:17:19.339Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:17:19.339Z",
+        499.5
+      ]
+    ]
   },
   {
     "name": "Magcargo",
@@ -230,11 +265,18 @@
     "year": 2006,
     "set": "Dragon Frontiers",
     "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Kingdra+ex+%2894%2F101%29",
-    "preco": "R$ 219,50",
+    "preco": "R$ 300,00",
     "img": "https://i.imgur.com/nTbtR8F.jpg",
     "espera": true,
     "rarities": [],
-    "id": 1782681046475
+    "id": 1782681046475,
+    "precoEm": "2026-10-20T01:17:30.432Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:17:30.432Z",
+        300
+      ]
+    ]
   },
   {
     "name": "Elekid",
@@ -269,11 +311,18 @@
     "year": 2006,
     "set": "Crystal Guardians",
     "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Blaziken+ex%20(90/100)&ed=CG&num=90",
-    "preco": "R$ 149,50",
+    "preco": "R$ 400,00",
     "img": "https://i.imgur.com/aP9I5wz.jpg",
     "espera": true,
     "rarities": [],
-    "id": 1782681300193
+    "id": 1782681300193,
+    "precoEm": "2026-10-20T01:17:54.054Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:17:54.054Z",
+        400
+      ]
+    ]
   },
   {
     "name": "Marshtomp",
@@ -308,11 +357,18 @@
     "year": 2004,
     "set": "Team Magma vs Team Aqua",
     "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Swampert+ex+%2895%2F95%29",
-    "preco": "R$ 80,00",
+    "preco": "R$ 427,03",
     "img": "https://i.imgur.com/5S9f6Io.jpg",
     "espera": true,
     "rarities": [],
-    "id": 1782681704729
+    "id": 1782681704729,
+    "precoEm": "2026-10-20T01:19:18.323Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:19:18.323Z",
+        427.03
+      ]
+    ]
   },
   {
     "name": "Swampert",
@@ -438,11 +494,18 @@
     "year": 2024,
     "set": "Máscaras do Crepúsculo",
     "liga": "https://www.ligapokemon.com.br/?view=cards%2Fsearch&tipo=1&card=214%2F167",
-    "preco": "R$ 1.097,88",
+    "preco": "R$ 1.694,63",
     "img": "https://i.imgur.com/x71tbqV.jpg",
     "espera": true,
     "rarities": [],
-    "id": 1782684942765
+    "id": 1782684942765,
+    "precoEm": "2026-10-20T01:15:43.714Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:15:43.714Z",
+        1694.63
+      ]
+    ]
   },
   {
     "name": "Greninja ex",
@@ -455,7 +518,8 @@
     "img": "https://i.imgur.com/36oZA2z.jpg",
     "espera": true,
     "rarities": [],
-    "id": 1782684992402
+    "id": 1782684992402,
+    "precoEm": "2026-10-20T01:17:44.324Z"
   },
   {
     "name": "Toxtricity ex",
@@ -566,13 +630,20 @@
     "year": 2021,
     "set": "Estilos de Batalha",
     "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Bruno%20(158/163)&ed=BST&num=158",
-    "preco": "R$ 254,92",
+    "preco": "R$ 59,99",
     "img": "https://i.imgur.com/q8xiYSP.jpg",
     "espera": true,
     "rarities": [
       "Foil"
     ],
-    "id": 1782850109136
+    "id": 1782850109136,
+    "precoEm": "2026-10-20T01:16:55.578Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:16:55.578Z",
+        59.99
+      ]
+    ]
   },
   {
     "name": "Ambição da Cíntia",
@@ -594,13 +665,20 @@
     "year": 2019,
     "set": "Eclipse Cósmico",
     "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Cynthia+%26+Caitlin+%28228%2F236%29",
-    "preco": "R$ 759,99",
+    "preco": "R$ 599,99",
     "img": "https://i.imgur.com/QYtpTXH.jpg",
     "espera": true,
     "rarities": [
       "Foil"
     ],
-    "id": 1782850585000
+    "id": 1782850585000,
+    "precoEm": "2026-10-20T01:16:17.776Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:16:17.776Z",
+        599.99
+      ]
+    ]
   },
   {
     "name": "Cíntia",
@@ -609,13 +687,20 @@
     "year": 2019,
     "set": "Destinos Ocultos",
     "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Cynthia+%28SV82%2F68%29",
-    "preco": "R$ 1.799,00",
+    "preco": "R$ 1.999,00",
     "img": "https://i.imgur.com/6ut4Fqy.jpg",
     "espera": true,
     "rarities": [
       "Foil"
     ],
-    "id": 1782850968642
+    "id": 1782850968642,
+    "precoEm": "2026-10-20T01:15:23.059Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:15:23.059Z",
+        1999
+      ]
+    ]
   },
   {
     "name": "Cíntia",
@@ -639,13 +724,20 @@
     "year": 2018,
     "set": "Ultraprisma",
     "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Cynthia+%28148%2F156%29",
-    "preco": "R$ 499,90",
+    "preco": "R$ 999,99",
     "img": "https://i.imgur.com/G4Pift8.jpg",
     "espera": true,
     "rarities": [
       "Foil"
     ],
-    "id": 1782907668925
+    "id": 1782907668925,
+    "precoEm": "2026-10-20T01:16:30.417Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:16:30.417Z",
+        999.99
+      ]
+    ]
   },
   {
     "name": "Cynthia's Guidance",
@@ -871,14 +963,21 @@
     "year": 2009,
     "set": "Supreme Victors",
     "liga": "https://www.ligapokemon.com.br/?view=cards%2Fcard&tipo=1&card=Garchomp+C+LV.X+%28145%2F147%29",
-    "preco": "R$ 499,90",
+    "preco": "R$ 400,00",
     "img": "https://i.imgur.com/ImvHds7.jpg",
     "espera": true,
     "rarities": [
       "Foil",
       "World Championships"
     ],
-    "id": 1782996530146
+    "id": 1782996530146,
+    "precoEm": "2026-10-20T01:16:46.322Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:16:46.322Z",
+        400
+      ]
+    ]
   },
   {
     "name": "Garchomp C LV.X",
@@ -1239,13 +1338,20 @@
     "year": 2008,
     "set": "POP Series 8",
     "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(16/17)&ed=P8&num=16",
-    "preco": "R$ 100,00",
+    "preco": "R$ 29,99",
     "img": "https://i.imgur.com/bpwt2dh.jpg",
     "espera": false,
     "rarities": [
       "Cosmo Holo"
     ],
-    "id": 1783000254496
+    "id": 1783000254496,
+    "precoEm": "2026-10-20T01:19:01.085Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:19:01.085Z",
+        29.99
+      ]
+    ]
   },
   {
     "name": "Riolu",
@@ -1284,13 +1390,20 @@
     "year": 2007,
     "set": "POP Series 6",
     "liga": "https://www.ligapokemon.com.br/?view=cards/card&card=Riolu%20(8/17)&ed=P6&num=8",
-    "preco": "R$ 79,90",
+    "preco": "R$ 119,99",
     "img": "https://i.imgur.com/95RnDO8.jpg",
     "espera": false,
     "rarities": [
       "Cosmo Holo"
     ],
-    "id": 1783001045156
+    "id": 1783001045156,
+    "precoEm": "2026-10-20T01:19:29.997Z",
+    "precoHist": [
+      [
+        "2026-10-20T01:19:29.997Z",
+        119.99
+      ]
+    ]
   },
   {
     "name": "Riolu",
