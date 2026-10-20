@@ -14,6 +14,7 @@ permissions:
 jobs:
   atualizar-precos:
     runs-on: ubuntu-latest
+    timeout-minutes: 20   # rede de segurança: nunca prende o job por horas
     env:
       # no nível do job para poder ser usado no `if:` do passo do Telegram
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -28,6 +29,7 @@ jobs:
       - name: Buscar preços de referência atualizados
         env:
           POKEMONTCG_API_KEY: ${{ secrets.POKEMONTCG_API_KEY }}
+          AWESOMEAPI_KEY: ${{ secrets.AWESOMEAPI_KEY }}   # opcional: só usada se as fontes sem chave falharem
         run: node scripts/atualizar-precos.js
 
       - name: Commitar alterações (se houver)
