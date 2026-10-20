@@ -12,7 +12,8 @@ banco de dados separado, sem servidor pra manter no ar.
 | Banco de dados (`docs/data/cards.json`) | **Dentro do próprio repositório**, versionado a cada alteração | Grátis |
 | Autenticação de escrita | Personal Access Token colado por você no painel, sessão a sessão | Grátis |
 | Imagens enviadas pelo painel | `docs/uploads/`, também dentro do repositório | Grátis |
-| Atualização automática de preços | **GitHub Actions**, semanal ou sob demanda | Grátis (dentro do limite generoso do plano gratuito) |
+| Preço de referência automático (`precoRef`) | **GitHub Actions**, semanal ou sob demanda. Grava só `precoRef`; o `preco` (Liga) nunca é alterado | Grátis (dentro do limite generoso do plano gratuito) |
+| Controle das cartas que faltam (preços da Liga, fotos, pendências) | Página `docs/gerenciar.html` — veja o `GERENCIAR.md` | Grátis |
 | Recebimento de contato de visitantes | Webhook do **seu n8n** (opcional) | Você já tem isso rodando |
 
 ## Passo a passo
@@ -51,7 +52,15 @@ branch (`main`) e cole o token. Ele fica guardado só na sessão da aba
      [@BotFather](https://t.me/BotFather) no Telegram.
 2. O workflow `.github/workflows/atualizar-precos.yml` já está configurado
    para rodar toda segunda-feira e também pode ser disparado manualmente
-   na aba **Actions** do repositório (botão "Run workflow").
+   na aba **Actions** do repositório (botão "Run workflow", escolhendo a
+   branch `main`; o "Re-run" de uma execução antiga repete o commit antigo).
+3. O que ele faz: busca cada carta na pokemontcg.io (por coleção + número),
+   converte para reais e grava `precoRef`. **Não altera `preco`**: esse é o
+   valor da Liga Pokémon, que você confere na página **Gerenciar faltantes**.
+4. Se algo der errado, a execução fica **vermelha** (sem câmbio ou sem resposta
+   da API). No log do passo "Buscar preços" aparece, por exemplo,
+   `Câmbio USD-BRL: 5.07 (via frankfurter)`. O secret `AWESOMEAPI_KEY` é
+   opcional (só vale como reserva do câmbio).
 
 ### 5. (Opcional) Contato de visitantes via n8n
 Em `docs/js/app.js`, defina `CONTACT_WEBHOOK_URL` com a URL de um node

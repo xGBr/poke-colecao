@@ -199,7 +199,8 @@
     if (n && linkNum && /^\d+$/.test(n.numero) && /^\d+$/.test(linkNum) && parseInt(n.numero, 10) !== parseInt(linkNum, 10)) out.push('link-diverge');
     // número do "card=" do link (n/total) × número digitado
     const cardParam = ligaParam(card.liga, 'card');
-    const mc = cardParam && cardParam.match(/\((\d+)\s*\/\s*(\d+)\)\s*$/);
+    // dois formatos: "Nome (n/total)" e busca só por número "n/total"
+    const mc = cardParam && (cardParam.match(/\((\d+)\s*\/\s*(\d+)\)\s*$/) || cardParam.trim().match(/^(\d+)\s*\/\s*(\d+)$/));
     if (mc && n && n.total && /^\d+$/.test(n.numero) && !out.includes('link-diverge')) {
       if (parseInt(mc[2], 10) !== parseInt(n.total, 10) || parseInt(mc[1], 10) !== parseInt(n.numero, 10)) out.push('link-diverge');
     }
