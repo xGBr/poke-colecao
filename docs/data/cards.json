@@ -93,7 +93,9 @@
     "rarities": [
       "Normal"
     ],
-    "id": 1788052760045
+    "id": 1788052760045,
+    "status": "obtida",
+    "obtidaEm": "2026-10-20T01:20:58.178Z"
   },
   {
     "name": "Horsea",
@@ -954,7 +956,9 @@
       "World Championships",
       "Staff"
     ],
-    "id": 1782996419735
+    "id": 1782996419735,
+    "status": "obtida",
+    "obtidaEm": "2026-10-20T01:21:36.169Z"
   },
   {
     "name": "Garchomp C LV.X",
@@ -977,7 +981,9 @@
         "2026-10-20T01:16:46.322Z",
         400
       ]
-    ]
+    ],
+    "status": "obtida",
+    "obtidaEm": "2026-10-20T01:21:53.701Z"
   },
   {
     "name": "Garchomp C LV.X",
@@ -992,7 +998,9 @@
     "rarities": [
       "Cosmo Holo"
     ],
-    "id": 1782996703182
+    "id": 1782996703182,
+    "status": "obtida",
+    "obtidaEm": "2026-10-20T01:22:01.986Z"
   },
   {
     "name": "Roserade da Cíntia",
