@@ -19,7 +19,11 @@
         "2026-10-20T01:16:06.131Z",
         1250
       ]
-    ]
+    ],
+    "precoRef": 1363.43,
+    "precoRefFonte": "TCGplayer/holofoil · ex14-2",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex14-2"
   },
   {
     "name": "Cloyster",
@@ -42,9 +46,9 @@
         4
       ]
     ],
-    "precoRef": 159.4,
+    "precoRef": 162.28,
     "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-14",
-    "precoRefAtualizadoEm": "2026-10-20T01:30:08.144Z",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
     "apiId": "ex15-14"
   },
   {
@@ -67,7 +71,11 @@
         "2026-10-20T01:18:33.897Z",
         64.99
       ]
-    ]
+    ],
+    "precoRef": 258,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex13-65",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex13-65"
   },
   {
     "name": "Exeggutor",
@@ -82,7 +90,11 @@
     "rarities": [
       "Normal"
     ],
-    "id": 1788052594903
+    "id": 1788052594903,
+    "precoRef": 232.51,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex13-41",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex13-41"
   },
   {
     "name": "Horsea",
@@ -115,9 +127,9 @@
       "Normal"
     ],
     "id": 1788052833428,
-    "precoRef": 219.51,
+    "precoRef": 223.48,
     "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-31",
-    "precoRefAtualizadoEm": "2026-10-20T01:30:08.144Z",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
     "apiId": "ex15-31"
   },
   {
@@ -152,7 +164,11 @@
     "rarities": [
       "Normal"
     ],
-    "id": 1788053011293
+    "id": 1788053011293,
+    "precoRef": 172.34,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-22",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex15-22"
   },
   {
     "name": "Electabuzz",
@@ -165,7 +181,11 @@
     "img": "https://i.imgur.com/HMdfVgW.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782679820027
+    "id": 1782679820027,
+    "precoRef": 210.58,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-29",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex15-29"
   },
   {
     "name": "Pinsir",
@@ -178,7 +198,11 @@
     "img": "https://i.imgur.com/5TYvmae.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782679881205
+    "id": 1782679881205,
+    "precoRef": 131.27,
+    "precoRefFonte": "TCGplayer/holofoil · ex15-9",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex15-9"
   },
   {
     "name": "Ditto",
@@ -191,7 +215,11 @@
     "img": "https://i.imgur.com/gTfGLUN.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782679935733
+    "id": 1782679935733,
+    "precoRef": 927.51,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex11-62",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex11-62"
   },
   {
     "name": "Chikorita",
@@ -204,7 +232,11 @@
     "img": "https://i.imgur.com/Y6VN2tF.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782680580861
+    "id": 1782680580861,
+    "precoRef": 208.83,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-44",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex15-44"
   },
   {
     "name": "Bayleef",
@@ -217,7 +249,11 @@
     "img": "https://i.imgur.com/Dl5AEV2.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782680620599
+    "id": 1782680620599,
+    "precoRef": 167.49,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-26",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex15-26"
   },
   {
     "name": "Meganium",
@@ -270,7 +306,11 @@
     "img": "https://i.imgur.com/sVgfNvJ.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782680937465
+    "id": 1782680937465,
+    "precoRef": 258,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ecard3-18",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ecard3-18"
   },
   {
     "name": "Kingdra EX",
@@ -290,7 +330,11 @@
         "2026-10-20T01:17:30.432Z",
         300
       ]
-    ]
+    ],
+    "precoRef": 645,
+    "precoRefFonte": "TCGplayer/holofoil · ex15-94",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex15-94"
   },
   {
     "name": "Elekid",
@@ -303,7 +347,11 @@
     "img": "https://i.imgur.com/VG9BWlX.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782681091581
+    "id": 1782681091581,
+    "precoRef": 114.5,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-48",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex15-48"
   },
   {
     "name": "Combusken",
@@ -316,7 +364,11 @@
     "img": "https://i.imgur.com/ghcdr3O.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782681243360
+    "id": 1782681243360,
+    "precoRef": 154.75,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex14-16",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex14-16"
   },
   {
     "name": "Blaziken EX",
@@ -336,7 +388,11 @@
         "2026-10-20T01:17:54.054Z",
         400
       ]
-    ]
+    ],
+    "precoRef": 903,
+    "precoRefFonte": "TCGplayer/holofoil · ex14-90",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex14-90"
   },
   {
     "name": "Marshtomp",
@@ -349,7 +405,11 @@
     "img": "https://i.imgur.com/TArFqEz.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782681517266
+    "id": 1782681517266,
+    "precoRef": 62.59,
+    "precoRefFonte": "TCGplayer/normal · pop3-15",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "pop3-15"
   },
   {
     "name": "Marshtomp",
@@ -382,7 +442,11 @@
         "2026-10-20T01:19:18.323Z",
         427.03
       ]
-    ]
+    ],
+    "precoRef": 1044.64,
+    "precoRefFonte": "TCGplayer/holofoil · ex4-95",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex4-95"
   },
   {
     "name": "Swampert",
@@ -395,7 +459,11 @@
     "img": "https://i.imgur.com/H25GsJL.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782681787903
+    "id": 1782681787903,
+    "precoRef": 412.75,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex14-27",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex14-27"
   },
   {
     "name": "Carvanha",
@@ -421,7 +489,11 @@
     "img": "https://i.imgur.com/8GHKUyk.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782682035010
+    "id": 1782682035010,
+    "precoRef": 185.71,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex13-53",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex13-53"
   },
   {
     "name": "Torkoal",
@@ -434,7 +506,11 @@
     "img": "https://i.imgur.com/b4yK7Y5.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782682106765
+    "id": 1782682106765,
+    "precoRef": 63.36,
+    "precoRefFonte": "TCGplayer/normal · pop1-10",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "pop1-10"
   },
   {
     "name": "Cacturne",
@@ -447,7 +523,11 @@
     "img": "https://i.imgur.com/2VF5TJW.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782682200036
+    "id": 1782682200036,
+    "precoRef": 152.17,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex14-15",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "ex14-15"
   },
   {
     "name": "Torterra",
@@ -460,7 +540,11 @@
     "img": "https://i.imgur.com/VMhGaZV.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782683385606
+    "id": 1782683385606,
+    "precoRef": 78.69,
+    "precoRefFonte": "TCGplayer/holofoil · dp7-11",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "dp7-11"
   },
   {
     "name": "Infernape",
@@ -533,7 +617,11 @@
     "espera": true,
     "rarities": [],
     "id": 1782684992402,
-    "precoEm": "2026-10-20T01:17:44.324Z"
+    "precoEm": "2026-10-20T01:17:44.324Z",
+    "precoRef": 74.41,
+    "precoRefFonte": "TCGplayer/holofoil · sv6-198",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "sv6-198"
   },
   {
     "name": "Toxtricity ex",
@@ -605,7 +693,11 @@
     "rarities": [
       "Foil"
     ],
-    "id": 1782849062327
+    "id": 1782849062327,
+    "precoRef": 25.65,
+    "precoRefFonte": "TCGplayer/holofoil · swsh6-212",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "swsh6-212"
   },
   {
     "name": "Brawly",
@@ -620,7 +712,11 @@
     "rarities": [
       "Foil"
     ],
-    "id": 1782849234357
+    "id": 1782849234357,
+    "precoRef": 7.64,
+    "precoRefFonte": "TCGplayer/holofoil · swsh6-188",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "swsh6-188"
   },
   {
     "name": "Bruno",
@@ -635,7 +731,11 @@
     "rarities": [
       "Foil"
     ],
-    "id": 1782849333831
+    "id": 1782849333831,
+    "precoRef": 27.5,
+    "precoRefFonte": "TCGplayer/holofoil · swsh5-172",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "swsh5-172"
   },
   {
     "name": "Bruno",
@@ -959,7 +1059,11 @@
       "Normal",
       "Reverse Foil"
     ],
-    "id": 1782996277725
+    "id": 1782996277725,
+    "precoRef": 62.13,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · pl3-40",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "pl3-40"
   },
   {
     "name": "Garchomp C",
@@ -1106,7 +1210,11 @@
       "Cosmo Holo",
       "Play Pokemon"
     ],
-    "id": 1782998004377
+    "id": 1782998004377,
+    "precoRef": 1.39,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · me1-76",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "me1-76"
   },
   {
     "name": "Riolu",
@@ -1121,7 +1229,11 @@
     "rarities": [
       "Reverse Foil"
     ],
-    "id": 1782998126686
+    "id": 1782998126686,
+    "precoRef": 1.19,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · sv7-81",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "sv7-81"
   },
   {
     "name": "Riolu",
@@ -1164,7 +1276,11 @@
     "img": "https://i.imgur.com/vud7An0.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782998390628
+    "id": 1782998390628,
+    "precoRef": 1.7,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · swsh4-90",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "swsh4-90"
   },
   {
     "name": "Riolu",
@@ -1179,7 +1295,11 @@
     "rarities": [
       "Reverse Foil"
     ],
-    "id": 1782998562281
+    "id": 1782998562281,
+    "precoRef": 3.72,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · sm11-115",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "sm11-115"
   },
   {
     "name": "Riolu",
@@ -1209,7 +1329,11 @@
     "rarities": [
       "Reverse Foil"
     ],
-    "id": 1782998848389
+    "id": 1782998848389,
+    "precoRef": 2.84,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · sm10-102",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "sm10-102"
   },
   {
     "name": "Riolu",
@@ -1239,7 +1363,11 @@
     "rarities": [
       "Reverse Foil"
     ],
-    "id": 1782999186159
+    "id": 1782999186159,
+    "precoRef": 3.25,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · xy10-45",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "xy10-45"
   },
   {
     "name": "Riolu",
@@ -1254,7 +1382,11 @@
     "rarities": [
       "Reverse Foil"
     ],
-    "id": 1782999342556
+    "id": 1782999342556,
+    "precoRef": 2.27,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · xy10-46",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "xy10-46"
   },
   {
     "name": "Riolu",
@@ -1269,7 +1401,11 @@
     "rarities": [
       "Reverse Foil"
     ],
-    "id": 1782999534781
+    "id": 1782999534781,
+    "precoRef": 36.22,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · bw11-79",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "bw11-79"
   },
   {
     "name": "Riolu",
@@ -1314,7 +1450,11 @@
     "rarities": [
       "Reverse Foil"
     ],
-    "id": 1782999796692
+    "id": 1782999796692,
+    "precoRef": 45.41,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · col1-50",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "col1-50"
   },
   {
     "name": "Riolu",
@@ -1344,7 +1484,11 @@
     "rarities": [
       "Reverse Foil"
     ],
-    "id": 1782999974400
+    "id": 1782999974400,
+    "precoRef": 103.15,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · hgss2-60",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "hgss2-60"
   },
   {
     "name": "Riolu",
@@ -1359,7 +1503,11 @@
     "rarities": [
       "Reverse Foil"
     ],
-    "id": 1783000074322
+    "id": 1783000074322,
+    "precoRef": 98.56,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · pl1-91",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "pl1-91"
   },
   {
     "name": "Riolu",
@@ -1381,7 +1529,11 @@
         "2026-10-20T01:19:01.085Z",
         29.99
       ]
-    ]
+    ],
+    "precoRef": 85.55,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · pop8-16",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "pop8-16"
   },
   {
     "name": "Riolu",
@@ -1396,7 +1548,11 @@
     "rarities": [
       "Reverse Foil"
     ],
-    "id": 1783000391058
+    "id": 1783000391058,
+    "precoRef": 46.39,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · dp6-117",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "dp6-117"
   },
   {
     "name": "Riolu",
@@ -1433,7 +1589,11 @@
         "2026-10-20T01:19:29.997Z",
         119.99
       ]
-    ]
+    ],
+    "precoRef": 120.8,
+    "precoRefFonte": "TCGplayer/holofoil · pop6-8",
+    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "apiId": "pop6-8"
   },
   {
     "name": "Riolu",
