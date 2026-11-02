@@ -20,9 +20,9 @@
         1250
       ]
     ],
-    "precoRef": 1363.43,
+    "precoRef": 1433.71,
     "precoRefFonte": "TCGplayer/holofoil · ex14-2",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "ex14-2"
   },
   {
@@ -46,9 +46,9 @@
         4
       ]
     ],
-    "precoRef": 162.28,
+    "precoRef": 170.65,
     "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-14",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "ex15-14"
   },
   {
@@ -72,9 +72,9 @@
         64.99
       ]
     ],
-    "precoRef": 258,
+    "precoRef": 271.3,
     "precoRefFonte": "TCGplayer/reverseHolofoil · ex13-65",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "ex13-65"
   },
   {
@@ -127,9 +127,9 @@
       "Normal"
     ],
     "id": 1788052833428,
-    "precoRef": 223.48,
+    "precoRef": 235,
     "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-31",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "ex15-31"
   },
   {
@@ -182,9 +182,9 @@
     "espera": false,
     "rarities": [],
     "id": 1782679820027,
-    "precoRef": 210.58,
+    "precoRef": 221.44,
     "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-29",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "ex15-29"
   },
   {
@@ -216,9 +216,9 @@
     "espera": false,
     "rarities": [],
     "id": 1782679935733,
-    "precoRef": 927.51,
+    "precoRef": 975.32,
     "precoRefFonte": "TCGplayer/reverseHolofoil · ex11-62",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "ex11-62"
   },
   {
@@ -250,9 +250,9 @@
     "espera": false,
     "rarities": [],
     "id": 1782680620599,
-    "precoRef": 167.49,
+    "precoRef": 176.13,
     "precoRefFonte": "TCGplayer/reverseHolofoil · ex15-26",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "ex15-26"
   },
   {
@@ -273,7 +273,11 @@
         "2026-10-20T01:18:07.433Z",
         351.9
       ]
-    ]
+    ],
+    "precoRef": 357.25,
+    "precoRefFonte": "TCGplayer/holofoil · ex15-4",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
+    "apiId": "ex15-4"
   },
   {
     "name": "Magcargo",
@@ -293,7 +297,11 @@
         "2026-10-20T01:17:19.339Z",
         499.5
       ]
-    ]
+    ],
+    "precoRef": 1085.2,
+    "precoRefFonte": "TCGplayer/holofoil · ecard3-H17",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
+    "apiId": "ecard3-H17"
   },
   {
     "name": "Magcargo",
@@ -307,9 +315,9 @@
     "espera": false,
     "rarities": [],
     "id": 1782680937465,
-    "precoRef": 258,
+    "precoRef": 271.3,
     "precoRefFonte": "TCGplayer/reverseHolofoil · ecard3-18",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "ecard3-18"
   },
   {
@@ -331,9 +339,9 @@
         300
       ]
     ],
-    "precoRef": 645,
+    "precoRef": 678.25,
     "precoRefFonte": "TCGplayer/holofoil · ex15-94",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "ex15-94"
   },
   {
@@ -422,7 +430,11 @@
     "img": "https://i.imgur.com/K5xgdPN.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782681597023
+    "id": 1782681597023,
+    "precoRef": 176.13,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex14-38",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
+    "apiId": "ex14-38"
   },
   {
     "name": "Swampert EX",
@@ -460,9 +472,9 @@
     "espera": false,
     "rarities": [],
     "id": 1782681787903,
-    "precoRef": 412.75,
+    "precoRef": 434.03,
     "precoRefFonte": "TCGplayer/reverseHolofoil · ex14-27",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "ex14-27"
   },
   {
@@ -476,7 +488,11 @@
     "img": "https://i.imgur.com/1jVP5Zc.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782681970839
+    "id": 1782681970839,
+    "precoRef": 135.81,
+    "precoRefFonte": "TCGplayer/reverseHolofoil · ex13-61",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
+    "apiId": "ex13-61"
   },
   {
     "name": "Sharpedo",
@@ -490,9 +506,9 @@
     "espera": false,
     "rarities": [],
     "id": 1782682035010,
-    "precoRef": 185.71,
+    "precoRef": 195.28,
     "precoRefFonte": "TCGplayer/reverseHolofoil · ex13-53",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "ex13-53"
   },
   {
@@ -541,9 +557,9 @@
     "espera": false,
     "rarities": [],
     "id": 1782683385606,
-    "precoRef": 78.69,
+    "precoRef": 82.75,
     "precoRefFonte": "TCGplayer/holofoil · dp7-11",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "dp7-11"
   },
   {
@@ -570,7 +586,11 @@
     "img": "https://i.imgur.com/A0b1MWU.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782683543795
+    "id": 1782683543795,
+    "precoRef": 9.55,
+    "precoRefFonte": "TCGplayer/holofoil · sm6-59",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
+    "apiId": "sm6-59"
   },
   {
     "name": "Arceus",
@@ -618,9 +638,9 @@
     "rarities": [],
     "id": 1782684992402,
     "precoEm": "2026-10-20T01:17:44.324Z",
-    "precoRef": 74.41,
+    "precoRef": 78.24,
     "precoRefFonte": "TCGplayer/holofoil · sv6-198",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "sv6-198"
   },
   {
@@ -647,7 +667,11 @@
     "img": "https://i.imgur.com/NAaW3h6.jpg",
     "espera": false,
     "rarities": [],
-    "id": 1782689843054
+    "id": 1782689843054,
+    "precoRef": 4.77,
+    "precoRefFonte": "TCGplayer/holofoil · sv4-100",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
+    "apiId": "sv4-100"
   },
   {
     "name": "Bia",
@@ -713,9 +737,9 @@
       "Foil"
     ],
     "id": 1782849234357,
-    "precoRef": 7.64,
+    "precoRef": 8.03,
     "precoRefFonte": "TCGplayer/holofoil · swsh6-188",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "swsh6-188"
   },
   {
@@ -732,9 +756,9 @@
       "Foil"
     ],
     "id": 1782849333831,
-    "precoRef": 27.5,
+    "precoRef": 28.92,
     "precoRefFonte": "TCGplayer/holofoil · swsh5-172",
-    "precoRefAtualizadoEm": "2026-10-26T18:01:29.395Z",
+    "precoRefAtualizadoEm": "2026-11-02T21:12:45.579Z",
     "apiId": "swsh5-172"
   },
   {
